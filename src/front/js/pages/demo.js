@@ -1,41 +1,43 @@
-import React, { useState, useEffect, useContext } from "react";
+
 import { Link } from "react-router-dom";
+import React, {  useState, useEffect,useContext } from 'react'
+import { useParams } from 'react-router'
+import { Context } from '../store/appContext'
 
-import { Context } from "../store/appContext";
 
-export const Demo = () => {
-	const { store, actions } = useContext(Context);
-
-	return (
-		<div className="container">
-			<ul className="list-group">
-				{store.demo.map((item, index) => {
-					return (
-						<li
-							key={index}
-							className="list-group-item d-flex justify-content-between"
-							style={{ background: item.background }}>
-							<Link to={"/single/" + index}>
-								<span>Link to: {item.title}</span>
-							</Link>
-							{// Conditional render example
-							// Check to see if the background is orange, if so, display the message
-							item.background === "orange" ? (
-								<p style={{ color: item.initial }}>
-									Check store/flux.js scroll to the actions to see the code
-								</p>
-							) : null}
-							<button className="btn btn-success" onClick={() => actions.changeColor(index, "orange")}>
-								Change Color
-							</button>
-						</li>
-					);
-				})}
-			</ul>
-			<br />
-			<Link to="/">
-				<button className="btn btn-primary">Back home</button>
-			</Link>
-		</div>
-	);
+const Demo = () => {
+    const { store, actions } = useContext(Context);
+    let params = useParams();
+    console.log(params);
+    let item = store[`${params.type}`][`${params.id}`];
+    console.log(item);
+    let fields; {
+        fields = (
+            <div className='fixed-about'>
+                <div className='top'>
+                    
+                    <div><h2 className="drink-title">{item?.strDrink}</h2>
+                    <p>
+                    </p>
+                    </div>
+                </div>
+                    <hr></hr>
+                <div className='bottom'>
+                    <h2>{item?.strAlcoholic}</h2>
+                    <h2>{item?.strGlass}</h2>
+                    <h2>{item?.strInstructions}</h2>
+                    
+                </div>
+            </div>
+        );
+  
+   
+    return (
+        <div><div>{fields}</div>
+		<div><Link to={"/demo/"}>
+		<span>Link to: {item.strDrink}</span>
+	</Link></div></div>
+    );
 };
+}
+export default Demo;

@@ -15,11 +15,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			]
 		},
+		cocktails:[],
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
+
+			loadSomeData: () => {
+				fetch("www.thecocktaildb.com/api/json/v1/1/search.php?f=a")
+				.then((response)=>response.json())
+				.then((data)=>{
+					// always console log first
+					console.log(data)
+					setStore({cocktails:data.results})
+				})
+			},
+
 
 			getMessage: async () => {
 				try{
