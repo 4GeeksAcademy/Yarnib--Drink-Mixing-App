@@ -1,0 +1,49 @@
+Project Name: HomeBar Pro (TBD)
+
+Week 1: Project Setup and Planning
+
+•	Pre-work: Set up Development Environment
+        o	Install the Full-Stack boilerplate provided by the academy. COMPLETED
+        o	Create a GitHub repository for the project. COMPLETED
+        o	Set up a Kanban board with Backlog, Todo, Doing, and Done columns. COMPLETED
+
+•	Day 1-2: Brainstorming and ideation
+        o	Define the app concept (HomeBar Pro) and its key features. COMPLETED
+        o	Create initial wireframes and user stories for the app. WIP
+
+•	Day 3-5: Front-End Development
+        o	Develop the basic layout and structure of the app (Home page, Login page, Profile page).
+        o	Implement user authentication (Login, Signup, Forgot Password) using the provided boilerplate.
+
+Week 2: Core Functionality Development
+
+•	Day 1-2: Design the Database Schema
+        o Define the database structure for storing ingredients, recipes, and user profiles.
+        o Set up the necessary database tables and relationships.
+
+•	Day 3-5: Back-End Development
+        o	Develop a custom API with authentication for handling user profiles, ingredients, and recipes.
+        o	Implement the logic for searching and suggesting drinks based on available ingredients.
+
+•	Day 6-7: Third-Party API Integration
+        o	Research and select a suitable third-party alcohol and cocktail database API.
+        o	Integrate the selected API to enhance the drink recipe database.
+
+Week 3: Finalization and Testing
+
+•	Day 1-2: Front-End Integration
+        o	Integrate the back-end API with the React.js application, using Flux and React Router.
+        o	Implement the functionality for users to input their available ingredients.
+
+•	Day 3-4: UI/UX Refinement
+        o	Polish the user interface and improve user experience.
+        o	Test the app's usability and gather feedback for improvements.
+
+•	Day 5-7: Testing, Debugging, and Documentation
+        o	Conduct thorough testing and debugging to identify and fix any issues.
+        o	Create user documentation and guidelines for using HomeBar Pro.
+
+Final Day: Deployment and Presentation
+
+•	Deploy the HomeBar Pro app on a suitable hosting platform.
+•	Present the final project 
