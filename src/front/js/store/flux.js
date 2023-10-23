@@ -21,6 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			accessToken: undefined,
 			user: undefined
 		},
+		cocktails:[],
 		actions: {
 			logIn: async ({email, hashed_password}) => {
 				const response = await fetch(
@@ -85,6 +86,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			
 			,
+			loadSomeData: () => {
+				fetch("www.thecocktaildb.com/api/json/v1/1/search.php?f=a")
+				.then((response)=>response.json())
+				.then((data)=>{
+					// always console log first
+					console.log(data)
+					setStore({cocktails:data.results})
+				})
+			},
+
+
 			getMessage: async () => {
 				try{
 					// fetching data from the backend
