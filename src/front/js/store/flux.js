@@ -19,9 +19,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			accessToken: undefined,
-			user: undefined
+			user: undefined,
+			cocktails:[],
 		},
-		cocktails:[],
 		actions: {
 			logIn: async ({email, hashed_password}) => {
 				const response = await fetch(

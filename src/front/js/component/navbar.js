@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/index.css"
 import { Login } from "./login";
+import { LoggedIn } from "./loggedin";
+import { Context } from "../store/appContext";
 
 export const Navbar = () => {
+	const { store, actions } = useContext(Context)
 	return (
 		<nav className="navbar navbar-light bg-light">
 			<div className="container">
@@ -11,7 +14,11 @@ export const Navbar = () => {
 					<span className="navbar-brand mb-0 h1">Home Bar Pro</span>
 				</Link>
 				<div className="ml-auto">
-					<Login />
+					{store.accessToken !== undefined ? (
+						<LoggedIn />
+					) : (
+						<Login />
+					)}
 				</div>
 			</div>
 		</nav>
