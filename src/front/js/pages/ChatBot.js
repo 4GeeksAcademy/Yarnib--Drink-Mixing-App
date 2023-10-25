@@ -41,6 +41,7 @@ function ChatBot() {
       sender: "ChatGPT"
     }
   ]);
+  
   const [isTyping, setIsTyping] = useState(false);
 
   const toggleChat = () => {

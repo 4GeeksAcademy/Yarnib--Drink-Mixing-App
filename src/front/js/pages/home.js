@@ -1,46 +1,8 @@
-// import React, { useContext, useState } from "react";
-// import { Context } from "../store/appContext";
-// import "../../styles/home.css";
-// import { Navigate, useNavigate } from "react-router-dom";
-
-// export const Home = (props) => {
-// 	const navigate = useNavigate();
-// 	const { store, actions } = useContext(Context);
-// 	const [ email, setEmail] = useState("");
-// 	const [ password, setPassword ] = useState("");
-// 	const onSubmit = async (event) => {
-// 		const success = await actions.logIn({
-// 			email: email,
-// 			hashed_password: password
-// 		});
-// 		if (success) {
-// 		navigate("/profile");
-// 		}
-// 	};
-// 	const onSignup = () => {
-// 		navigate("/sign-up")
-// 	}
-
-// 	return (
-// 		<div className="text-center mt-5">
-// 			<h1>Hello Rigo!!</h1>
-// 			<input className="form-control m-3" type="email" placeholder="email" value={email} onChange={(event) => setEmail(event.target.value)}></input>
-// 			<input className="form-control m-3" type="password" placeholder="password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
-// 			<button 
-// 				className="btn btn-primary m-2"
-// 				onClick={onSubmit}
-// 				>log in</button>
-// 			<button className="btn btn-primary m-2" onClick={onSignup}>Sign Up!</button>
-// 		</div>
-// 	);
-// };
 import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../store/appContext';
 import rigoImageUrl from '../../img/rigo-baby.jpg';
 import '../../styles/home.css';
 import ChatBot from './ChatBot';
-import { fetchCocktails, fetchCocktailsByIngredient } from './api';
-import ingredients from './ingredients';
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -49,22 +11,27 @@ export const Home = () => {
   const [favorites, setFavorites] = useState([]);
   const [keywords, setKeywords] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
-  const [showDrinkList, setShowDrinkList] = useState(true); // Set it to true initially
+  const [showDrinkList, setShowDrinkList] = useState(true);
   const [previousSearchResults, setPreviousSearchResults] = useState([]);
 
   useEffect(() => {
-    fetchCocktails()
+    fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=`)
+      .then((response) => response.json())
       .then((data) => {
-        setCocktails(data);
+        setCocktails(data.drinks);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
   }, []);
 
-  const handleDrinkClick = (drink) => {
-    setSelectedDrink(drink);
-    setShowDrinkList(false);
+  const handleDrinkClick = async (drink) => {
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drink.idDrink}`);
+    const data = await response.json();
+    if (data.drinks && data.drinks.length > 0) {
+      setSelectedDrink(data.drinks[0]);
+      setShowDrinkList(false);
+    }
   };
 
   const toggleFavorite = (drink) => {
@@ -76,18 +43,15 @@ export const Home = () => {
     }
   };
 
-  const getDrinkDetails = (drinkName) => {
-    return ingredients[drinkName] || { Ingredients: [], Instructions: 'Instructions not available' };
-  };
-
   const handleIngredientSearch = () => {
     if (keywords.length > 0) {
       const ingredientsString = keywords.join(',');
-      fetchCocktailsByIngredient(ingredientsString)
+      fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredientsString}`)
+        .then((response) => response.json())
         .then((data) => {
-          if (data.length > 0) {
+          if (data.drinks && data.drinks.length > 0) {
             setPreviousSearchResults([...searchResults]);
-            setSearchResults(data);
+            setSearchResults(data.drinks);
             setShowDrinkList(true);
           } else {
             alert('No search results found.');
@@ -99,80 +63,9 @@ export const Home = () => {
     }
   };
 
-  const backToCocktailList = () => {
-    if (previousSearchResults.length > 0) {
-      setSearchResults(previousSearchResults);
-      setShowDrinkList(true);
-    } else {
-      alert('No previous search results available.');
-    }
-  };
-
   return (
     <div className="text-center mt-5">
-      <h1>Hello Rigo!!</h1>
-      <p>
-        <img src={rigoImageUrl} alt="Rigo Baby" />
-      </p>
-      <div className="alert alert-info">
-        {store.message || 'Loading message from the backend (make sure your python backend is running)...'}
-      </div>
-      <p>
-        This boilerplate comes with lots of documentation:{' '}
-        <a href="https://start.4geeksacademy.com/starters/react-flask">Read documentation</a>
-      </p>
-
-      <div className="search-bar" style={{ textAlign: 'center' }}>
-        <input
-          type="text"
-          style={{
-            textAlign: 'center', // Center the text inside the input field
-          }}
-          placeholder="Type Ingredient Here"
-          value={keywords.join(' ')}
-          onChange={(e) => setKeywords(e.target.value.split(' '))}
-          onKeyPress={(e) => {
-            if (e.key === 'Enter') {
-              handleIngredientSearch();
-            }
-          }}
-        />
-        <button
-          style={{
-            marginLeft: '10px', // Adjust the margin as needed
-          }}
-          onClick={handleIngredientSearch}
-        >
-          Search by Ingredient
-        </button>
-      </div>
-
-      <div className="search-results-container">
-        {showDrinkList && searchResults.length > 0 ? (
-          <ul className="cocktail-list">
-            {searchResults.map((cocktail) => (
-              <li key={cocktail.idDrink} className="cocktail-item" onClick={() => handleDrinkClick(cocktail)}>
-                <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} className="cocktail-image" />
-                <div className="drink-info">
-                  <p className="drink-name">
-                    {cocktail.strDrink}
-                    <button
-                      className={favorites.includes(cocktail.idDrink) ? 'favorite active' : 'favorite'}
-                      onClick={() => toggleFavorite(cocktail)}>
-                      ★
-                    </button>
-                  </p>
-                  <p className="other-info">
-                    <a href="#" onClick={() => handleDrinkClick(cocktail)}>
-                      Details
-                    </a>
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        ) : null}
-      </div>
+      {/* ... Rest of your component layout and presentation ... */}
 
       {selectedDrink && (
         <div className="drink-details">
@@ -185,23 +78,24 @@ export const Home = () => {
               ★
             </button>
           </p>
-          {getDrinkDetails(selectedDrink.strDrink) ? (
-            <div>
-              <p className="drink-ingredients">
-                <strong>Ingredients:</strong>
-                <ul>
-                  {getDrinkDetails(selectedDrink.strDrink).Ingredients.map((ingredient, index) => (
-                    <li key={index}>{ingredient}</li>
-                  ))}
-                </ul>
-              </p>
-              <p className="drink-instructions">
-                <strong>Instructions:</strong> {getDrinkDetails(selectedDrink.strDrink).Instructions}
-              </p>
-            </div>
-          ) : (
-            <p>Ingredients and instructions not available for this drink.</p>
-          )}
+          <div>
+            <p className="drink-ingredients">
+              <strong>Ingredients:</strong>
+              <ul>
+                {[...Array(15)].map((_, i) => {
+                  const ingredient = selectedDrink[`strIngredient${i + 1}`];
+                  const measure = selectedDrink[`strMeasure${i + 1}`];
+                  if (ingredient && measure) {
+                    return <li key={i}>{measure} {ingredient}</li>;
+                  }
+                  return null;
+                })}
+              </ul>
+            </p>
+            <p className="drink-instructions">
+              <strong>Instructions:</strong> {selectedDrink.strInstructions}
+            </p>
+          </div>
           <p className="other-info">
             <a href="#" onClick={() => {
               setSelectedDrink(null);
