@@ -11,7 +11,7 @@ export const Profile = (props) => {
     }
     return(
         <div className="container">
-            <h1>{"Hello " + store?.user?.email}</h1>
+            <h1>{"Welcome " + store?.user?.name + "!"}</h1>
             <button 
                 className="btn btn-danger"
                 onClick={onSubmit}

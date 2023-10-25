@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/index.css"
+import { Login } from "./login";
 
 export const Navbar = () => {
 	return (
@@ -10,7 +11,7 @@ export const Navbar = () => {
 					<span className="navbar-brand mb-0 h1">Home Bar Pro</span>
 				</Link>
 				<div className="ml-auto">
-					
+					<Login />
 				</div>
 			</div>
 		</nav>
