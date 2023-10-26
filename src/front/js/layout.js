@@ -14,6 +14,7 @@ import { SignUp } from "./pages/signup";
 import { Profile } from "./pages/profile";
 import ChatBot from "./pages/ChatBot";
 import Social from "./pages/Social";
+import UserFavorites from "./pages/userfavorites";
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -33,6 +34,7 @@ const Layout = () => {
                         <Route element={<Profile />} path="/profile" />
                         <Route element={<ChatBot />} path="/ChatBot" />
                         <Route element={<Social />} path="/Social" />
+                        <Route element={<UserFavorites />} path="/userfavorites" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />

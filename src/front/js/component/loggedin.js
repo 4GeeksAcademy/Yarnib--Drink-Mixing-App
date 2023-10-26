@@ -6,9 +6,12 @@ export const LoggedIn = (props) => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
     const onSubmit = async (event) => {
-    await actions.logOut(); 
-    navigate('/');
+        await actions.logOut(); 
+        navigate('/');
 }
+    const onFavorites = (event) => {
+        navigate('/userfavorites')
+    }
     return (
         <div className="text-center">
             <div className="row">
@@ -17,7 +20,10 @@ export const LoggedIn = (props) => {
                 </div>
                 <div className="col-6">
                     <h6>{"Welcome " + store?.user?.name + "!"}</h6>
-                    <button className="btn btn-primary">Favorites</button>
+                    <button 
+                        onClick={onFavorites}
+                        className="btn btn-primary"
+                        >Favorites</button>
                     <button 
                         className="btn btn-danger"
                         onClick={onSubmit}
