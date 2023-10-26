@@ -14,7 +14,7 @@ export const Home = () => {
   const [favorites, setFavorites] = useState([]);
   const [keywords, setKeywords] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
-  const [showDrinkList, setShowDrinkList] = useState(true); // Set it to true initially
+  const [showDrinkList, setShowDrinkList] = useState(true); 
   const [previousSearchResults, setPreviousSearchResults] = useState([]);
 
   useEffect(() => {
@@ -75,18 +75,6 @@ export const Home = () => {
 
   return (
     <div className="text-center mt-5">
-      <h1>Hello Rigo!!</h1>
-      <p>
-        <img src={rigoImageUrl} alt="Rigo Baby" />
-      </p>
-      <div className="alert alert-info">
-        {store.message || 'Loading message from the backend (make sure your python backend is running)...'}
-      </div>
-      <p>
-        This boilerplate comes with lots of documentation:{' '}
-        <a href="https://start.4geeksacademy.com/starters/react-flask">Read documentation</a>
-      </p>
-
       <div className="search-bar" style={{ textAlign: 'center' }}>
         <input
           type="text"
@@ -104,7 +92,7 @@ export const Home = () => {
         />
         <button
           style={{
-            marginLeft: '10px', // Adjust the margin as needed
+            marginLeft: '10px', 
           }}
           onClick={handleIngredientSearch}
         >
@@ -170,7 +158,6 @@ export const Home = () => {
           <p className="other-info">
             <a href="#" onClick={() => {
               setSelectedDrink(null);
-              setShowDrinkList(true); // Ensure the list is shown when going back
             }}>
               Back to search results
             </a>

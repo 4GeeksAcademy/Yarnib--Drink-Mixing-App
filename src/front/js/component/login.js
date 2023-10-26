@@ -22,7 +22,7 @@ export const Login = (props) => {
 	}
 
 	return (
-		<div className="text-center mt-5">
+		<div className="text-center mt-5 top-right-nav">
 			<h1>Log in</h1>
 			<input className="form-control m-3" type="email" placeholder="email" value={email} onChange={(event) => setEmail(event.target.value)}></input>
 			<input className="form-control m-3" type="password" placeholder="password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
@@ -30,7 +30,7 @@ export const Login = (props) => {
 				className="btn btn-primary m-2"
 				onClick={onSubmit}
 				>log in</button>
-			<button className="btn btn-primary m-2" onClick={onSignup}>Sign Up!</button>
+			<button className="btn btn-success m-2" onClick={onSignup}>Sign Up!</button>
 		</div>
 	);
 };

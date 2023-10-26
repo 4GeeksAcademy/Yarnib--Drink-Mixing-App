@@ -16,18 +16,18 @@ const systemMessage = {
   content: "Speak like a bartender."
 };
 
-// Define custom styles for the chat elements
+
 const customStyles = {
   chatContainer: {
-    backgroundColor: 'red', // Change chat container background color
+    backgroundColor: 'red', 
   },
   message: {
-    backgroundColor: 'white', // Change message bubble background color
-    color: 'green', // Change message text color
+    backgroundColor: 'white', 
+    color: 'green', 
   },
   messageInput: {
-    backgroundColor: 'red', // Change input field background color
-    color: 'orange', // Change input field text color
+    backgroundColor: 'red', 
+    color: 'orange', 
   },
 };
 
@@ -52,12 +52,12 @@ function ChatBot() {
     ? {
         width: "400px",
         height: "500px",
-        ...customStyles.chatContainer, // Apply custom chat container style
+        ...customStyles.chatContainer,
       }
     : {
         width: "300px",
         height: "400px",
-        ...customStyles.chatContainer, // Apply custom chat container style
+        ...customStyles.chatContainer, 
       };
 
   const handleSend = async (message) => {
