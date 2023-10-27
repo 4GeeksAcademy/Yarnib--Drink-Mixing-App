@@ -3,10 +3,11 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
 
-from api.models import db, User
+from api.models import db, User, ContactRequests
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from werkzeug.security import check_password_hash
+
 
 
 api = Blueprint('api', __name__)
@@ -68,11 +69,21 @@ def user_sign_up():
 
     return jsonify(message="User registered successfully"), 201
 
-@api.route("/transfers", methods=["GET"])
-@jwt_required()
-def protected():
-    user_id = get_jwt_identity()
-    user = User.query.get(user_id)
-    if user is None:
-        raise APIException("No such user!, 404")
-    return jsonify(logged_in_as=user.serialize()), 200
+@api.route('/contact_requests', methods=['POST'])
+def create_contact_request():
+    data = request.get_json()
+    name = data.get('name')
+    email = data.get('email')
+    datatype = data.get('datatype')
+    text = data.get('text')
+    if not all([name, email, datatype, text]):
+        return jsonify({'error': 'Missing required fields'}), 400 
+    new_contact_request = ContactRequests(name=name, email=email, datatype=datatype, text=text)
+    db.session.add(new_contact_request)
+    try:
+        db.session.commit()
+        return jsonify({'message': 'Contact request added successfully'}), 201  
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500 
+

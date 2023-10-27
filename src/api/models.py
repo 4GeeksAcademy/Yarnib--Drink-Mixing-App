@@ -41,3 +41,25 @@ class User(db.Model):
         
     def check_password(self, password_to_check):
         return check_password_hash(self.hashed_password, f"{password_to_check}{self.salt}")
+    
+class ContactRequests(db.Model):
+    __tablename__ = 'contact_requests'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(75), unique=False, nullable=False)
+    email = db.Column(db.String(100), unique=False, nullable=False)
+    datatype = db.Column(db.Boolean, nullable=False)
+    text = db.Column(db.String(400), nullable=False)
+
+    def __repr__(self):
+        return f'<Contact {self.email}>'
+
+
+
+def add_contact_request(name, email, datatype, text):
+    new_contact_request = ContactRequests(name=name, email=email, datatype=datatype, text=text)
+    db.session.add(new_contact_request)
+
+    try:
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
