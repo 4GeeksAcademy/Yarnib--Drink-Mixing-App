@@ -9,13 +9,6 @@ import {
   TypingIndicator,
 } from '@chatscope/chat-ui-kit-react';
 
-const API_KEY = "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";
-
-const systemMessage = {
-  role: "system",
-  content: "Speak like a bartender."
-};
-
 // Define custom styles for the chat elements
 const customStyles = {
   chatContainer: {
@@ -82,6 +75,11 @@ function ChatBot() {
         return { role, content: messageObject.message };
       });
 
+      const systemMessage = {
+        role: "system",
+        content: "Speak like a bartender."
+      };
+
       const apiRequestBody = {
         model: "gpt-3.5-turbo",
         messages: [systemMessage, ...apiMessages],
@@ -90,7 +88,7 @@ function ChatBot() {
       const response = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
-          Authorization: "Bearer " + API_KEY,
+          Authorization: "Bearer " + process.env.REACT_APP_CHATBOT_API_KEY,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(apiRequestBody),
