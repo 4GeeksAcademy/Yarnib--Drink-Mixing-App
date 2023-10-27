@@ -47,7 +47,7 @@ class ContactRequests(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(75), unique=False, nullable=False)
     email = db.Column(db.String(100), unique=False, nullable=False)
-    datatype = db.Column(db.Boolean, nullable=False)
+    datatype = db.Column(db.String(25), nullable=False)
     text = db.Column(db.String(400), nullable=False)
 
     def __repr__(self):

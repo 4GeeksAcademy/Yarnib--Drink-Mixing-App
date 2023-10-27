@@ -79,11 +79,14 @@ def create_contact_request():
     if not all([name, email, datatype, text]):
         return jsonify({'error': 'Missing required fields'}), 400 
     new_contact_request = ContactRequests(name=name, email=email, datatype=datatype, text=text)
+    print(new_contact_request.name)
     db.session.add(new_contact_request)
     try:
         db.session.commit()
+        
         return jsonify({'message': 'Contact request added successfully'}), 201  
     except Exception as e:
         db.session.rollback()
         return jsonify({'error': str(e)}), 500 
+        
 

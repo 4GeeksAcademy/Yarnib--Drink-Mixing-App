@@ -35,6 +35,7 @@ export const ContactForm = () => {
                     <input
                         type="text"
                         className="form-control"
+                        id="name"
                         placeholder="Name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -43,6 +44,7 @@ export const ContactForm = () => {
                 <div className="row">
                     <input
                         type="text"
+                        id="email"
                         className="form-control"
                         placeholder="Email"
                         value={email}
@@ -78,6 +80,7 @@ export const ContactForm = () => {
                     <h6>Write us below!</h6>
                     <input
                         type="text"
+                        id="text"
                         className="form-control"
                         value={text}
                         onChange={(e) => setText(e.target.value)}
