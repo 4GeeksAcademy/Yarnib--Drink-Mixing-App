@@ -1,10 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-export const Footer = () => (
-	<footer className="footer mt-auto py-3 text-center">
-		<p>
-			Made with <i className="fa fa-heart text-danger" /> by{" "}
-			<a href="http://www.4geeksacademy.com">4Geeks Academy</a>
-		</p>
+
+export const Footer = () => {
+	const navigate = useNavigate();
+	const onSubmit = (event) => {
+		navigate('/contactform');
+	}
+	return(
+		<footer className="footer mt-auto py-3 text-center">
+		<button className="btn btn-primary" onClick={onSubmit}>Contact us!</button>
 	</footer>
-);
+	)
+
+};

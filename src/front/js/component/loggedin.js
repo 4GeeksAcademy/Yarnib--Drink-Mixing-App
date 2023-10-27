@@ -8,7 +8,7 @@ export const LoggedIn = (props) => {
     const onSubmit = async (event) => {
         await actions.logOut(); 
         navigate('/');
-}
+    }
     const onFavorites = (event) => {
         navigate('/userfavorites')
     }
