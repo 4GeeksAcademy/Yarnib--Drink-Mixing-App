@@ -41,36 +41,25 @@ class User(db.Model):
         
     def check_password(self, password_to_check):
         return check_password_hash(self.hashed_password, f"{password_to_check}{self.salt}")
-
-class Cocktail(db.Model):
-    __tablename__ = "cocktail"
-    id = db.Column(db.Integer,primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
-    recipe = db.Column(db.Text, nullable=False)
-    instructions = db.Column(db.Text, nullable=False)
+    
+class ContactRequests(db.Model):
+    __tablename__ = 'contact_requests'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(75), unique=False, nullable=False)
+    email = db.Column(db.String(100), unique=False, nullable=False)
+    datatype = db.Column(db.String(25), nullable=False)
+    text = db.Column(db.String(400), nullable=False)
 
     def __repr__(self):
-        return f'<Cocktail {self.name}>'
+        return f'<Contact {self.email}>'
 
-    def serialize(self):
-        return {
-            "id": self.id,
-            "recipe": self.recipe,
-            "name": self.name,
-            "instructions": self.instructions
-        }
 
-class Favorites(db.Model):
-    __tablename__ = "favorites"
-    id = db.Column(db.Integer,primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True),
-    cocktail_id = db.Column(db.Integer, db.ForeignKey("cocktail.id"), primary_key=True)
-    def __repr__(self):
-        return f'<Favorites {self.name}>'
 
-    def serialize(self):
-        return {
-            "id": self.id,
-            "user_id": self.user_id,
-            "cocktail_id": self.cocktail_id,
-        }
+def add_contact_request(name, email, datatype, text):
+    new_contact_request = ContactRequests(name=name, email=email, datatype=datatype, text=text)
+    db.session.add(new_contact_request)
+
+    try:
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
