@@ -1,11 +1,9 @@
-
 import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../store/appContext';
 import rigoImageUrl from '../../img/rigo-baby.jpg';
 import '../../styles/home.css';
 import ChatBot from './ChatBot';
-import { fetchCocktails, fetchCocktailsByIngredient } from './api';
-import ingredients from './ingredients';
+import { fetchCocktails, fetchCocktailsByIngredient, fetchCocktailByName } from './api';
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -14,7 +12,7 @@ export const Home = () => {
   const [favorites, setFavorites] = useState([]);
   const [keywords, setKeywords] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
-  const [showDrinkList, setShowDrinkList] = useState(true); 
+  const [showDrinkList, setShowDrinkList] = useState(true);
   const [previousSearchResults, setPreviousSearchResults] = useState([]);
 
   useEffect(() => {
@@ -28,8 +26,14 @@ export const Home = () => {
   }, []);
 
   const handleDrinkClick = (drink) => {
-    setSelectedDrink(drink);
-    setShowDrinkList(false);
+    fetchCocktailByName(drink.strDrink)
+      .then((data) => {
+        setSelectedDrink(data);
+        setShowDrinkList(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching cocktail details:', error);
+      });
   };
 
   const toggleFavorite = (drink) => {
@@ -39,10 +43,6 @@ export const Home = () => {
     } else {
       setFavorites([...favorites, drink.idDrink]);
     }
-  };
-
-  const getDrinkDetails = (drinkName) => {
-    return ingredients[drinkName] || { Ingredients: [], Instructions: 'Instructions not available' };
   };
 
   const handleIngredientSearch = () => {
@@ -92,7 +92,7 @@ export const Home = () => {
         />
         <button
           style={{
-            marginLeft: '10px', 
+            marginLeft: '10px',
           }}
           onClick={handleIngredientSearch}
         >
@@ -111,9 +111,12 @@ export const Home = () => {
                     {cocktail.strDrink}
                     <button
                       className={favorites.includes(cocktail.idDrink) ? 'favorite active' : 'favorite'}
-                      onClick={() => toggleFavorite(cocktail)}>
+                      onClick={() => toggleFavorite(cocktail)}
+                    >
                       ★
+                      
                     </button>
+                    
                   </p>
                   <p className="other-info">
                     <a href="#" onClick={() => handleDrinkClick(cocktail)}>
@@ -129,36 +132,38 @@ export const Home = () => {
 
       {selectedDrink && (
         <div className="drink-details">
-          <img src={selectedDrink.strDrinkThumb} alt={selectedDrink.strDrink} className="original-cocktail-image" />
+            <img src={selectedDrink.Image} alt={selectedDrink.strDrink} className="cocktail-image" />
           <p className="drink-name">
             {selectedDrink.strDrink}
             <button
               className={favorites.includes(selectedDrink.idDrink) ? 'favorite active' : 'favorite'}
-              onClick={() => toggleFavorite(selectedDrink)}>
+              onClick={() => toggleFavorite(selectedDrink)}
+            >
               ★
             </button>
+          
+          {console.log(selectedDrink)}
           </p>
-          {getDrinkDetails(selectedDrink.strDrink) ? (
-            <div>
-              <p className="drink-ingredients">
-                <strong>Ingredients:</strong>
-                <ul>
-                  {getDrinkDetails(selectedDrink.strDrink).Ingredients.map((ingredient, index) => (
-                    <li key={index}>{ingredient}</li>
-                  ))}
-                </ul>
-              </p>
-              <p className="drink-instructions">
-                <strong>Instructions:</strong> {getDrinkDetails(selectedDrink.strDrink).Instructions}
-              </p>
-            </div>
-          ) : (
-            <p>Ingredients and instructions not available for this drink.</p>
-          )}
+          
+          <div>
+           
+           {/* need to mvoe ul underneath p tag */}
+            <p className="drink-ingredients">
+              <strong>Ingredients:</strong>
+              <ul>
+                {selectedDrink.Ingredients.map((ingredient, index) => (
+                  <li key={index}>
+                    {ingredient.ingredient} ({ingredient.measure})
+                  </li>
+                ))}
+              </ul>
+            </p>
+            <p className="drink-instructions">
+              <strong>Instructions:</strong> {selectedDrink.Instructions}
+            </p>
+          </div>
           <p className="other-info">
-            <a href="#" onClick={() => {
-              setSelectedDrink(null);
-            }}>
+            <a href="#" onClick={() => setSelectedDrink(null)}>
               Back to search results
             </a>
           </p>
