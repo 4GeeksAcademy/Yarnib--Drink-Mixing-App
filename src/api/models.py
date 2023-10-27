@@ -41,3 +41,27 @@ class User(db.Model):
         
     def check_password(self, password_to_check):
         return check_password_hash(self.hashed_password, f"{password_to_check}{self.salt}")
+
+class Cocktail(db.Model):
+    __tablename__ = "cocktail"
+    id = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    recipe = db.Column(db.Text, nullable=False)
+    instructions = db.Column(db.Text, nullable=False)
+
+    def __repr__(self):
+        return f'<Cocktail {self.name}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "recipe": self.recipe,
+            "name": self.name,
+            "instructions": self.instructions
+        }
+
+
+Favorites = db.Table('favorites',
+    db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
+    db.Column("cocktail_id", db.Integer, db.ForeignKey("cocktail.id"), primary_key=True)
+)
