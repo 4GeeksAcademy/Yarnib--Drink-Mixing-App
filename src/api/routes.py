@@ -87,6 +87,7 @@ def create_contact_request():
         return jsonify({'message': 'Contact request added successfully'}), 201  
     except Exception as e:
         db.session.rollback()
+        print(e)
         return jsonify({'error': str(e)}), 500 
         
 
