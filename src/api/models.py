@@ -60,8 +60,17 @@ class Cocktail(db.Model):
             "instructions": self.instructions
         }
 
+class Favorites(db.Model):
+    __tablename__ = "favorites"
+    id = db.Column(db.Integer,primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True),
+    cocktail_id = db.Column(db.Integer, db.ForeignKey("cocktail.id"), primary_key=True)
+    def __repr__(self):
+        return f'<Favorites {self.name}>'
 
-Favorites = db.Table('favorites',
-    db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
-    db.Column("cocktail_id", db.Integer, db.ForeignKey("cocktail.id"), primary_key=True)
-)
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "cocktail_id": self.cocktail_id,
+        }
