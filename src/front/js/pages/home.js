@@ -101,6 +101,7 @@ export const Home = () => {
       </div>
 
       <div className="search-results-container">
+        
         {showDrinkList && searchResults.length > 0 ? (
           <ul className="cocktail-list">
             {searchResults.map((cocktail) => (
@@ -109,6 +110,8 @@ export const Home = () => {
                 <div className="drink-info">
                   <p className="drink-name">
                     {cocktail.strDrink}
+
+                    <br></br>
                     <button
                       className={favorites.includes(cocktail.idDrink) ? 'favorite active' : 'favorite'}
                       onClick={() => toggleFavorite(cocktail)}
