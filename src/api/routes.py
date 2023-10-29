@@ -49,25 +49,32 @@ def check_user_identity():
     ), 200
 
 
-@api.route('/sign-up', methods=["POST", "GET"])
+@api.route('/sign-up', methods=["POST"])
 def user_sign_up():
     new_user_data = request.json
     name = new_user_data.get("name")
     email = new_user_data.get("email")
+    age = new_user_data.get("age")
     hashed_password = new_user_data.get("hashed_password")
 
-    if not name or not email or not hashed_password:
+    if not name or not email or not hashed_password or not age:
         raise APIException("Incomplete user data in the request", 400)
+
+    if int(age) < 10:
+        return jsonify(message="You must be older than 10 years old to sign up"), 400
+    elif int(age) < 21:
+        return jsonify(message="You must be 21 years or older to sign up"), 400
 
     existing_user = User.query.filter_by(email=email).first()
     if existing_user:
         raise APIException("User with this email already exists", 400)
 
-    new_user = User(name=name, email=email, hashed_password=hashed_password)
+    new_user = User(name=name, email=email, hashed_password=hashed_password, age=age)
     db.session.add(new_user)
     db.session.commit()
 
     return jsonify(message="User registered successfully"), 201
+
 
 @api.route('/contact_requests', methods=['POST'])
 def create_contact_request():

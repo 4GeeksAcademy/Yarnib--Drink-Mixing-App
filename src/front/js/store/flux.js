@@ -87,13 +87,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				localStorage.removeItem("user");
 
 			},
-			signUp: async ({ email, hashed_password, name }) => {
+			signUp: async ({ email, hashed_password, name, age }) => {
 				const response = await fetch(`${baseApiUrl}/api/sign-up`, {
 				  method: "POST",
 				  body: JSON.stringify({
 					email: email,
 					hashed_password: hashed_password,
-					name: name
+					name: name,
+					age: age
 				  }),
 				  headers: {
 					"Content-Type": "application/json",

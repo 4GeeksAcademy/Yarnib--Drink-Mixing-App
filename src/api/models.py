@@ -11,6 +11,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(25), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
+    age = db.Column(db.Integer, unique=False, nullable=False)
     hashed_password = db.Column(db.String(240), unique=False, nullable=False)
     salt = db.Column(db.String(120), nullable=False)
 
@@ -21,10 +22,11 @@ class User(db.Model):
         return {
             "id": self.id,
             "email": self.email,
-            "name": self.name
+            "name": self.name,
+            "age": self.age
         }
 
-    def __init__(self, name, hashed_password, email):
+    def __init__(self, name, hashed_password, email, age):
         already_exists = User.query.filter_by(name=name).one_or_none()
         if already_exists is not None:
             raise APIException("User already exists", 400)
@@ -32,6 +34,7 @@ class User(db.Model):
         self.hashed_password = generate_password_hash(hashed_password + self.salt)
         self.name = name
         self.email = email
+        self.age = age
         db.session.add(self)
         try:
             db.session.commit()

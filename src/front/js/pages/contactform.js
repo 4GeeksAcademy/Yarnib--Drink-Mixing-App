@@ -78,9 +78,10 @@ export const ContactForm = () => {
                 </div>
                 <div className="row">
                     <h6>Write us below!</h6>
-                    <input
+                    <textarea
                         type="text"
                         id="text"
+                        rows={8}
                         className="form-control"
                         value={text}
                         onChange={(e) => setText(e.target.value)}
