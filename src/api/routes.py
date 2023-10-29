@@ -96,7 +96,7 @@ def request_reset():
         send_email(user.email, 'Password Reset Request', token)
 
         return jsonify({'message': 'If your email is in our system, you will receive a password reset link.',"reset_url":token}) #need to get rid of "reesturl:token need to work send email function"
-    return jsonify({"message":"user email does not exist"}), 400
+    return jsonify({"message":"If your email is in our system, you will receive a password reset link."}), 400
 @api.route('reset_password', methods=['POST']) 
 @jwt_required()
 def reset_password():
