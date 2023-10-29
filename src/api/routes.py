@@ -7,7 +7,7 @@ from api.models import db, User, ContactRequests
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from werkzeug.security import check_password_hash
-
+from api.favoriteService import addFavorite, getAllFavorites
 
 
 api = Blueprint('api', __name__)
@@ -15,8 +15,10 @@ api = Blueprint('api', __name__)
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
+    addFavorite(1,1)
 
     response_body = {
+        "favorites" : getAllFavorites(1),
         "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
     }
 

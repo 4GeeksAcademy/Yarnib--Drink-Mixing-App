@@ -30,3 +30,4 @@ def downgrade():
         batch_op.drop_column('age')
 
     # ### end Alembic commands ###
+

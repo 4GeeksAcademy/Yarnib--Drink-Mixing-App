@@ -2,9 +2,17 @@ from flask_sqlalchemy import SQLAlchemy
 from api.utils import APIException
 from base64 import b64encode
 import os
+from sqlalchemy.orm import relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
+
+class Favorites(db.Model):
+    __tablename__ = "favorites"
+    id = db.Column(db.Integer,primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    cocktail_id = db.Column(db.String, nullable=False)
+    user = db.relationship("User")
 
 class User(db.Model):
     __tablename__ = 'user'
