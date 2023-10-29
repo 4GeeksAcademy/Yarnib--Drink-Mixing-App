@@ -9,7 +9,12 @@ import {
   TypingIndicator,
 } from '@chatscope/chat-ui-kit-react';
 
-const API_KEY = "";
+// needs to go to the .env file
+// need to pull from the .env file
+// usecase is process.env.API_KEY
+// in env we do api key and then we reference it here
+const API_KEY  = "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";
+;
 
 const systemMessage = {
   role: "system",

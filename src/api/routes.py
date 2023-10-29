@@ -7,7 +7,7 @@ from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from werkzeug.security import check_password_hash
-
+from datetime import datetime,timedelta
 
 api = Blueprint('api', __name__)
 
@@ -76,3 +76,38 @@ def protected():
     if user is None:
         raise APIException("No such user!, 404")
     return jsonify(logged_in_as=user.serialize()), 200
+
+
+
+def send_email(email,subject,token):
+    pass #need to figure out how to send email with token
+@api.route('/request_reset', methods=['POST'])
+def request_reset():
+    email = request.json.get('email')
+    user = User.query.filter_by(email=email).first()
+  
+    if user:
+        token = create_access_token(identity=email)
+        user.reset_token = token
+        user.token_expiration = datetime.utcnow() + timedelta(hours=1)
+        db.session.commit()
+        
+ 
+        send_email(user.email, 'Password Reset Request', token)
+
+        return jsonify({'message': 'If your email is in our system, you will receive a password reset link.',"reset_url":token}) #need to get rid of "reesturl:token need to work send email function"
+    return jsonify({"message":"user email does not exist"}), 400
+@api.route('reset_password', methods=['POST']) 
+@jwt_required()
+def reset_password():
+    email=get_jwt_identity()
+
+    user = User.query.filter_by(email=email).first_or_404()
+    new_password = request.json.get('password')
+    
+    user.hashed_password = new_password # Implement password hashing
+    user.reset_token = None
+    user.token_expiration = None
+    db.session.commit()
+    
+    return jsonify({'message': 'Password has been reset successfully.'})

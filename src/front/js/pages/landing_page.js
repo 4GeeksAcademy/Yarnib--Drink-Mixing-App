@@ -2,29 +2,26 @@ import React from 'react';
 import headerpic from '../../img/headerpic.png';
 import "../../styles/landing_page.css";
 import ChatBot from './ChatBot';
-
-const LandingPage = ({ loggedIn }) => {
+import { Link } from "react-router-dom";
+const LandingPage = () => {
     return (
-        <div>
+        <div >
             <div style={{ display: "flex", position: "relative" }}>
                 <img src={headerpic} alt="header" className='header' />
                 <ChatBot id="landing_page_search" />
             </div>
-            <div className='center-board'>
-                <div className='center left'>
-                    <h2>log0</h2>
-                </div>
-                <div className='middle'>
-                    <h2>center</h2>
-                </div>
-                <div className='center right'>
-                    {loggedIn ? (
-                        <h2>Welcome, User!</h2>
-                    ) : (
-                        <h2>Not logged in</h2>
-                    )}
+           <div className='center' > 
+             
+                <div className='signup'>
+                        <Link className='buttons' to="/sign-up">
+                            <span className="btn btn-primary learn-more">Sign up</span>
+                        </Link>
+                        <Link  className='buttons'  to="/profile">
+                            <span className="btn btn-primary learn-more">my profile</span>
+                        </Link>
                 </div>
             </div>
+           
         </div>
     );
 }

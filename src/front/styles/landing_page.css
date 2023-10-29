@@ -1,19 +1,20 @@
 /* landing_page.css */
 
-.header{
-    height:100px;
-    width: 100%;
-}
-.center-board {
+
+.center{
     display: flex;
-    justify-content: space-between; /* Spacing between child divs */
+    justify-content: center;
+ 
 }
-
-.center {
-    flex: 1; /* Each div takes up an equal portion of the available space */
-    text-align: center;
+.signup{
+    width:100%;
+    display:flex;
+    justify-content: center;
+  
 }
-
-.left, .middle, .right {
-    width: 33%; /* Each div takes up 33% of the available space */
+span{
+    width:300px;
+    height:50px;
+   
+    margin-top: 100px;
 }

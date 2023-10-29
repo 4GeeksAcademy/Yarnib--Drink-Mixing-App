@@ -3,7 +3,6 @@ from api.utils import APIException
 from base64 import b64encode
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
-
 db = SQLAlchemy()
 
 class User(db.Model):
@@ -13,7 +12,12 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     hashed_password = db.Column(db.String(240), unique=False, nullable=False)
     salt = db.Column(db.String(120), nullable=False)
-
+    reset_token = db.Column(db.String(1000), nullable=True)
+    token_expiration = db.Column(db.DateTime, nullable=True)
+    
+    
+    
+    
     def __repr__(self):
         return f'<User {self.email}>'
 
