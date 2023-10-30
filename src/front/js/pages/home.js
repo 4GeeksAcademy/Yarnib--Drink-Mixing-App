@@ -66,6 +66,20 @@ export const Home = () => {
     }
   };
 
+  const backToCocktailList = () => {
+    if (previousSearchResults.length > 0) {
+      setSearchResults(previousSearchResults);
+      setShowDrinkList(true);
+    } else {
+      alert('No previous search results available.');
+    }
+  };
+
+  const handleStarClick = (event, drink) => {
+    event.stopPropagation(); // Prevent the click event from bubbling up to the <li>
+    toggleFavorite(drink);
+  };
+
   return (
     <div className="text-center mt-5">
       <div className="search-bar" style={{ textAlign: 'center' }}>
@@ -103,16 +117,13 @@ export const Home = () => {
                 <div className="drink-info">
                   <p className="drink-name">
                     {cocktail.strDrink}
-
                     <br></br>
                     <button
                       className={favorites.includes(cocktail.idDrink) ? 'favorite active' : 'favorite'}
-                      onClick={() => toggleFavorite(cocktail)}
+                      onClick={(e) => handleStarClick(e, cocktail)} // Use handleStarClick for star icon
                     >
                       ★
-                      
                     </button>
-                    
                   </p>
                   <p className="other-info">
                     <a href="#" onClick={() => handleDrinkClick(cocktail)}>
@@ -128,7 +139,7 @@ export const Home = () => {
 
       {selectedDrink && (
         <div className="drink-details">
-            <img src={selectedDrink.Image} alt={selectedDrink.strDrink} className="cocktail-image" />
+          <img src={selectedDrink.Image} alt={selectedDrink.strDrink} className="cocktail-image" />
           <p className="drink-name">
             {selectedDrink.strDrink}
             <button
@@ -137,13 +148,8 @@ export const Home = () => {
             >
               ★
             </button>
-          
-          {console.log(selectedDrink)}
           </p>
-          
           <div>
-           
-           {/* need to mvoe ul underneath p tag */}
             <p className="drink-ingredients">
               <strong>Ingredients:</strong>
               <ul>
