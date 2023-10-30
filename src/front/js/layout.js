@@ -14,6 +14,8 @@ import { SignUp } from "./pages/signup";
 import { Profile } from "./pages/profile";
 import ChatBot from "./pages/ChatBot";
 import Social from "./pages/Social";
+import Ageverification from "./pages/Ageverification";
+import BlogPage from "./pages/BlogPage";
 import UserFavorites from "./pages/userfavorites";
 import { ContactForm } from "./pages/contactform";
 //create your first component
@@ -35,6 +37,8 @@ const Layout = () => {
                         <Route element={<Profile />} path="/profile" />
                         <Route element={<ChatBot />} path="/ChatBot" />
                         <Route element={<Social />} path="/Social" />
+                        <Route element={<BlogPage />} path="/BlogPage" />
+                        <Route element={<Ageverification />} path="/Ageverification" />
                         <Route element={<ContactForm />} path="/contactform" />
                         <Route element={<UserFavorites />} path="/userfavorites" />
                         <Route element={<Demo />} path="/demo" />
