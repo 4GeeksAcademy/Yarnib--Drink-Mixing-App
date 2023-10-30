@@ -9,30 +9,18 @@ import {
   TypingIndicator,
 } from '@chatscope/chat-ui-kit-react';
 
-// needs to go to the .env file
-// need to pull from the .env file
-// usecase is process.env.API_KEY
-// in env we do api key and then we reference it here
-const API_KEY  = "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";
-;
-
-const systemMessage = {
-  role: "system",
-  content: "Speak like a bartender."
-};
-
 // Define custom styles for the chat elements
 const customStyles = {
   chatContainer: {
-    backgroundColor: 'red', // Change chat container background color
+    backgroundColor: 'red', 
   },
   message: {
-    backgroundColor: 'white', // Change message bubble background color
-    color: 'green', // Change message text color
+    backgroundColor: 'white', 
+    color: 'green', 
   },
   messageInput: {
-    backgroundColor: 'red', // Change input field background color
-    color: 'orange', // Change input field text color
+    backgroundColor: 'red', 
+    color: 'orange', 
   },
 };
 
@@ -58,12 +46,12 @@ function ChatBot() {
     ? {
         width: "400px",
         height: "500px",
-        ...customStyles.chatContainer, // Apply custom chat container style
+        ...customStyles.chatContainer,
       }
     : {
         width: "300px",
         height: "400px",
-        ...customStyles.chatContainer, // Apply custom chat container style
+        ...customStyles.chatContainer, 
       };
 
   const handleSend = async (message) => {
@@ -88,6 +76,11 @@ function ChatBot() {
         return { role, content: messageObject.message };
       });
 
+      const systemMessage = {
+        role: "system",
+        content: "Speak like a bartender."
+      };
+
       const apiRequestBody = {
         model: "gpt-3.5-turbo",
         messages: [systemMessage, ...apiMessages],
@@ -96,7 +89,7 @@ function ChatBot() {
       const response = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: {
-          Authorization: "Bearer " + API_KEY,
+          Authorization: "Bearer " + process.env.REACT_APP_CHATBOT_API_KEY,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(apiRequestBody),

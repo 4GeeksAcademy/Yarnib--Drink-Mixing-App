@@ -1,9 +1,9 @@
-
 import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../store/appContext';
 import rigoImageUrl from '../../img/rigo-baby.jpg';
 import '../../styles/home.css';
 import ChatBot from './ChatBot';
+import { fetchCocktails, fetchCocktailsByIngredient, fetchCocktailByName } from './api';
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -26,13 +26,15 @@ export const Home = () => {
       });
   }, []);
 
-  const handleDrinkClick = async (drink) => {
-    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drink.idDrink}`);
-    const data = await response.json();
-    if (data.drinks && data.drinks.length > 0) {
-      setSelectedDrink(data.drinks[0]);
-      setShowDrinkList(false);
-    }
+  const handleDrinkClick = (drink) => {
+    fetchCocktailByName(drink.strDrink)
+      .then((data) => {
+        setSelectedDrink(data);
+        setShowDrinkList(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching cocktail details:', error);
+      });
   };
 
   const toggleFavorite = (drink) => {
@@ -66,42 +68,98 @@ export const Home = () => {
 
   return (
     <div className="text-center mt-5">
-      {/* ... Rest of your component layout and presentation ... */}
+      <div className="search-bar" style={{ textAlign: 'center' }}>
+        <input
+          type="text"
+          style={{
+            textAlign: 'center', // Center the text inside the input field
+          }}
+          placeholder="Type Ingredient Here"
+          value={keywords.join(' ')}
+          onChange={(e) => setKeywords(e.target.value.split(' '))}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+              handleIngredientSearch();
+            }
+          }}
+        />
+        <button
+          style={{
+            marginLeft: '10px',
+          }}
+          onClick={handleIngredientSearch}
+        >
+          Search by Ingredient
+        </button>
+      </div>
+
+      <div className="search-results-container">
+        
+        {showDrinkList && searchResults.length > 0 ? (
+          <ul className="cocktail-list">
+            {searchResults.map((cocktail) => (
+              <li key={cocktail.idDrink} className="cocktail-item" onClick={() => handleDrinkClick(cocktail)}>
+                <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} className="cocktail-image" />
+                <div className="drink-info">
+                  <p className="drink-name">
+                    {cocktail.strDrink}
+
+                    <br></br>
+                    <button
+                      className={favorites.includes(cocktail.idDrink) ? 'favorite active' : 'favorite'}
+                      onClick={() => toggleFavorite(cocktail)}
+                    >
+                      ★
+                      
+                    </button>
+                    
+                  </p>
+                  <p className="other-info">
+                    <a href="#" onClick={() => handleDrinkClick(cocktail)}>
+                      Details
+                    </a>
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+      </div>
 
       {selectedDrink && (
         <div className="drink-details">
-          <img src={selectedDrink.strDrinkThumb} alt={selectedDrink.strDrink} className="original-cocktail-image" />
+            <img src={selectedDrink.Image} alt={selectedDrink.strDrink} className="cocktail-image" />
           <p className="drink-name">
             {selectedDrink.strDrink}
             <button
               className={favorites.includes(selectedDrink.idDrink) ? 'favorite active' : 'favorite'}
-              onClick={() => toggleFavorite(selectedDrink)}>
+              onClick={() => toggleFavorite(selectedDrink)}
+            >
               ★
             </button>
+          
+          {console.log(selectedDrink)}
           </p>
+          
           <div>
+           
+           {/* need to mvoe ul underneath p tag */}
             <p className="drink-ingredients">
               <strong>Ingredients:</strong>
               <ul>
-                {[...Array(15)].map((_, i) => {
-                  const ingredient = selectedDrink[`strIngredient${i + 1}`];
-                  const measure = selectedDrink[`strMeasure${i + 1}`];
-                  if (ingredient && measure) {
-                    return <li key={i}>{measure} {ingredient}</li>;
-                  }
-                  return null;
-                })}
+                {selectedDrink.Ingredients.map((ingredient, index) => (
+                  <li key={index}>
+                    {ingredient.ingredient} ({ingredient.measure})
+                  </li>
+                ))}
               </ul>
             </p>
             <p className="drink-instructions">
-              <strong>Instructions:</strong> {selectedDrink.strInstructions}
+              <strong>Instructions:</strong> {selectedDrink.Instructions}
             </p>
           </div>
           <p className="other-info">
-            <a href="#" onClick={() => {
-              setSelectedDrink(null);
-              setShowDrinkList(true); // Ensure the list is shown when going back
-            }}>
+            <a href="#" onClick={() => setSelectedDrink(null)}>
               Back to search results
             </a>
           </p>

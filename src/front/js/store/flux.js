@@ -19,13 +19,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			accessToken: undefined,
-			user: undefined
+			user: undefined,
+			contact_requests:[],
 		},
-		cocktails:[],
 		actions: {
+			contact: async ({ name, email, datatype, text }) => {
+
+					const response = await fetch(`${baseApiUrl}/api/contact_requests`, {
+						method: "POST",
+						body: JSON.stringify({
+							name: name,
+							email: email,
+							datatype: datatype,
+							text: text,
+						}),
+						headers: {
+							"Content-Type": "application/json"
+						}
+					});
+		
+					if (response.ok) {
+						const body = await response.json();
+						console.log("Contact request submitted successfully:", body);
+					} else {
+						throw new Error('Failed to submit contact request');
+					}
+				}
+				,
+				
+			
+
 			logIn: async ({email, hashed_password}) => {
 				const response = await fetch(
-					`${baseApiUrl}/api/log-in`, {
+					`${baseApiUrl}/api/`, {
 						method: "POST",
 						body: JSON.stringify({
 							email: email,
@@ -49,6 +75,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			}
 			
 			,
+
+
 			logOut: () => {
 				setStore({
 					accessToken: undefined,
@@ -59,13 +87,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				localStorage.removeItem("user");
 
 			},
-			signUp: async ({ email, hashed_password, name }) => {
+			signUp: async ({ email, hashed_password, name, age }) => {
 				const response = await fetch(`${baseApiUrl}/api/sign-up`, {
 				  method: "POST",
 				  body: JSON.stringify({
 					email: email,
 					hashed_password: hashed_password,
-					name: name
+					name: name,
+					age: age
 				  }),
 				  headers: {
 					"Content-Type": "application/json",

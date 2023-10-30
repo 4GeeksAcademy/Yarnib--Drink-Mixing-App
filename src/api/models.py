@@ -2,14 +2,23 @@ from flask_sqlalchemy import SQLAlchemy
 from api.utils import APIException
 from base64 import b64encode
 import os
+from sqlalchemy.orm import relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 db = SQLAlchemy()
+
+class Favorites(db.Model):
+    __tablename__ = "favorites"
+    id = db.Column(db.Integer,primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    cocktail_id = db.Column(db.String, nullable=False)
+    user = db.relationship("User")
 
 class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False)
+    name = db.Column(db.String(25), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
+    age = db.Column(db.Integer, unique=False, nullable=False)
     hashed_password = db.Column(db.String(240), unique=False, nullable=False)
     salt = db.Column(db.String(120), nullable=False)
     reset_token = db.Column(db.String(1000), nullable=True)
@@ -25,10 +34,11 @@ class User(db.Model):
         return {
             "id": self.id,
             "email": self.email,
-            "name": self.name
+            "name": self.name,
+            "age": self.age
         }
 
-    def __init__(self, name, hashed_password, email):
+    def __init__(self, name, hashed_password, email, age):
         already_exists = User.query.filter_by(name=name).one_or_none()
         if already_exists is not None:
             raise APIException("User already exists", 400)
@@ -36,6 +46,7 @@ class User(db.Model):
         self.hashed_password = generate_password_hash(hashed_password + self.salt)
         self.name = name
         self.email = email
+        self.age = age
         db.session.add(self)
         try:
             db.session.commit()
@@ -45,3 +56,25 @@ class User(db.Model):
         
     def check_password(self, password_to_check):
         return check_password_hash(self.hashed_password, f"{password_to_check}{self.salt}")
+    
+class ContactRequests(db.Model):
+    __tablename__ = 'contact_requests'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(75), unique=False, nullable=False)
+    email = db.Column(db.String(100), unique=False, nullable=False)
+    datatype = db.Column(db.String(25), nullable=False)
+    text = db.Column(db.String(400), nullable=False)
+
+    def __repr__(self):
+        return f'<Contact {self.email}>'
+
+
+
+def add_contact_request(name, email, datatype, text):
+    new_contact_request = ContactRequests(name=name, email=email, datatype=datatype, text=text)
+    db.session.add(new_contact_request)
+
+    try:
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
