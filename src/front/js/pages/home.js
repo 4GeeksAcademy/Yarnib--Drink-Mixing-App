@@ -4,6 +4,7 @@ import rigoImageUrl from '../../img/rigo-baby.jpg';
 import '../../styles/home.css';
 import ChatBot from './ChatBot';
 import { fetchCocktails, fetchCocktailsByIngredient, fetchCocktailByName } from './api';
+import UserFavorites from "./userfavorites";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -82,6 +83,7 @@ export const Home = () => {
 
   return (
     <div className="text-center mt-5">
+      <UserFavorites></UserFavorites>
       <div className="search-bar" style={{ textAlign: 'center' }}>
         <input
           type="text"
@@ -108,7 +110,7 @@ export const Home = () => {
       </div>
 
       <div className="search-results-container">
-        
+
         {showDrinkList && searchResults.length > 0 ? (
           <ul className="cocktail-list">
             {searchResults.map((cocktail) => (
@@ -123,6 +125,7 @@ export const Home = () => {
                       onClick={(e) => handleStarClick(e, cocktail)} // Use handleStarClick for star icon
                     >
                       ★
+
                     </button>
                   </p>
                   <p className="other-info">
@@ -148,8 +151,13 @@ export const Home = () => {
             >
               ★
             </button>
+
+            {console.log(selectedDrink)}
           </p>
+
           <div>
+
+            {/* need to mvoe ul underneath p tag */}
             <p className="drink-ingredients">
               <strong>Ingredients:</strong>
               <ul>

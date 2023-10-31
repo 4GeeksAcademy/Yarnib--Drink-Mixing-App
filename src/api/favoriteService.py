@@ -10,20 +10,20 @@ def addFavorite(userId, cocktailId):
 
     favToSave = Favorites(user_id=userId, cocktail_id=cocktailId)
     print("Object is ", favToSave)
-    obj = db.session.add(favToSave)
+    db.session.add(favToSave)
     db.session.commit()
-    print("added successfully", obj)
+    db.session.refresh(favToSave)
+    print("added successfully", favToSave)
+    return favToSave
 
-def getAllFavorites(userId):
-    print("getting all favorites for user ", userId)
-    favs = Favorites.query.filter_by(user_id=userId).all()
-    if favs is None:
-        print("No favorites")
-    print(favs)
+def getAllFavorites(user):
+    print("getting all favorites for user ", user)
+    favs = db.session().query(Favorites).filter(Favorites.user_id == user).all()
+    print("result ", favs)
     return favs
 
 def removeFromFavorites(userId, favId):
     print("removing from favorites for user ", userId)
     obj = Favorites.query.filter_by(id=favId).one()
-    session.delete(obj)
-    session.commit()    
+    db.session.delete(obj)
+    db.session.commit()    

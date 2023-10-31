@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from api.utils import APIException
 from base64 import b64encode
 import os
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 from werkzeug.security import generate_password_hash, check_password_hash
 db = SQLAlchemy()
 
@@ -12,6 +12,15 @@ class Favorites(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     cocktail_id = db.Column(db.String, nullable=False)
     user = db.relationship("User")
+    def __repr__(self):
+        return f'<Favorites {self.id}. {self.user_id} {self.cocktail_id}. {self.user}>'
+        
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "cocktail_id": self.cocktail_id,
+        }
 
 class User(db.Model):
     __tablename__ = 'user'

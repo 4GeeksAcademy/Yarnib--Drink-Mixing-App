@@ -8,7 +8,7 @@ from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from werkzeug.security import check_password_hash
 from datetime import datetime,timedelta
-from api.favoriteService import addFavorite, getAllFavorites
+from api.favoriteService import addFavorite, getAllFavorites, removeFromFavorites
 
 
 api = Blueprint('api', __name__)
@@ -16,10 +16,8 @@ api = Blueprint('api', __name__)
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
-    addFavorite(1,1)
 
     response_body = {
-        "favorites" : getAllFavorites(1),
         "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
     }
 
@@ -142,5 +140,28 @@ def create_contact_request():
         db.session.rollback()
         print(e)
         return jsonify({'error': str(e)}), 500 
-        
+
+@api.route('/favorites', methods=['POST'])
+def addToFavorites():
+    data = request.get_json()
+    user = data.get("userId")
+    cocktail = data.get("cocktailId")
+    result = addFavorite(user, cocktail)
+    if result is None:
+        return jsonify({'error': 'couldnt add'}), 400
+    else:
+        return jsonify({'result:' : 'successfully added to favorite'}), 201
+
+@api.route('/favorites/all', methods=['POST'])
+def getAllFav():
+    data = request.get_json()
+    user = data.get('userId')
+    favs = getAllFavorites(user)
+    print("returned ", favs)
+    return jsonify({'favs' : jsonify(favs)}), 200
+
+@api.route('/favorites', methods=['DELETE'])
+def removeFromFavorites():
+    data = request.get_json()
+
 

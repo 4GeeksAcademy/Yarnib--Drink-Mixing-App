@@ -2,7 +2,7 @@ import os
 from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from api.utils import APIException, generate_sitemap
 from api.commands import setup_commands
 from api.models import db, User, ContactRequest,Favorites
@@ -31,7 +31,7 @@ MIGRATE = Migrate(app, db, compare_type = True)
 db.init_app(app)
 
 # Allow CORS requests to this API
-CORS(app)
+CORS(app, resources={r"*": {"origins": "*"}})
 
 # add the admin
 setup_admin(app)

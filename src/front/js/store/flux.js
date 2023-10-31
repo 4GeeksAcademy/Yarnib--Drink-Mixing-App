@@ -20,47 +20,50 @@ const getState = ({ getStore, getActions, setStore }) => {
 			],
 			accessToken: undefined,
 			user: undefined,
-			contact_requests:[],
+			contact_requests: [],
+			favorites: [],
 		},
+
+
 		actions: {
 			contact: async ({ name, email, datatype, text }) => {
 
-					const response = await fetch(`${baseApiUrl}/api/contact_requests`, {
-						method: "POST",
-						body: JSON.stringify({
-							name: name,
-							email: email,
-							datatype: datatype,
-							text: text,
-						}),
-						headers: {
-							"Content-Type": "application/json"
-						}
-					});
-		
-					if (response.ok) {
-						const body = await response.json();
-						console.log("Contact request submitted successfully:", body);
-					} else {
-						throw new Error('Failed to submit contact request');
+				const response = await fetch(`${baseApiUrl}/api/contact_requests`, {
+					method: "POST",
+					body: JSON.stringify({
+						name: name,
+						email: email,
+						datatype: datatype,
+						text: text,
+					}),
+					headers: {
+						"Content-Type": "application/json"
 					}
-				}
-				,
-				
-			
+				});
 
-			logIn: async ({email, hashed_password}) => {
+				if (response.ok) {
+					const body = await response.json();
+					console.log("Contact request submitted successfully:", body);
+				} else {
+					throw new Error('Failed to submit contact request');
+				}
+			}
+			,
+
+
+
+			logIn: async ({ email, hashed_password }) => {
 				const response = await fetch(
 					`${baseApiUrl}/api/`, {
-						method: "POST",
-						body: JSON.stringify({
-							email: email,
-							hashed_password: hashed_password,
-						}),
-						headers: {
-							"Content-Type": "application/json"
-						}
+					method: "POST",
+					body: JSON.stringify({
+						email: email,
+						hashed_password: hashed_password,
+					}),
+					headers: {
+						"Content-Type": "application/json"
 					}
+				}
 				)
 				const body = await response.json();
 				if (response.ok) {
@@ -73,7 +76,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return true
 				}
 			}
-			
+
 			,
 
 
@@ -82,59 +85,101 @@ const getState = ({ getStore, getActions, setStore }) => {
 					accessToken: undefined,
 					user: undefined,
 				});
-			
+
 				localStorage.removeItem("accessToken");
 				localStorage.removeItem("user");
 
 			},
 			signUp: async ({ email, hashed_password, name, age }) => {
 				const response = await fetch(`${baseApiUrl}/api/sign-up`, {
-				  method: "POST",
-				  body: JSON.stringify({
-					email: email,
-					hashed_password: hashed_password,
-					name: name,
-					age: age
-				  }),
-				  headers: {
-					"Content-Type": "application/json",
-				  },
+					method: "POST",
+					body: JSON.stringify({
+						email: email,
+						hashed_password: hashed_password,
+						name: name,
+						age: age
+					}),
+					headers: {
+						"Content-Type": "application/json",
+					},
 				});
-			  
+
 				const body = await response.json();
 				if (response.ok) {
-				  setStore({
-					accessToken: body.access_token,
-					user: body.user,
-				  });
-			  
-				  localStorage.setItem("accessToken", body.access_token);
-				  localStorage.setItem("user", JSON.stringify(body.user));
-				}
-			  }
+					setStore({
+						accessToken: body.access_token,
+						user: body.user,
+					});
 
-			
-			,
+					localStorage.setItem("accessToken", body.access_token);
+					localStorage.setItem("user", JSON.stringify(body.user));
+				}
+			},
+
+
+
 			loadSomeData: () => {
 				fetch("www.thecocktaildb.com/api/json/v1/1/search.php?f=a")
-				.then((response)=>response.json())
-				.then((data)=>{
-					// always console log first
-					console.log(data)
-					setStore({cocktails:data.results})
+					.then((response) => response.json())
+					.then((data) => {
+						// always console log first
+						console.log(data)
+						setStore({ cocktails: data.results })
+					})
+			},
+
+			addToFavorites: async (userId, cocktailId) => {
+				console.log("api call")
+				const response = await fetch(`${baseApiUrl}/api/favorites`, {
+					method: "POST",
+					body: JSON.stringify({
+						userId: userId,
+						cocktailId: cocktailId
+					},
+					),
+					headers: {
+						"Content-Type": "application/json",
+					}
+				}).then(response => {
+					if (response.status == 201) {
+						console.log("succesfully added to favorites")
+					} else {
+						console.log("Error when adding")
+					}
 				})
+
+			},
+			getAllFavorites: async (userId) => {
+				const response = await fetch(`${baseApiUrl}/api/favorites/all`, {
+					method: "POST",
+					body: JSON.stringify({
+						userId: userId
+					},
+					),
+					headers: {
+						"Content-Type": "application/json",
+					}
+				}).then(response => {
+					return response.json()
+				}).then(data => {
+					console.log(data)
+				})
+			},
+
+			deleteFavorites: (faveId, userId) => {
+
 			},
 
 
 			getMessage: async () => {
-				try{
+				try {
 					// fetching data from the backend
 					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
 					const data = await resp.json()
 					setStore({ message: data.message })
 					// don't forget to return something, that is how the async resolves
 					return data;
-				}catch(error){
+				} catch (error) {
 					console.log("Error loading message from backend", error)
 				}
 			},
