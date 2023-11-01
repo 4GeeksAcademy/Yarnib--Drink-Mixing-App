@@ -2,9 +2,9 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
-
+import { LandingPage } from "./pages/landingpage";
 import { Home } from "./pages/home";
-import Landing_page  from "./pages/landing_page";
+
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
@@ -12,9 +12,9 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { SignUp } from "./pages/signup";
 import { Profile } from "./pages/profile";
-import ChatBot from "./pages/ChatBot";
-import Social from "./pages/Social";
-import Ageverification from "./pages/Ageverification";
+import ChatBot from "./pages/chatbot";
+import Social from "./pages/social";
+import Ageverification from "./pages/ageverification";
 import BlogPage from "./pages/BlogPage";
 import UserFavorites from "./pages/userfavorites";
 import { ContactForm } from "./pages/contactform";
@@ -24,7 +24,7 @@ const Layout = () => {
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";
 
-    if(!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL/ >;
+    if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
     return (
         <div>
@@ -36,13 +36,12 @@ const Layout = () => {
                         <Route element={<SignUp />} path="/sign-up" />
                         <Route element={<Profile />} path="/profile" />
                         <Route element={<ChatBot />} path="/ChatBot" />
-                        <Route element={<Landing_page/>} path="/landing_page" />
+                        <Route element={<LandingPage />} path="/landingpage" />
                         <Route element={<Social />} path="/Social" />
                         <Route element={<BlogPage />} path="/BlogPage" />
                         <Route element={<Ageverification />} path="/Ageverification" />
                         <Route element={<ContactForm />} path="/contactform" />
                         <Route element={<UserFavorites />} path="/userfavorites" />
-                        <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>

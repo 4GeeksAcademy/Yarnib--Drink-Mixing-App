@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../store/appContext';
 import rigoImageUrl from '../../img/rigo-baby.jpg';
 import '../../styles/home.css';
-import ChatBot from './ChatBot';
+import ChatBot from './chatbot';
 import { fetchCocktails, fetchCocktailsByIngredient, fetchCocktailByName } from './api';
 import UserFavorites from "./userfavorites";
-import headerpic from "../../img/Headerimages/headerpic"
+
 
 export const Home = () => {
   const { store, actions } = useContext(Context);

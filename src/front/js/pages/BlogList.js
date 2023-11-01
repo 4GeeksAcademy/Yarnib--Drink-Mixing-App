@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import blogData from './blogData'; // Relative to the current directory
+import blogData from './blogdata'; // Relative to the current directory
 import BlogPost from './BlogPost'; // Relative to the current directory
 
 

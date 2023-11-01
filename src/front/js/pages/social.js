@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ChatBot from './ChatBot';
+import ChatBot from './chatbot';
 
 function Social() {
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -77,14 +77,14 @@ function Social() {
   return (
     <div style={{ backgroundColor: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
       <div style={{ position: 'relative' }}>
-      <iframe
-  ref={iframeRef}
-  title="Social Content"
-  src="https://www.spatial.io/s/Cheers-Home-Bar-Pro-Lounge-65399d0415435224fad00916"
-  allow="camera;microphone"
-  width={isFullScreen ? '100%' : customWidth}
-  height={isFullScreen ? '100vh' : customHeight}
-></iframe>
+        <iframe
+          ref={iframeRef}
+          title="Social Content"
+          src="https://www.spatial.io/s/Cheers-Home-Bar-Pro-Lounge-65399d0415435224fad00916"
+          allow="camera;microphone"
+          width={isFullScreen ? '100%' : customWidth}
+          height={isFullScreen ? '100vh' : customHeight}
+        ></iframe>
         {!isFullScreen && (
           <button
             onClick={isFullScreen ? exitFullscreen : enterFullscreen}

@@ -105,7 +105,7 @@ def request_reset():
 
         return jsonify({'message': 'If your email is in our system, you will receive a password reset link.',"reset_url":token}) #need to get rid of "reesturl:token need to work send email function"
     return jsonify({"message":"If your email is in our system, you will receive a password reset link."}), 400
-@api.route('reset_password', methods=['POST']) 
+@api.route('/reset-password', methods=['POST']) 
 @jwt_required()
 def reset_password():
     email=get_jwt_identity()
@@ -120,7 +120,7 @@ def reset_password():
     
     return jsonify({'message': 'Password has been reset successfully.'})
 
-@api.route('/contact_requests', methods=['POST'])
+@api.route('/contact-requests', methods=['POST'])
 def create_contact_request():
     data = request.get_json()
     name = data.get('name')
