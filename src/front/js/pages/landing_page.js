@@ -1,5 +1,5 @@
 import React from 'react';
-import headerpic from '../../img/headerpic.png';
+import headerpic from '../../img/Headerimages/headerpic';
 import "../../styles/landing_page.css";
 import ChatBot from './ChatBot';
 import { Link } from "react-router-dom";

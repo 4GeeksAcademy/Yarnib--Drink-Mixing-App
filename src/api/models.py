@@ -10,7 +10,7 @@ class Favorites(db.Model):
     __tablename__ = "favorites"
     id = db.Column(db.Integer,primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    cocktail_id = db.Column(db.String, nullable=False)
+    cocktail_id = db.Column(db.String(100), nullable=False)
     user = db.relationship("User")
     def __repr__(self):
         return f'<Favorites {self.id}. {self.user_id} {self.cocktail_id}. {self.user}>'
@@ -32,6 +32,7 @@ class User(db.Model):
     salt = db.Column(db.String(120), nullable=False)
     reset_token = db.Column(db.String(1000), nullable=True)
     token_expiration = db.Column(db.DateTime, nullable=True)
+    # favorites = db.relationship("Favorites", backref="user")
     
     
     
@@ -66,7 +67,7 @@ class User(db.Model):
     def check_password(self, password_to_check):
         return check_password_hash(self.hashed_password, f"{password_to_check}{self.salt}")
     
-class ContactRequests(db.Model):
+class ContactRequest(db.Model):
     __tablename__ = 'contact_requests'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(75), unique=False, nullable=False)

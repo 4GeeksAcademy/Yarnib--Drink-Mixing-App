@@ -5,6 +5,7 @@ import '../../styles/home.css';
 import ChatBot from './ChatBot';
 import { fetchCocktails, fetchCocktailsByIngredient, fetchCocktailByName } from './api';
 import UserFavorites from "./userfavorites";
+import headerpic from "../../img/Headerimages/headerpic"
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
