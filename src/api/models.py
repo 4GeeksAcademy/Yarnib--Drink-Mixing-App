@@ -6,20 +6,6 @@ from sqlalchemy.orm import relationship, backref
 from werkzeug.security import generate_password_hash, check_password_hash
 db = SQLAlchemy()
 
-class Favorites(db.Model):
-    __tablename__ = "favorites"
-    id = db.Column(db.Integer,primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    cocktail_id = db.Column(db.String, nullable=False)
-    def __repr__(self):
-        return f'<Favorites {self.id}. {self.user_id} {self.cocktail_id}.>'
-        
-    def serialize(self):
-        return {
-            "id": self.id,
-            "user_id": self.user_id,
-            "cocktail_id": self.cocktail_id,
-        }
 
 class User(db.Model):
     __tablename__ = 'user'
