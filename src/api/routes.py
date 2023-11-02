@@ -146,7 +146,7 @@ def addToFavorites():
     data = request.get_json()
     user = data.get("userId")
     cocktail = data.get("cocktailId")
-    result = addFavorite(user, cocktail)
+    result = addFavorite(user, cocktail, name)
     if result is None:
         return jsonify({'error': 'couldnt add'}), 400
     else:

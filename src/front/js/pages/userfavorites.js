@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import '../../styles/userFavorites.css';
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
 
 
 export const UserFavorites = () => {
@@ -42,9 +43,28 @@ export const UserFavorites = () => {
 
 
     return (
-        <div className="sidebar float-right container" >
-            <h1>Favorites</h1>
-            {favs.map((fav) => (
+        <div className="sidebar container" >
+            <div className="row justify-content-center">
+                <h1 className="text-center">
+                    <i className="fas fa-glass-martini-alt me-2"></i>
+                    <i className="fas fa-wine-glass me-2"></i>
+                    <i class="fas fa-beer me-2"></i>
+                    Favorites
+                    <i className="fas fa-beer ms-2"></i>
+                    <i className="fas fa-wine-glass ms-2"></i>
+                    <i className="fas fa-glass-martini-alt ms-2"></i>
+                </h1>
+            </div>
+            {favs.length == 0 ? (
+                <div>
+                    <p className="text-center">
+                        Oh NOOOOO!!!! No favorite drinks... Let's change that!<br />
+                        <Link to="/">
+                            <span>Search For Drinks</span>
+                        </Link>
+                    </p>
+                </div>
+            ) : (favs.map((fav) => (
                 <div className="row" key={fav.idDrink}>
                     <div className="col-10">
                         <a href="#" className="list-group-item list-group-item-action py-3 lh-tight" aria-current="true" style={{ background: "inherit" }}>
@@ -64,7 +84,7 @@ export const UserFavorites = () => {
                         </div>
                     </div>
                 </div>
-            ))}
+            )))}
 
         </div >
     )

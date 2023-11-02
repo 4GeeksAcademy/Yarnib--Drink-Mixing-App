@@ -77,6 +77,7 @@ def add_contact_request(name, email, datatype, text):
 class Favorites(db.Model):
     __tablename__ = "favorites"
     id = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     cocktail_id = db.Column(db.String(100), nullable=False)
     user = db.relationship("User")

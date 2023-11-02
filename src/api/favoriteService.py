@@ -3,12 +3,12 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.utils import generate_sitemap, APIException
 
 
-def addFavorite(userId, cocktailId):
+def addFavorite(userId, cocktailId, name):
     print("addFavorite was called")
     print("userId is ", userId)
     print("cocktail is ", cocktailId)
 
-    favToSave = Favorites(user_id=userId, cocktail_id=cocktailId)
+    favToSave = Favorites(user_id=userId, cocktail_id=cocktailId, name=name)
     print("Object is ", favToSave)
     db.session.add(favToSave)
     db.session.commit()

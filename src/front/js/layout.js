@@ -4,7 +4,6 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 import LandingPage from "./pages/landingpage";
 import { Home } from "./pages/home";
-import Landing_page from "./pages/landing_page";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
@@ -33,15 +32,16 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
+                        <Route element={<Home />} path="/:theId" />
                         <Route element={<SignUp />} path="/sign-up" />
                         <Route element={<Profile />} path="/profile" />
                         <Route element={<ChatBot />} path="/ChatBot" />
-                        <Route element={<Landing_page />} path="/landing_page" />
+                        <Route element={<LandingPage />} path="/landingpage" />
                         <Route element={<Social />} path="/Social" />
                         <Route element={<BlogPage />} path="/BlogPage" />
                         <Route element={<Ageverification />} path="/Ageverification" />
                         <Route element={<ContactForm />} path="/contactform" />
-                        <Route element={<UserFavorites />} path="/userfavorites" />
+                        <Route element={<UserFavorites />} path="/favorites" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
