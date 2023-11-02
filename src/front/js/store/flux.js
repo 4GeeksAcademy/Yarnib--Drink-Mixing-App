@@ -54,7 +54,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			logIn: async ({ email, hashed_password }) => {
 				const response = await fetch(
-					`${baseApiUrl}/api/`, {
+					`${baseApiUrl}/api/log-in`, {
 					method: "POST",
 					body: JSON.stringify({
 						email: email,

@@ -143,7 +143,7 @@ export const Home = () => {
 
       {selectedDrink && (
         <div className="drink-details">
-          <img src={selectedDrink.Image} alt={selectedDrink.strDrink} className="cocktail-image" />
+          <img src={selectedDrink.Image} alt={selectedDrink.strDrink} className="cocktail-image setter" />
           <p className="drink-name">
             {selectedDrink.strDrink}
             <button

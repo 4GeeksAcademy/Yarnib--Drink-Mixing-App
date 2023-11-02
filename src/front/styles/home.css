@@ -66,3 +66,7 @@
   .favorite.active {
     color: gold;
   }
+.setter{
+  width:500px;
+  height:500px;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import {
   MainContainer,
@@ -27,14 +27,12 @@ const customStyles = {
 function ChatBot() {
   const [chatVisible, setChatVisible] = useState(false);
   const [isChatBigger, setIsChatBigger] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      message: "Hello, I'm Cheers! Let's Make A Drink",
-      sentTime: "just now",
-      sender: "ChatGPT"
-    }
-  ]);
-  
+  const [messages, setMessages] = useState(() => loadMessagesFromLocalStorage());
+
+  useEffect(() => {
+    saveMessagesToLocalStorage(messages);
+  }, [messages]);
+
   const [isTyping, setIsTyping] = useState(false);
 
   const toggleChat = () => {
@@ -67,6 +65,21 @@ function ChatBot() {
 
     setIsTyping(true);
     await processMessageToChatGPT(newMessages);
+  };
+
+  function saveMessagesToLocalStorage(messages) {
+    localStorage.setItem('chatMessages', JSON.stringify(messages));
+  }
+
+  function loadMessagesFromLocalStorage() {
+    const storedMessages = localStorage.getItem('chatMessages');
+    return storedMessages ? JSON.parse(storedMessages) : [
+      {
+        message: "Hello, I'm Cheers! Let's Make A Drink",
+        sentTime: "just now",
+        sender: "ChatGPT"
+      }
+    ];
   }
 
   async function processMessageToChatGPT(chatMessages) {
@@ -100,7 +113,10 @@ function ChatBot() {
       }
 
       const data = await response.json();
-      setMessages([...chatMessages, { message: data.choices[0].message.content, sender: "ChatGPT" }]);
+      setMessages([...chatMessages, { 
+        message: data.choices[0].message.content, 
+        sender: "ChatGPT" 
+      }]);
       setIsTyping(false);
     } catch (error) {
       console.error("API request error:", error);
@@ -124,7 +140,7 @@ function ChatBot() {
                 typingIndicator={isTyping ? <TypingIndicator content="Cheers is typing" /> : null}
               >
                 {messages.map((message, i) => {
-                  return <Message key={i} model={message} style={customStyles.message} />
+                  return <Message key={i} model={message} style={customStyles.message} />;
                 })}
               </MessageList>
               <MessageInput
