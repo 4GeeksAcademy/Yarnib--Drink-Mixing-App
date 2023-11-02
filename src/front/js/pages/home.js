@@ -42,13 +42,13 @@ export const Home = () => {
   const toggleFavorite = (drink) => {
     if (favorites.includes(drink.idDrink)) {
       const updatedFavorites = favorites.filter((fav) => fav !== drink.idDrink);
-      actions.addToFavorites(1, drink.idDrink, drink.strDrink, drink.strDrinkThumb).then((result) => {
-
+      actions.deleteFavorites(1, drink.idDrink).then((result) => {
+        console.log(result)
       })
       setFavorites(updatedFavorites);
     } else {
       console.log(drink)
-      actions.addToFavorites(1, drink.idDrink, drink.strDrink).then((result) => {
+      actions.addToFavorites(1, drink.idDrink, drink.strDrink, drink.strDrinkThumb).then((result) => {
         setFavorites([...favorites, drink.idDrink]);
       })
     }

@@ -8,7 +8,7 @@ from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from werkzeug.security import check_password_hash
 from datetime import datetime,timedelta
-from api.favoriteService import addFavorite, getAllFavorites, removeFromFavorites
+from api.favoriteService import addFavorite, getAllFavorites, deleteFromFavorites
 
 
 api = Blueprint('api', __name__)
@@ -148,7 +148,7 @@ def addToFavorites():
     cocktail = data.get("cocktailId")
     name = data.get("name")
     url = data.get("url")
-    result = addFavorite(user, cocktail, name)
+    result = addFavorite(user, cocktail, name, url)
     if result is None:
         return jsonify({'error': 'couldnt add'}), 400
     else:
@@ -166,5 +166,8 @@ def getAllFav():
 @api.route('/favorites', methods=['DELETE'])
 def removeFromFavorites():
     data = request.get_json()
+    favId = data.get("favId")
+    deleteFromFavorites(favId)
+    return jsonify({"msg": "deleted"}), 200
 
 

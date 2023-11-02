@@ -7,6 +7,7 @@ def addFavorite(userId, cocktailId, drinkName, url):
     print("addFavorite was called")
     print("userId is ", userId)
     print("cocktail is ", cocktailId)
+    print("url ", url)
 
     favToSave = Favorites(user_id=userId, cocktail_id=cocktailId, name=drinkName, img=url)
     print("Object is ", favToSave)
@@ -22,8 +23,9 @@ def getAllFavorites(user):
     print("result ", favs)
     return favs
 
-def removeFromFavorites(userId, favId):
-    print("removing from favorites for user ", userId)
+def deleteFromFavorites(favId):
+    print("removing from favorites for user ", favId)
     obj = Favorites.query.filter_by(id=favId).one()
     db.session.delete(obj)
     db.session.commit()    
+    return True

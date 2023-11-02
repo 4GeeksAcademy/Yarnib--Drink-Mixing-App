@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 export const UserFavorites = () => {
 
     const [favs, setFavs] = useState([])
+    const [update, setUpdate] = useState(false)
     const { store, actions } = useContext(Context);
 
     useEffect(() => {
@@ -14,14 +15,7 @@ export const UserFavorites = () => {
             console.log(favDrinks.favs)
             setFavs(favDrinks.favs)
         });
-    }, []);
-
-    const addToFavorites = (cocktailId) => {
-        actions.addToFavorites(1, cocktailId).then(res => {
-            console.log(res)
-        })
-    }
-
+    }, [update]);
 
 
     return (
@@ -60,7 +54,12 @@ export const UserFavorites = () => {
                     </div>
                     <div className="col-2">
                         <div className="col-2">
-                            <button onClick={() => addToFavorites(1)}>
+                            <button onClick={() => {
+                                actions.deleteFavorites(fav.id).then(e => {
+                                    setUpdate(!update)
+                                })
+                            }
+                            }>
                                 <i className="fa-solid fa-trash-can"></i>
                             </button>
                         </div>

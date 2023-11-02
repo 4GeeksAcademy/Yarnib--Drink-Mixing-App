@@ -129,7 +129,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			addToFavorites: async (userId, cocktailId, name, url) => {
-				console.log("api call")
+				console.log("api call: addToFavorites")
 				const response = await fetch(`${baseApiUrl}/api/favorites`, {
 					method: "POST",
 					body: JSON.stringify({
@@ -166,7 +166,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}).then(data => {
 					console.log(data)
 					setStore({
-						cocktails: getStore.cocktails,
+						user: getStore().user,
+						accessToken: getStore().accessToken,
+						cocktails: getStore().cocktails,
 						favorites: data.favs
 					})
 					return data
@@ -174,8 +176,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return response
 			},
 
-			deleteFavorites: (faveId, userId) => {
-
+			deleteFavorites: async (favId,) => {
+				console.log("api call: DeleteFromFavorite")
+				const response = await fetch(`${baseApiUrl}/api/favorites`, {
+					method: "DELETE",
+					body: JSON.stringify({
+						favId: favId
+					},
+					),
+					headers: {
+						"Content-Type": "application/json",
+					}
+				}).then(response => {
+					if (response.status == 201) {
+						console.log("succesfully added to favorites")
+					} else {
+						console.log("Error when adding")
+					}
+				})
 			},
 
 
