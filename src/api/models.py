@@ -80,6 +80,7 @@ class Favorites(db.Model):
     name = db.Column(db.String(100), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     cocktail_id = db.Column(db.String(100), nullable=False)
+    img = db.Column(db.String(500), nullable=False)
     user = db.relationship("User")
     def __repr__(self):
         return f'<Favorites {self.id}. {self.user_id} {self.cocktail_id}. {self.user}>'
@@ -89,4 +90,6 @@ class Favorites(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "cocktail_id": self.cocktail_id,
+            "name": self.name,
+            "img": self.img
         }

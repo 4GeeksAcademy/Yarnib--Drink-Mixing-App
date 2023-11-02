@@ -128,13 +128,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 			},
 
-			addToFavorites: async (userId, cocktailId) => {
+			addToFavorites: async (userId, cocktailId, name, url) => {
 				console.log("api call")
 				const response = await fetch(`${baseApiUrl}/api/favorites`, {
 					method: "POST",
 					body: JSON.stringify({
 						userId: userId,
-						cocktailId: cocktailId
+						cocktailId: cocktailId,
+						name: name,
+						url: url
 					},
 					),
 					headers: {

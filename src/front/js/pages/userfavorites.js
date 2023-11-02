@@ -12,16 +12,9 @@ export const UserFavorites = () => {
     useEffect(() => {
         actions.getAllFavorites(1).then(favDrinks => {
             console.log(favDrinks.favs)
-            getCocktailDetails(favDrinks.favs[0].cocktail_id).then(data => {
-                console.log(data)
-                return data;
-            }).then(e => {
-                console.log(e)
-                setFavs([e])
-            })
+            setFavs(favDrinks.favs)
         });
-
-    }, [])
+    }, []);
 
     const addToFavorites = (cocktailId) => {
         actions.addToFavorites(1, cocktailId).then(res => {
@@ -29,17 +22,6 @@ export const UserFavorites = () => {
         })
     }
 
-    const getCocktailDetails = async (id) => {
-        const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`, {
-            method: "GET",
-        }).then(response => {
-            return response.json()
-        }).then(data => {
-            console.log(data)
-            return data.drinks[0]
-        })
-        return response
-    }
 
 
     return (
@@ -48,7 +30,7 @@ export const UserFavorites = () => {
                 <h1 className="text-center">
                     <i className="fas fa-glass-martini-alt me-2"></i>
                     <i className="fas fa-wine-glass me-2"></i>
-                    <i class="fas fa-beer me-2"></i>
+                    <i className="fas fa-beer me-2"></i>
                     Favorites
                     <i className="fas fa-beer ms-2"></i>
                     <i className="fas fa-wine-glass ms-2"></i>
@@ -65,11 +47,11 @@ export const UserFavorites = () => {
                     </p>
                 </div>
             ) : (favs.map((fav) => (
-                <div className="row" key={fav.idDrink}>
+                <div className="row" key={fav.id}>
                     <div className="col-10">
                         <a href="#" className="list-group-item list-group-item-action py-3 lh-tight" aria-current="true" style={{ background: "inherit" }}>
                             <div className="d-flex w-100 align-items-center justify-content-between">
-                                <strong className="mb-1">{fav.strDrink}</strong>
+                                <strong className="mb-1">{fav.name}</strong>
                                 <small>Wed</small>
                             </div>
                             <div className="col-10 mb-1 small"> </div>
