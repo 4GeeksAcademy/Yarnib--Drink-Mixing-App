@@ -163,7 +163,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return response.json()
 				}).then(data => {
 					console.log(data)
+					setStore({
+						cocktails: getStore.cocktails,
+						favorites: data.favs
+					})
+					return data
 				})
+				return response
 			},
 
 			deleteFavorites: (faveId, userId) => {

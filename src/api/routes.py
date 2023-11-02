@@ -158,7 +158,8 @@ def getAllFav():
     user = data.get('userId')
     favs = getAllFavorites(user)
     print("returned ", favs)
-    return jsonify({'favs' : jsonify(favs)}), 200
+    favAsJson = [e.serialize() for e in favs]
+    return jsonify({'favs': favAsJson}), 200
 
 @api.route('/favorites', methods=['DELETE'])
 def removeFromFavorites():

@@ -84,7 +84,6 @@ export const Home = () => {
 
   return (
     <div className="text-center mt-5">
-      <UserFavorites></UserFavorites>
       <div className="search-bar" style={{ textAlign: 'center' }}>
         <input
           type="text"

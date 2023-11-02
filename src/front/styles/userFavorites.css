@@ -1,7 +1,4 @@
 .sidebar {
-  height: 500px;
-  width: 25vw;
-  float: right;
   background: rgb(131, 58, 180);
   background: linear-gradient(
     90deg,
@@ -10,5 +7,4 @@
     rgba(252, 101, 69, 1) 73%
   );
   padding-top: 16px;
-  overflow-y: scroll;
 }

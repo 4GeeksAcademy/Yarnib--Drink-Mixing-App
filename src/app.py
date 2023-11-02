@@ -5,7 +5,7 @@ from flask_swagger import swagger
 from flask_cors import CORS, cross_origin
 from api.utils import APIException, generate_sitemap
 from api.commands import setup_commands
-from api.models import db, User, ContactRequest,Favorites
+from api.models import db, User, ContactRequests, Favorites
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands

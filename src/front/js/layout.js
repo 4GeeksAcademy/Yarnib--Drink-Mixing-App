@@ -2,9 +2,9 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
-import  LandingPage  from "./pages/landingpage";
+import LandingPage from "./pages/landingpage";
 import { Home } from "./pages/home";
-
+import Landing_page from "./pages/landing_page";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
@@ -36,7 +36,7 @@ const Layout = () => {
                         <Route element={<SignUp />} path="/sign-up" />
                         <Route element={<Profile />} path="/profile" />
                         <Route element={<ChatBot />} path="/ChatBot" />
-                        <Route element={<LandingPage />} path="/landingpage" />
+                        <Route element={<Landing_page />} path="/landing_page" />
                         <Route element={<Social />} path="/Social" />
                         <Route element={<BlogPage />} path="/BlogPage" />
                         <Route element={<Ageverification />} path="/Ageverification" />
