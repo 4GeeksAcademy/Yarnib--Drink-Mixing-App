@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../store/appContext';
 import rigoImageUrl from '../../img/rigo-baby.jpg';
 import '../../styles/home.css';
-import ChatBot from './ChatBot';
+import ChatBot from './chatbot';
 import Blogsidebar from './Blogsidebar'; // Import the Blogsidebar component
 import { fetchCocktails, fetchCocktailsByIngredient, fetchCocktailByName } from './api';
 import Homebarprotopsplashnotitle from "../../img/Headerimages/Homebarprotopsplashnotitle.jpg";
