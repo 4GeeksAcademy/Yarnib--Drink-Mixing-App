@@ -103,21 +103,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"Content-Type": "application/json",
 					},
 				});
-
-				const body = await response.json();
+			
 				if (response.ok) {
+					const body = await response.json();
 					setStore({
 						accessToken: body.access_token,
 						user: body.user,
 					});
-
+			
 					localStorage.setItem("accessToken", body.access_token);
 					localStorage.setItem("user", JSON.stringify(body.user));
 				}
+			
+				return response;
 			},
-
-
-
 			loadSomeData: () => {
 				fetch("www.thecocktaildb.com/api/json/v1/1/search.php?f=a")
 					.then((response) => response.json())

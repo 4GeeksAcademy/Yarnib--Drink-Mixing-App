@@ -21,8 +21,8 @@ export const SignUp = () => {
                 age: age
             });
 
-            // Check response for success message
-            if (response.message === "User registered successfully") {
+
+            if (response.status == 201) {
                 navigate("/");
             }
         } catch (error) {
