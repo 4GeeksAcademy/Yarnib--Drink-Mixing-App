@@ -12,9 +12,9 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { SignUp } from "./pages/signup";
 import { Profile } from "./pages/profile";
-import ChatBot from "./pages/ChatBot";
-import Social from "./pages/Social";
-import Ageverification from "./pages/Ageverification";
+import Chatbot from "./pages/chatbot";
+import Social from "./pages/social";
+import Ageverification from "./pages/ageverification";
 import Blogsidebar from "./pages/Blogsidebar";
 import BlogPage from "./pages/BlogPage";
 import UserFavorites from "./pages/userfavorites";
@@ -33,15 +33,15 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
-                        <Route element={<Ageverification />} path="/Ageverification" />
+                        <Route element={<Ageverification />} path="/ageverification" />
                         <Route element={<Home />} path="/" />
                         <Route element={<Home />} path="/:theId" />
                         <Route element={<SignUp />} path="/sign-up" />
                         <Route element={<ResetPassword />} path="/request_reset" />
                         <Route element={<Profile />} path="/profile" />
-                        <Route element={<ChatBot />} path="/ChatBot" />
+                        <Route element={<Chatbot />} path="/chatbot" />
                         <Route element={<LandingPage />} path="/landingpage" />
-                        <Route element={<Social />} path="/Social" />
+                        <Route element={<Social />} path="/social" />
                         <Route element={<Blogsidebar />} path="/Blogsidebar" />
                         <Route element={<BlogPage />} path="/BlogPage" />
                         <Route element={<ContactForm />} path="/contactform" />
