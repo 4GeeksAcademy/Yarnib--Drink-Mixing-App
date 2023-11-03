@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-
+import requests
 from api.models import db, User, ContactRequest
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
@@ -94,16 +94,23 @@ def send_email():
         return jsonify("incorrect email")
     token = create_access_token(identity=email)
 
-    return request.post(
-        "https://api.mailgun.net/v3/sandboxdac79922f6944beb8aacc8e1cd2cd893.mailgun.org/messages",
-        auth=("api", "pubkey-86fc1877cd707f93fab8f5d09eeebd85"),
-        data={
-            "from": "Your Name <mailgun@sandboxdac79922f6944beb8aacc8e1cd2cd893.mailgun.org>",
-            "to": [email],
-            "subject": "passwordreset",
-            "text": f"Your reset token is: {token}"  # You should create a proper reset link using this token
-        }
-    )
+    try:
+        response=requests.post(
+            "https://api.mailgun.net/v3/sandboxdac79922f6944beb8aacc8e1cd2cd893.mailgun.org/messages",
+            auth=("api", "pubkey-86fc1877cd707f93fab8f5d09eeebd85"),
+            data={
+                "from": "Your Name <mailgun@sandboxdac79922f6944beb8aacc8e1cd2cd893.mailgun.org>",
+                "to": [email],
+                "subject": "passwordreset",
+                "text": f"Your reset token is: {token}"  # You should create a proper reset link using this token
+            # do a conditional after line 107 before the return
+            }
+        )
+        print(response.text)
+        return jsonify(response.json()),response.status_code
+    except Exception as error:
+        print(error)
+        return jsonify(error),400
 @api.route('/request_reset', methods=['POST'])
 def request_reset():
     email = request.json.get('email')
