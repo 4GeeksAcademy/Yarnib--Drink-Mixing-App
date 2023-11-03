@@ -3,6 +3,7 @@ import "../../styles/landing_page.css";
 import ChatBot from './chatbot';
 import { Link } from "react-router-dom";
 // import {headerpic} from "../../img/Headerimages/headerpic.png"
+
 const LandingPage = () => {
     return (
         <div >

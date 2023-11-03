@@ -6,7 +6,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, ContactRequest
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash ,generate_password_hash
 from datetime import datetime,timedelta
 from api.favoriteService import addFavorite, getAllFavorites, deleteFromFavorites
 
@@ -86,9 +86,24 @@ def protected():
     return jsonify(logged_in_as=user.serialize()), 200
 
 
+@api.route('/forgot-password', methods=["POST"])
+def send_email():
+    email = request.json.get('email')
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify("incorrect email")
+    token = create_access_token(identity=email)
 
-def send_email(email,subject,token):
-    pass #need to figure out how to send email with token
+    return request.post(
+        "https://api.mailgun.net/v3/sandboxdac79922f6944beb8aacc8e1cd2cd893.mailgun.org/messages",
+        auth=("api", "pubkey-86fc1877cd707f93fab8f5d09eeebd85"),
+        data={
+            "from": "Your Name <mailgun@sandboxdac79922f6944beb8aacc8e1cd2cd893.mailgun.org>",
+            "to": [email],
+            "subject": "passwordreset",
+            "text": f"Your reset token is: {token}"  # You should create a proper reset link using this token
+        }
+    )
 @api.route('/request_reset', methods=['POST'])
 def request_reset():
     email = request.json.get('email')
@@ -112,8 +127,8 @@ def reset_password():
 
     user = User.query.filter_by(email=email).first_or_404()
     new_password = request.json.get('password')
-    
-    user.hashed_password = new_password # Implement password hashing
+    user.hashed_password = generate_password_hash(new_password)
+   
     user.reset_token = None
     user.token_expiration = None
     db.session.commit()

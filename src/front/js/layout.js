@@ -4,9 +4,10 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 import LandingPage from "./pages/landingpage";
 import { Home } from "./pages/home";
+import { Sendtoken } from "./pages/requestingreset";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
-
+import { ResetPassword } from "./pages/resetpassword";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { SignUp } from "./pages/signup";
@@ -36,6 +37,7 @@ const Layout = () => {
                         <Route element={<Home />} path="/" />
                         <Route element={<Home />} path="/:theId" />
                         <Route element={<SignUp />} path="/sign-up" />
+                        <Route element={<ResetPassword />} path="/request_reset" />
                         <Route element={<Profile />} path="/profile" />
                         <Route element={<ChatBot />} path="/ChatBot" />
                         <Route element={<LandingPage />} path="/landingpage" />
@@ -44,6 +46,7 @@ const Layout = () => {
                         <Route element={<BlogPage />} path="/BlogPage" />
                         <Route element={<ContactForm />} path="/contactform" />
                         <Route element={<UserFavorites />} path="/userfavorites" />
+                        <Route element={<Sendtoken />} path="/sendtoken" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
