@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import SignupHeader1080 from "../../img/Headerimages/SignupHeader1080.jpg";
 
 export const SignUp = () => {
     const { actions } = useContext(Context);
@@ -36,6 +37,7 @@ export const SignUp = () => {
 
     return (
         <div className="container">
+            <img src={SignupHeader1080} alt="SignupHeader1080" style={{ width: '100%' }} />
             <h1>Sign up below!</h1>
             {errorMessage && <p className="text-danger">{errorMessage}</p>}
             <form onSubmit={onSubmit}>

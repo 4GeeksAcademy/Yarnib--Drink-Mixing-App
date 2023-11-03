@@ -17,7 +17,7 @@ const BlogList = () => {
   };
 
   return (
-    <div className="blog-list">
+    <div className="blog-list" style={{ margin: 0 + 'px auto', maxWidth: 40 + '%', color: 'white' }}>
       {blogData.slice(0, visiblePosts).map((post) => (
         <BlogPost key={post.id} post={post} />
       ))}

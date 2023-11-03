@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import ChatBot from './chatbot';
 
+
+
 function Social() {
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [originalWidth, setOriginalWidth] = useState('1280px');
   const [originalHeight, setOriginalHeight] = useState('800px');
   const [customWidth, setCustomWidth] = useState(originalWidth);
   const [customHeight, setCustomHeight] = useState(originalHeight);
+  
 
   const iframeRef = React.createRef();
 
@@ -75,7 +78,12 @@ function Social() {
   }, []);
 
   return (
-    <div style={{ backgroundColor: 'black', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <div style={{ backgroundColor: 'black', display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100vh' }}>
+      {/* Navbar */}
+      {/* Place your navbar code here, e.g., navigation links, logo, etc. */}
+      
+      
+
       <div style={{ position: 'relative' }}>
         <iframe
           ref={iframeRef}

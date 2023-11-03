@@ -11,9 +11,10 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { SignUp } from "./pages/signup";
 import { Profile } from "./pages/profile";
-import ChatBot from "./pages/chatbot";
-import Social from "./pages/social";
-import Ageverification from "./pages/ageverification";
+import ChatBot from "./pages/ChatBot";
+import Social from "./pages/Social";
+import Ageverification from "./pages/Ageverification";
+import Blogsidebar from "./pages/Blogsidebar";
 import BlogPage from "./pages/BlogPage";
 import UserFavorites from "./pages/userfavorites";
 import { ContactForm } from "./pages/contactform";
@@ -31,6 +32,7 @@ const Layout = () => {
                 <ScrollToTop>
                     <Navbar />
                     <Routes>
+                        <Route element={<Ageverification />} path="/Ageverification" />
                         <Route element={<Home />} path="/" />
                         <Route element={<Home />} path="/:theId" />
                         <Route element={<SignUp />} path="/sign-up" />
@@ -38,10 +40,10 @@ const Layout = () => {
                         <Route element={<ChatBot />} path="/ChatBot" />
                         <Route element={<LandingPage />} path="/landingpage" />
                         <Route element={<Social />} path="/Social" />
+                        <Route element={<Blogsidebar />} path="/Blogsidebar" />
                         <Route element={<BlogPage />} path="/BlogPage" />
-                        <Route element={<Ageverification />} path="/Ageverification" />
                         <Route element={<ContactForm />} path="/contactform" />
-                        <Route element={<UserFavorites />} path="/favorites" />
+                        <Route element={<UserFavorites />} path="/userfavorites" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>

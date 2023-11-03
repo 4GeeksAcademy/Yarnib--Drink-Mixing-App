@@ -1,5 +1,4 @@
 import React from 'react';
-import headerpic from '../../img/Headerimages/SignupHeader4k.png';
 import "../../styles/landing_page.css";
 import ChatBot from './ChatBot';
 import { Link } from "react-router-dom";
@@ -7,7 +6,7 @@ const LandingPage = () => {
     return (
         <div >
             <div style={{ display: "flex", position: "relative" }}>
-                <img src={headerpic} alt="header" className='header' />
+                {/* <img src={headerpic} alt="header" className='header' /> */}
                 <ChatBot id="landing_page_search" />
             </div>
             <div className='center' >

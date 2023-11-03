@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
+import chatimg from "../../img/Bartenderchatlogo/bartenderIconwhite.png";
+
 import {
   MainContainer,
   ChatContainer,
@@ -163,7 +165,7 @@ function ChatBot() {
         }}
         onClick={toggleChat}
       >
-        <span role="img" aria-label="Chat Icon">💬</span>
+        <img style={{width: "50px"}} src={chatimg}></img>
       </div>
     </div>
   );

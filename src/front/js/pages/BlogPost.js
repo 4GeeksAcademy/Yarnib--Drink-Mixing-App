@@ -12,7 +12,7 @@ const containerStyle = {
   border: '3px solid #ccc', // Add a border to create a box
   padding: '10px', // Add padding for spacing
   fontWeight: 'bold', // Make the box bold
-  maxWidth: '40%', // Set the maximum width to 100% to fit the image width
+  //maxWidth: '40%', // Set the maximum width to 100% to fit the image width
   margin: '0 auto', // Center the container horizontally
 };
 
@@ -35,7 +35,7 @@ const BlogPost = ({ post }) => {
     if (imageRef.current) {
       const imageWidth = imageRef.current.width;
       const container = document.querySelector('.container');
-      container.style.maxWidth = `${imageWidth}px`;
+      //container.style.maxWidth = `${imageWidth}px`;
     }
   }, []);
 
