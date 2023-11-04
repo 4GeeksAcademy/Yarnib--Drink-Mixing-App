@@ -1,7 +1,5 @@
 import React from 'react';
 import BlogList from './BlogList';
-import chatbot from './chatbot';
-import ShotsHeader1080 from "../../img/Headerimages/ShotsHeader1080.jpg";
 
 const BlogPage = () => {
   return (
@@ -16,9 +14,6 @@ const BlogPage = () => {
       </div>
 
       <BlogList />
-
-      {/* Render the ChatBot component here, inside the return statement */}
-      <chatbot />
     </div>
   );
 };
