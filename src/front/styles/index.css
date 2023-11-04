@@ -58,7 +58,7 @@
     left: 0;
     width: 250px; /* Adjust as needed */
     background-color: #020202; /* Set the background color to #020202 */
-    border: 1px solid #ccc; /* Add a border for clarity */
+    border: 1px solid #96F3F8; /* Add a border for clarity */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
     overflow: visible; /* Allows content to overflow the dropdown */
   }
