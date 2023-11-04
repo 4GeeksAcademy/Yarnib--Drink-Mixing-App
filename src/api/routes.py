@@ -97,7 +97,7 @@ def send_email():
     try:
         response=requests.post(
             "https://api.mailgun.net/v3/sandboxdac79922f6944beb8aacc8e1cd2cd893.mailgun.org/messages",
-            auth=("api", "pubkey-86fc1877cd707f93fab8f5d09eeebd85"),
+            auth=("api", "f358afdd761153b6fe3e00907abbd9b8-3e508ae1-834c93c1"),
             data={
                 "from": "Your Name <mailgun@sandboxdac79922f6944beb8aacc8e1cd2cd893.mailgun.org>",
                 "to": [email],
@@ -106,10 +106,10 @@ def send_email():
             # do a conditional after line 107 before the return
             }
         )
-        print(response.text)
+        print(f">>> 😀 {response.text}")
         return jsonify(response.json()),response.status_code
     except Exception as error:
-        print(error)
+        print(f">>> 😣 {error}")
         return jsonify(error),400
 @api.route('/request_reset', methods=['POST'])
 def request_reset():

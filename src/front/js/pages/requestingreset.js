@@ -1,8 +1,9 @@
 import React,{ useState }  from "react"
 export const Sendtoken = ()=>{
+    const baseApiUrl = process.env.BACKEND_URL || "http://127.0.0.1:3001";
     const[email,setEmail]=useState("")
     function send_email(){
-        fetch("https://congenial-capybara-p594pqx669x27vvw-3001.app.github.dev/api/forgot-password" ,{
+        fetch(`${baseApiUrl}api/forgot-password` ,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
