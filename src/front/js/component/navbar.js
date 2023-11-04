@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/index.css";
 import { Login } from "./login";
@@ -11,6 +11,12 @@ export const Navbar = () => {
     const navigate = useNavigate();
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [enableFav, setEnableFav] = useState(false)
+    useEffect(() => {
+        if (localStorage.getItem("user") != null) {
+            setEnableFav(true)
+        }
+    }, enableFav)
 
     const handleLogoClick = () => {
         if (window.location.pathname === "/") {
@@ -43,9 +49,13 @@ export const Navbar = () => {
                     <Link to="/Social" className="tab-link">
                         Social
                     </Link>
-                    <Link to="/userfavorites" className="tab-link">
+                    {(enableFav) ? (<Link to="/userfavorites" className="tab-link">
                         Favorites
-                    </Link>
+                    </Link>) : (<Link to="/" className="tab-link-disabled disabled" onClick={(event) => event.preventDefault()}>
+                        <span data-toggle="tooltip" data-placement="left" title="Log in to see Favorites!">Favorites</span>
+                    </Link>)
+                    }
+
                 </div>
 
                 <div className="dropdown-container">

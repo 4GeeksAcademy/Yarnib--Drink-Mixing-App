@@ -1,69 +1,83 @@
 /* Update your existing CSS to move "Home Bar Pro" to the far left */
-body{
-    background-color: black;
-    color: white;
+body {
+  background-color: black;
+  color: white;
 }
-.top-right-nav{
-    height: 270px;
-    width: 220px;
-    justify-content: center;
-    align-items: center;
-    color: #e58be1; /* Set text color to #e58be1 */
+.top-right-nav {
+  height: 270px;
+  width: 220px;
+  justify-content: center;
+  align-items: center;
+  color: #e58be1; /* Set text color to #e58be1 */
 }
-.profile-pic{
-    max-width: 150px;
-    max-height: 150px;
-    flex: content;
+.profile-pic {
+  max-width: 150px;
+  max-height: 150px;
+  flex: content;
 }
 .login-container {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 10px; /* Adjust the padding as needed */
-    background-color: #fff; /* Set the background color as needed */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a shadow for better visibility */
-    z-index: 1000; /* Make sure it's above other elements on the page */
-  }
-  .custom-navbar-bg {
-    background-color: black; /* Background color remains black */
-    border: 2px solid rgb(230, 0, 255); /* Add a white border */
-    /* Add other styling for your navbar as needed */
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px; /* Adjust the padding as needed */
+  background-color: #fff; /* Set the background color as needed */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a shadow for better visibility */
+  z-index: 1000; /* Make sure it's above other elements on the page */
+}
+.custom-navbar-bg {
+  background-color: black; /* Background color remains black */
+  border: 2px solid rgb(230, 0, 255); /* Add a white border */
+  /* Add other styling for your navbar as needed */
 }
 
 .tab-container {
-    border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
 }
 
 .tab-link {
-    display: inline-block;
-    padding: 10px 20px 15px; /* Add additional padding to the bottom */
-    border: 1px solid #0a06f1;
-    border-bottom: none;
-    background-color: rgb(81, 0, 255);
-    border-radius: 4px 4px 0 0;
-    margin: 0 9px;
-    text-decoration: none;
-    color: #ffffff;
-    transition: background-color 0.3s;
+  display: inline-block;
+  padding: 10px 20px 15px; /* Add additional padding to the bottom */
+  border: 1px solid #0a06f1;
+  border-bottom: none;
+  background-color: rgb(81, 0, 255);
+  border-radius: 4px 4px 0 0;
+  margin: 0 9px;
+  text-decoration: none;
+  color: #ffffff;
+  transition: background-color 0.3s;
+}
+
+.tab-link-disabled {
+  display: inline-block;
+  padding: 10px 20px 15px; /* Add additional padding to the bottom */
+  border: 1px solid #0a06f1;
+  border-bottom: none;
+  background-color: rgb(109, 107, 113);
+  border-radius: 4px 4px 0 0;
+  margin: 0 9px;
+  text-decoration: none;
+  color: currentColor;
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .tab-link:hover {
-    background-color: #e0e0e0;
+  background-color: #e0e0e0;
 }
 
 .dropdown-container {
-    position: relative;
-    z-index: 1; /* Ensure it's higher than the navbar */
-  }
-  
-  .dropdown-content {
-    display: block;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 250px; /* Adjust as needed */
-    background-color: #020202; /* Set the background color to #020202 */
-    border: 1px solid #ccc; /* Add a border for clarity */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
-    overflow: visible; /* Allows content to overflow the dropdown */
-  }
+  position: relative;
+  z-index: 1; /* Ensure it's higher than the navbar */
+}
+
+.dropdown-content {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 250px; /* Adjust as needed */
+  background-color: #020202; /* Set the background color to #020202 */
+  border: 1px solid #ccc; /* Add a border for clarity */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+  overflow: visible; /* Allows content to overflow the dropdown */
+}

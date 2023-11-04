@@ -16,6 +16,7 @@ export const Home = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [showDrinkList, setShowDrinkList] = useState(true);
   const [previousSearchResults, setPreviousSearchResults] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false)
 
   useEffect(() => {
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=`)
@@ -48,9 +49,14 @@ export const Home = () => {
       setFavorites(updatedFavorites);
     } else {
       console.log(drink)
-      actions.addToFavorites(1, drink.idDrink, drink.strDrink, drink.strDrinkThumb).then((result) => {
-        setFavorites([...favorites, drink.idDrink]);
-      })
+      if (store.user != undefined) {
+        console.log(store)
+        let id = store.user.id
+
+        actions.addToFavorites(id, drink.idDrink, drink.strDrink, drink.strDrinkThumb).then((result) => {
+          setFavorites([...favorites, drink.idDrink]);
+        })
+      }
     }
   };
 
@@ -91,7 +97,7 @@ export const Home = () => {
   return (
     <div style={{ background: `url(${Homebarprotopsplashnotitle})`, backgroundSize: 'cover', height: '100vh' }}>
       <div className="text-center">
-       
+
         <div className="search-bar" style={{ margin: '100px 0', textAlign: 'center' }}>
           <input
             type="text"
@@ -117,7 +123,7 @@ export const Home = () => {
           </button>
         </div>
 
-      {/* <div className="search-results-container">
+        {/* <div className="search-results-container">
 
         {showDrinkList && searchResults.length > 0 ? (
           <ul className="cocktail-list">
@@ -158,12 +164,18 @@ export const Home = () => {
                     <p className="drink-name">
                       {cocktail.strDrink}
                       <br></br>
-                      <button
+                      {store.user != undefined ? ((<button
                         className={favorites.includes(cocktail.idDrink) ? 'favorite active' : 'favorite'}
                         onClick={(e) => handleStarClick(e, cocktail)} // Use handleStarClick for star icon
                       >
                         ★
-                      </button>
+                      </button>)) :
+                        (<button
+                          className="favorite disabled" disabled data-toggle="tooltip" data-placement="left" title="Login to add to favorites!">
+                          ★
+                        </button>)
+                      }
+
                     </p>
                     <p className="other-info">
                       <a href="#" onClick={() => handleDrinkClick(cocktail)}>

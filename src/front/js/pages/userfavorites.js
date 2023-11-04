@@ -11,10 +11,19 @@ export const UserFavorites = () => {
     const { store, actions } = useContext(Context);
 
     useEffect(() => {
-        actions.getAllFavorites(1).then(favDrinks => {
-            console.log(favDrinks.favs)
-            setFavs(favDrinks.favs)
-        });
+        console.log(store)
+
+        console.log(store.user != undefined)
+
+        if (store.user != undefined) {
+            console.log(store)
+            let id = store.user.id
+            actions.getAllFavorites(id).then(favDrinks => {
+                console.log(favDrinks.favs)
+                setFavs(favDrinks.favs)
+            });
+        }
+
     }, [update]);
 
 
@@ -47,11 +56,10 @@ export const UserFavorites = () => {
                             <a href="#" className="list-group-item list-group-item-action py-3 lh-tight" aria-current="true" style={{ background: "inherit" }}>
                                 <div className="d-flex w-100 align-items-center justify-content-between">
                                     <strong className="mb-1">{fav.name}</strong>
-                                    <small>Wed</small>
                                 </div>
                                 <div className="col-10 mb-1 small"> </div>
                             </a>
-                            <img style={{ width: 100, height: 100 }} src={fav.strDrinkThumb}></img>
+                            <img style={{ width: 100, height: 100 }} src={fav.img}></img>
                         </div>
                         <div className="col-2">
                             <div className="col-2">

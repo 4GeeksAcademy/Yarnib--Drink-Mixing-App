@@ -71,8 +71,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						accessToken: body.access_token,
 						user: body.user
 					});
+					console.log(body.user)
 					localStorage.setItem("accessToken", body.access_token);
-					localStorage.setItem("user", body.user);
+					localStorage.setItem("user", JSON.stringify(body.user));
 					return true
 				}
 			}
@@ -103,18 +104,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"Content-Type": "application/json",
 					},
 				});
-			
+
 				if (response.ok) {
 					const body = await response.json();
 					setStore({
 						accessToken: body.access_token,
 						user: body.user,
 					});
-			
+
 					localStorage.setItem("accessToken", body.access_token);
 					localStorage.setItem("user", JSON.stringify(body.user));
 				}
-			
+
 				return response;
 			},
 			loadSomeData: () => {
