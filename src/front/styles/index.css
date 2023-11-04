@@ -4,9 +4,11 @@ body{
     color: white;
 }
 .top-right-nav{
-    height: 70px;
-    width: 50px;
-    color: black;
+    height: 270px;
+    width: 220px;
+    justify-content: center;
+    align-items: center;
+    color: #e58be1; /* Set text color to #e58be1 */
 }
 .profile-pic{
     max-width: 150px;
@@ -49,3 +51,19 @@ body{
     background-color: #e0e0e0;
 }
 
+.dropdown-container {
+    position: relative;
+    z-index: 1; /* Ensure it's higher than the navbar */
+  }
+  
+  .dropdown-content {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 250px; /* Adjust as needed */
+    background-color: #020202; /* Set the background color to #020202 */
+    border: 1px solid #ccc; /* Add a border for clarity */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+    overflow: visible; /* Allows content to overflow the dropdown */
+  }
