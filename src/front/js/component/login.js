@@ -43,6 +43,7 @@ export const Login = (props) => {
             <button className="btn btn-success m-2" onClick={onSignup}>
                 Sign Up!
             </button>
+            <a>Forgot Password?</a>
         </div>
     );
 };
