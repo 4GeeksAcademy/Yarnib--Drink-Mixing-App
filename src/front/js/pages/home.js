@@ -28,7 +28,6 @@ export const Home = () => {
         console.error('Error fetching data:', error);
       });
   }, []);
-
   const handleDrinkClick = (drink) => {
     fetchCocktailByName(drink.strDrink)
       .then((data) => {
@@ -39,7 +38,6 @@ export const Home = () => {
         console.error('Error fetching cocktail details:', error);
       });
   };
-
   const toggleFavorite = (drink) => {
     if (favorites.includes(drink.idDrink)) {
       const updatedFavorites = favorites.filter((fav) => fav !== drink.idDrink);
@@ -59,7 +57,6 @@ export const Home = () => {
       }
     }
   };
-
   const handleIngredientSearch = () => {
     if (keywords.length > 0) {
       const ingredientsString = keywords.join(',');
@@ -79,7 +76,6 @@ export const Home = () => {
         });
     }
   };
-
   const backToCocktailList = () => {
     if (previousSearchResults.length > 0) {
       setSearchResults(previousSearchResults);
@@ -88,16 +84,13 @@ export const Home = () => {
       alert('No previous search results available.');
     }
   };
-
   const handleStarClick = (event, drink) => {
     event.stopPropagation(); // Prevent the click event from bubbling up to the <li>
     toggleFavorite(drink);
   };
-
   return (
     <div style={{ background: `url(${Homebarprotopsplashnotitle})`, backgroundSize: 'cover', height: '100vh' }}>
       <div className="text-center">
-
         <div className="search-bar" style={{ margin: '100px 0', textAlign: 'center' }}>
           <input
             type="text"
@@ -125,6 +118,7 @@ export const Home = () => {
 
         {/* <div className="search-results-container">
 
+        {/* <div className="search-results-container">
         {showDrinkList && searchResults.length > 0 ? (
           <ul className="cocktail-list">
             {searchResults.map((cocktail) => (
@@ -153,7 +147,6 @@ export const Home = () => {
           </ul>
         ) : null}
       </div> */}
-
         <div className="search-results-container">
           {showDrinkList && searchResults.length > 0 ? (
             <ul className="cocktail-list">
@@ -164,18 +157,12 @@ export const Home = () => {
                     <p className="drink-name">
                       {cocktail.strDrink}
                       <br></br>
-                      {store.user != undefined ? ((<button
+                      <button
                         className={favorites.includes(cocktail.idDrink) ? 'favorite active' : 'favorite'}
                         onClick={(e) => handleStarClick(e, cocktail)} // Use handleStarClick for star icon
                       >
                         ★
-                      </button>)) :
-                        (<button
-                          className="favorite disabled" disabled data-toggle="tooltip" data-placement="left" title="Login to add to favorites!">
-                          ★
-                        </button>)
-                      }
-
+                      </button>
                     </p>
                     <p className="other-info">
                       <a href="#" onClick={() => handleDrinkClick(cocktail)}>
@@ -188,7 +175,6 @@ export const Home = () => {
             </ul>
           ) : null}
         </div>
-
         {selectedDrink && (
           <div
             style={{

@@ -1,6 +1,6 @@
 import React from 'react';
 import BlogList from './BlogList';
-import ChatBot from './chatbot';
+import Chatbot from './chatbot';
 import ShotsHeader1080 from "../../img/Headerimages/ShotsHeader1080.jpg";
 
 const BlogPage = () => {
@@ -10,7 +10,7 @@ const BlogPage = () => {
       <BlogList />
 
       {/* Render the ChatBot component here, inside the return statement */}
-      <ChatBot />
+      <Chatbot />
     </div>
   );
 };
