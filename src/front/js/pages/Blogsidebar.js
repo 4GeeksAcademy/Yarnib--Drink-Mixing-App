@@ -11,7 +11,7 @@ const homepageStyle = {
   justifyContent: 'start',
   alignItems: 'start',
   top:"200px",
-  let:"0",
+  left:"0",
   margin:"0"
 };
 
@@ -21,8 +21,9 @@ const sidebarStyle = {
   height: '840px',
   overflowY: 'auto',
   position:"absolute",
-  top:"140px",
-  right:"0",
+  
+  top:"160px",
+  left:"0",
   margin:"0"
 
 };
@@ -36,8 +37,8 @@ const contentStyle = {
   maxWidth: '100%',
   paddingRight: '0px', // Adjust the right padding to move the content to the right
   position:"absolute",
-  top:"200px",
-  let:"0"
+  top:"180px",
+  right:"0",
 };
 
 const centerTitleStyle = {
