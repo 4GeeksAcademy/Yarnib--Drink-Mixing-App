@@ -6,7 +6,6 @@ import chatbot from './chatbot';
 import Blogsidebar from './Blogsidebar'; // Import the Blogsidebar component
 import { fetchCocktails, fetchCocktailsByIngredient, fetchCocktailByName } from './api';
 import Homebarprotopsplashnotitle from "../../img/Headerimages/Homebarprotopsplashnotitle.jpg";
-
 export const Home = () => {
   const { store, actions } = useContext(Context);
   const [cocktails, setCocktails] = useState([]);
@@ -17,6 +16,7 @@ export const Home = () => {
   const [showDrinkList, setShowDrinkList] = useState(true);
   const [previousSearchResults, setPreviousSearchResults] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false)
+  const [showAgeVerificationModal, setShowAgeVerificationModal] = useState(true);
 
   useEffect(() => {
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=`)
@@ -27,7 +27,7 @@ export const Home = () => {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-  }, []);
+  }, [showAgeVerificationModal]);
   const handleDrinkClick = (drink) => {
     fetchCocktailByName(drink.strDrink)
       .then((data) => {
@@ -50,7 +50,6 @@ export const Home = () => {
       if (store.user != undefined) {
         console.log(store)
         let id = store.user.id
-
         actions.addToFavorites(id, drink.idDrink, drink.strDrink, drink.strDrinkThumb).then((result) => {
           setFavorites([...favorites, drink.idDrink]);
         })
@@ -115,9 +114,6 @@ export const Home = () => {
             Search
           </button>
         </div>
-
-        {/* <div className="search-results-container">
-
         {/* <div className="search-results-container">
         {showDrinkList && searchResults.length > 0 ? (
           <ul className="cocktail-list">
@@ -133,7 +129,6 @@ export const Home = () => {
                       onClick={(e) => handleStarClick(e, cocktail)} // Use handleStarClick for star icon
                     >
                       ★
-
                     </button>
                   </p>
                   <p className="other-info">
@@ -157,12 +152,17 @@ export const Home = () => {
                     <p className="drink-name">
                       {cocktail.strDrink}
                       <br></br>
-                      <button
+                      {store.user != undefined ? ((<button
                         className={favorites.includes(cocktail.idDrink) ? 'favorite active' : 'favorite'}
                         onClick={(e) => handleStarClick(e, cocktail)} // Use handleStarClick for star icon
                       >
                         ★
-                      </button>
+                      </button>)) :
+                        (<button
+                          className="favorite disabled" disabled data-toggle="tooltip" data-placement="left" title="Login to add to favorites!">
+                          ★
+                        </button>)
+                      }
                     </p>
                     <p className="other-info">
                       <a href="#" onClick={() => handleDrinkClick(cocktail)}>
