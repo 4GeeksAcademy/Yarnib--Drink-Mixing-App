@@ -10,6 +10,9 @@ const homepageStyle = {
   gridTemplateColumns: '2fr 1fr',
   justifyContent: 'start',
   alignItems: 'start',
+  top:"200px",
+  let:"0",
+  margin:"0"
 };
 
 const sidebarStyle = {
@@ -17,6 +20,11 @@ const sidebarStyle = {
   width: '250px',
   height: '840px',
   overflowY: 'auto',
+  position:"absolute",
+  top:"140px",
+  right:"0",
+  margin:"0"
+
 };
 
 const contentStyle = {
@@ -27,6 +35,9 @@ const contentStyle = {
   flex: '1',
   maxWidth: '100%',
   paddingRight: '0px', // Adjust the right padding to move the content to the right
+  position:"absolute",
+  top:"200px",
+  let:"0"
 };
 
 const centerTitleStyle = {
@@ -80,7 +91,7 @@ const Home = () => {
               alignSelf: 'flex-end',
               cursor: 'pointer',
               maxWidth: '70%',
-              marginLeft: '28%', // Adjust the marginLeft to move the banner to the right
+              
             }}
           />
         </a>

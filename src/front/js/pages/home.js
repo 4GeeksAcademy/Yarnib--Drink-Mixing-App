@@ -90,7 +90,7 @@ export const Home = () => {
   return (
     <div style={{ background: `url(${Homebarprotopsplashnotitle})`, backgroundSize: 'cover', height: '100vh' }}>
       <div className="text-center">
-        <div className="search-bar" style={{ margin: '100px 0', textAlign: 'center' }}>
+        <div className="search-bar" style={{ margin: '40px 0', textAlign: 'center' }}>
           <input
             type="text"
             style={{
