@@ -95,10 +95,10 @@ def send_email():
 
     try:
         response=requests.post(
-            "https://api.mailgun.net/v3/sandboxdac79922f6944beb8aacc8e1cd2cd893.mailgun.org/messages",
-            auth=("api", "f358afdd761153b6fe3e00907abbd9b8-3e508ae1-834c93c1"),
+            "mailgun domain",
+            # auth=("api", "api key goes here"),
             data={
-                "from": "Your Name <mailgun@sandboxdac79922f6944beb8aacc8e1cd2cd893.mailgun.org>",
+                "from": "Your Name <mailgundomain>",
                 "to": [email],
                 "subject": "passwordreset",
                 "text": f"Your reset token is: {token}"  # You should create a proper reset link using this token
