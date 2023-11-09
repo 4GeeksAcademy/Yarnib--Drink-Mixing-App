@@ -8,7 +8,6 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from werkzeug.security import check_password_hash ,generate_password_hash
 from datetime import datetime,timedelta
 from api.favoriteService import addFavorite, getAllFavorites, deleteFromFavorites
-import requests
 import os
 
 api = Blueprint('api', __name__)
