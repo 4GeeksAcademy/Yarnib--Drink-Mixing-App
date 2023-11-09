@@ -6,6 +6,8 @@ import Chatbot from './chatbot';
 import Blogsidebar from './Blogsidebar'; // Import the Blogsidebar component
 import { fetchCocktails, fetchCocktailsByIngredient, fetchCocktailByName } from './api';
 import Homebarprotopsplashnotitle from "../../img/Headerimages/Homebarprotopsplashnotitle.jpg";
+import { useParams } from "react-router-dom";
+
 export const Home = () => {
   const { store, actions } = useContext(Context);
   const [cocktails, setCocktails] = useState([]);
@@ -17,16 +19,22 @@ export const Home = () => {
   const [previousSearchResults, setPreviousSearchResults] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false)
   const [showAgeVerificationModal, setShowAgeVerificationModal] = useState(true);
+  let { drinkId } = useParams();
 
   useEffect(() => {
-    fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=`)
-      .then((response) => response.json())
-      .then((data) => {
-        setCocktails(data.drinks);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
+    console.log(drinkId)
+    if (drinkId != undefined) {
+      handleDrinkClick({ strDrink: drinkId })
+    } else {
+      fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=`)
+        .then((response) => response.json())
+        .then((data) => {
+          setCocktails(data.drinks);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    }
   }, [showAgeVerificationModal]);
   const handleDrinkClick = (drink) => {
     fetchCocktailByName(drink.strDrink)
@@ -198,7 +206,7 @@ export const Home = () => {
               </button>
             </p>
             <div>
-              <p className="drink-ingredients">
+              <div className="drink-ingredients">
                 <strong>Ingredients:</strong>
                 <ul>
                   {selectedDrink.Ingredients.map((ingredient, index) => (
@@ -207,7 +215,7 @@ export const Home = () => {
                     </li>
                   ))}
                 </ul>
-              </p>
+              </div>
               <p className="drink-instructions">
                 <strong>Instructions:</strong> {selectedDrink.Instructions}
               </p>
@@ -223,7 +231,7 @@ export const Home = () => {
       <div className="sidebar">
         <Blogsidebar /> {/* Include the BlogSidebar component here */}
       </div>
-      
+
     </div>
   );
 };

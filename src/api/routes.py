@@ -29,7 +29,7 @@ def check_user_identity():
     body = request.json
     email = body.get("email")
     hashed_password = body.get("hashed_password")
-
+    print("hello")
     if email is None or hashed_password is None:
         raise APIException("Incomplete login data in the request", 400)
 

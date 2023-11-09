@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-const baseApiUrl = process.env.BACKEND_URL || "http://127.0.0.1:3001";
+const baseApiUrl = process.env.BACKEND_URL || "http://10.0.5.2:3001";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {

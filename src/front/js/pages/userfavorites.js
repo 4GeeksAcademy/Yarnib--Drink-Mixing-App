@@ -51,18 +51,15 @@ export const UserFavorites = () => {
                         </p>
                     </div>
                 ) : (favs.map((fav) => (
-                    <div className="row" key={fav.id}>
-                        <div className="col-10">
-                            <a href="#" className="list-group-item list-group-item-action py-3 lh-tight" aria-current="true" style={{ background: "inherit" }}>
+                    <div style={{ backgroundColor: "white" }} className="row" key={fav.id}>
+                        <div className="col-8 list-group-item list-group-item-action">
+                            <a href={"/" + fav.name} className="" aria-current="true" style={{ background: "inherit" }}>
                                 <div className="d-flex w-100 align-items-center justify-content-between">
                                     <strong className="mb-1">{fav.name}</strong>
                                 </div>
-                                <div className="col-10 mb-1 small"> </div>
+                                <img className="float-start" style={{ width: 100, height: 100 }} src={fav.img}></img>
                             </a>
-                            <img style={{ width: 100, height: 100 }} src={fav.img}></img>
-                        </div>
-                        <div className="col-2">
-                            <div className="col-2">
+                            <div className="float-end">
                                 <button onClick={() => {
                                     actions.deleteFavorites(fav.id).then(e => {
                                         setUpdate(!update)
@@ -72,6 +69,7 @@ export const UserFavorites = () => {
                                     <i className="fa-solid fa-trash-can"></i>
                                 </button>
                             </div>
+
                         </div>
                     </div>
                 )))
