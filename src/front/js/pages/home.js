@@ -223,7 +223,7 @@ export const Home = () => {
       <div className="sidebar">
         <Blogsidebar /> {/* Include the BlogSidebar component here */}
       </div>
-      <chatbot />
+      
     </div>
   );
 };
