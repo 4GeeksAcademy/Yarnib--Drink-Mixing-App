@@ -3,7 +3,8 @@ export const Sendtoken = ()=>{
     const baseApiUrl = process.env.BACKEND_URL || "http://127.0.0.1:3001";
     const[email,setEmail]=useState("")
     function send_email(){
-        fetch(`${baseApiUrl}api/forgot-password` ,{
+    //  check to see if no email is typed
+        fetch(`${baseApiUrl}/api/forgot-password` ,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

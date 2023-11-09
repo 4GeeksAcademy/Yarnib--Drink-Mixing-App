@@ -8,7 +8,8 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from werkzeug.security import check_password_hash ,generate_password_hash
 from datetime import datetime,timedelta
 from api.favoriteService import addFavorite, getAllFavorites, deleteFromFavorites
-
+import requests
+import os
 
 api = Blueprint('api', __name__)
 
@@ -92,20 +93,23 @@ def send_email():
     if not user:
         return jsonify("incorrect email")
     token = create_access_token(identity=email)
-
+  
     try:
         response=requests.post(
-            "mailgun domain",
-            # auth=("api", "api key goes here"),
+            
+            # need to get rid of every instance of mailgun
+            f"{os.environ.get('HIDDEN_URL')}",
+             auth=("api", os.environ.get('MAILGUN_KEY')),
             data={
-                "from": "Your Name <mailgundomain>",
+                "from": f"Your Name <{os.environ.get('HIDDEN')}@{os.environ.get('DOMAIN')}>",
                 "to": [email],
                 "subject": "passwordreset",
                 "text": f"Your reset token is: {token}"  # You should create a proper reset link using this token
             # do a conditional after line 107 before the return
+            #use os.environment.get
             }
         )
-        print(f">>> 😀 {response.text}")
+    
         return jsonify(response.json()),response.status_code
     except Exception as error:
         print(f">>> 😣 {error}")

@@ -11,7 +11,7 @@ const homepageStyle = {
   justifyContent: 'start',
   alignItems: 'start',
   top:"200px",
-  left:"0",
+  left:"0px",
   margin:"0"
 };
 

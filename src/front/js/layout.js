@@ -48,6 +48,7 @@ const Layout = () => {
                         <Route element={<UserFavorites />} path="/userfavorites" />
                         <Route element={<Sendtoken />} path="/sendtoken" />
                         <Route element={<Single />} path="/single/:theid" />
+                       
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />

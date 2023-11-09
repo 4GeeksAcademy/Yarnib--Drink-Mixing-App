@@ -50,6 +50,7 @@ export const ResetPassword = () => {
             <form onSubmit={onSubmit}>
                 {/* Email input */}
                 <label htmlFor="emailInput">Email</label>
+                {/* needs to confirm reset code */}
                 <input
                     id="emailInput"
                     className="form-control m-3"
