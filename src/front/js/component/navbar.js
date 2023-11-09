@@ -11,12 +11,15 @@ export const Navbar = () => {
     const navigate = useNavigate();
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [enableFav, setEnableFav] = useState(false)
+    const [enableFav, setEnableFav] = useState(false);
+
     useEffect(() => {
-        if (localStorage.getItem("user") != null) {
-            setEnableFav(true)
+        if (localStorage.getItem("user") !== null) {
+            setEnableFav(true);
+        } else {
+            setEnableFav(false);
         }
-    }, enableFav)
+    }, [store.accessToken]); // Update enableFav when store.accessToken changes
 
     const handleLogoClick = () => {
         if (window.location.pathname === "/") {
@@ -46,16 +49,23 @@ export const Navbar = () => {
                     <Link to="/BlogPage" className="tab-link">
                         Blog
                     </Link>
-                    <Link to="/Social" className="tab-link">
-                        Social
-                    </Link>
-                    {(enableFav) ? (<Link to="/userfavorites" className="tab-link">
-                        Favorites
-                    </Link>) : (<Link to="/" className="tab-link-disabled disabled" onClick={(event) => event.preventDefault()}>
-                        <span data-toggle="tooltip" data-placement="left" title="Log in to see Favorites!">Favorites</span>
-                    </Link>)
-                    }
-
+                        
+                    
+                    {enableFav ? (
+                        <Link to="/userfavorites" className="tab-link">
+                            Favorites
+                        </Link>
+                    ) : (
+                        <Link
+                            to="/"
+                            className="tab-link-disabled disabled"
+                            onClick={(event) => event.preventDefault()}
+                        >
+                            <span data-toggle="tooltip" data-placement="left" title="Log in to see Favorites!">
+                                Favorites
+                            </span>
+                        </Link>
+                    )}
                 </div>
 
                 <div className="dropdown-container">
