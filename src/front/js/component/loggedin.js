@@ -10,8 +10,8 @@ export const LoggedIn = (props) => {
         localStorage.clear()
         navigate('/');
     }
-    const onFavorites = (event) => {
-        navigate('/userfavorites')
+    const onProfile = (event) => {
+        navigate('/profile')
     }
     const onSocial = (event) => {
         navigate('/social');
@@ -25,9 +25,9 @@ export const LoggedIn = (props) => {
                 <div className="col-6">
                     <h6>{"Welcome " + store?.user?.name + "!"}</h6>
                     <button
-                        onClick={onFavorites}
+                        onClick={onProfile}
                         className="btn btn-primary logged-in-btn"
-                    >Favorites</button>
+                    >My Profile!</button>
                     <button
                         className="btn btn-primary logged-in-btn"
                         onClick={onSocial}
