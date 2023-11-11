@@ -15,9 +15,7 @@ class User(db.Model):
     age = db.Column(db.Integer, unique=False, nullable=False)
     hashed_password = db.Column(db.String(240), unique=False, nullable=False)
     salt = db.Column(db.String(120), nullable=False)
-    # reset_token = db.Column(db.String(1000), nullable=True)
-    # token_expiration = db.Column(db.DateTime, nullable=True)
-    # favorites = db.relationship("Favorites", backref="user")
+
     
     
     

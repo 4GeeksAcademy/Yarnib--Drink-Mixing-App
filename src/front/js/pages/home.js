@@ -3,7 +3,7 @@ import { Context } from '../store/appContext';
 import rigoImageUrl from '../../img/rigo-baby.jpg';
 import '../../styles/home.css';
 import Chatbot from './chatbot';
-import Blogsidebar from './Blogsidebar'; // Import the Blogsidebar component
+import Blogsidebar from './Blogsidebar'; 
 import { fetchCocktails, fetchCocktailsByIngredient, fetchCocktailByName } from './api';
 import Homebarprotopsplashnotitle from "../../img/Headerimages/Homebarprotopsplashnotitle.jpg";
 import { useParams } from "react-router-dom";
@@ -92,7 +92,7 @@ export const Home = () => {
     }
   };
   const handleStarClick = (event, drink) => {
-    event.stopPropagation(); // Prevent the click event from bubbling up to the <li>
+    event.stopPropagation(); 
     toggleFavorite(drink);
   };
   return (
@@ -122,34 +122,7 @@ export const Home = () => {
             Search
           </button>
         </div>
-        {/* <div className="search-results-container">
-        {showDrinkList && searchResults.length > 0 ? (
-          <ul className="cocktail-list">
-            {searchResults.map((cocktail) => (
-              <li key={cocktail.idDrink} className="cocktail-item" onClick={() => handleDrinkClick(cocktail)}>
-                <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} className="cocktail-image" />
-                <div className="drink-info">
-                  <p className="drink-name">
-                    {cocktail.strDrink}
-                    <br></br>
-                    <button
-                      className={favorites.includes(cocktail.idDrink) ? 'favorite active' : 'favorite'}
-                      onClick={(e) => handleStarClick(e, cocktail)} // Use handleStarClick for star icon
-                    >
-                      ★
-                    </button>
-                  </p>
-                  <p className="other-info">
-                    <a href="#" onClick={() => handleDrinkClick(cocktail)}>
-                      Details
-                    </a>
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        ) : null}
-      </div> */}
+
         <div className="search-results-container">
           {showDrinkList && searchResults.length > 0 ? (
             <ul className="cocktail-list">
@@ -162,7 +135,7 @@ export const Home = () => {
                       <br></br>
                       {store.user != undefined ? ((<button
                         className={favorites.includes(cocktail.idDrink) ? 'favorite active' : 'favorite'}
-                        onClick={(e) => handleStarClick(e, cocktail)} // Use handleStarClick for star icon
+                        onClick={(e) => handleStarClick(e, cocktail)} 
                       >
                         ★
                       </button>)) :
@@ -229,7 +202,7 @@ export const Home = () => {
         )}
       </div>
       <div className="sidebar">
-        <Blogsidebar /> {/* Include the BlogSidebar component here */}
+        <Blogsidebar /> 
       </div>
 
     </div>

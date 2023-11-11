@@ -113,6 +113,7 @@ def send_email():
     except Exception as error:
         print(f">>> 😣 {error}")
         return jsonify(error),400
+
 @api.route('/request_reset', methods=['POST'])
 def request_reset():
     email = request.json.get('email')
@@ -129,6 +130,7 @@ def request_reset():
 
         return jsonify({'message': 'If your email is in our system, you will receive a password reset link.',"reset_url":token}) #need to get rid of "reesturl:token need to work send email function"
     return jsonify({"message":"If your email is in our system, you will receive a password reset link."}), 400
+
 @api.route('/reset-password', methods=['POST']) 
 @jwt_required()
 def reset_password():
