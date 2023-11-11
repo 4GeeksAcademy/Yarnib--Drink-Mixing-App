@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import blogData from './blogdata'; // Relative to the current directory
-import BlogPost from './BlogPost'; // Relative to the current directory
-
+import blogData from './blogdata'; 
+import BlogPost from './BlogPost'; 
 
 
 const buttonContainerStyle = {
   display: 'flex',
-  justifyContent: 'center', // Center the button horizontally
+  justifyContent: 'center', 
 };
 
 const BlogList = () => {

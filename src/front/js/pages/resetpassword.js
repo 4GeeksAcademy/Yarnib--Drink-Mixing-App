@@ -12,13 +12,13 @@ export const ResetPassword = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
     
-    // Assuming the token is passed as a URL query parameter
+    
     const token = searchParams.get("token");
 
     const onSubmit = async (event) => {
         event.preventDefault();
         
-        // Client-side validation here (e.g., check password match and strength)
+        
         if (password !== confirmPassword) {
             setErrorMessage("Passwords do not match.");
             return;
@@ -28,17 +28,17 @@ export const ResetPassword = () => {
             const response = await actions.resetPassword({
                 email,
                 password,
-                token, // Include the token in the reset request
+                token, 
             });
 
-            // Check response for success message
+           
             if (response.message === "Password has been reset successfully.") {
                 navigate("/login");
             } else {
                 setErrorMessage(response.message);
             }
         } catch (error) {
-            // More robust error handling
+           
             setErrorMessage("An error occurred while resetting the password.");
         }
     };
@@ -60,7 +60,7 @@ export const ResetPassword = () => {
                     required
                 />
 
-                {/* Password input */}
+                
                 <label htmlFor="passwordInput">New Password</label>
                 <input
                     id="passwordInput"
@@ -72,7 +72,7 @@ export const ResetPassword = () => {
                     required
                 />
 
-                {/* Confirm Password input */}
+                
                 <label htmlFor="confirmPasswordInput">Confirm New Password</label>
                 <input
                     id="confirmPasswordInput"
@@ -85,7 +85,7 @@ export const ResetPassword = () => {
                 />
                
 
-                {/* Submit button */}
+                
                 <button className="btn btn-success" type="submit">
                     Reset Password
                 </button>

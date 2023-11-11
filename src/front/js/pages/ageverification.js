@@ -10,9 +10,9 @@ export const AgeVerification = () => {
   };
   const handleRedirect = () => {
     if (selectedOption === 'Yes') {
-      setShowModal(false); // Update the state to close the modal
+      setShowModal(false); 
     } else if (selectedOption === 'No') {
-      window.location.href = 'https://www.disney.com'; // Redirect to Disney.com
+      window.location.href = 'https://www.disney.com'; 
     }
   };
   const backgroundImageStyle = {

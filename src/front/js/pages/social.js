@@ -79,8 +79,7 @@ function Social() {
 
   return (
     <div style={{ backgroundColor: 'black', display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100vh' }}>
-      {/* Navbar */}
-      {/* Place your navbar code here, e.g., navigation links, logo, etc. */}
+      
       
       
 
@@ -108,7 +107,7 @@ function Social() {
         )}
       </div>
 
-      {/* Render the ChatBot component */}
+     
       <ChatBot />
     </div>
   );

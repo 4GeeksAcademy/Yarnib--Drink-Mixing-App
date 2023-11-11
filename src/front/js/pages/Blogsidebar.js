@@ -34,7 +34,7 @@ const contentStyle = {
   alignItems: 'flex-end',
   flex: '1',
   maxWidth: '100%',
-  paddingRight: '0px', // Adjust the right padding to move the content to the right
+  paddingRight: '0px', 
   position:"absolute",
   top:"200px",
   let:"0"

@@ -19,7 +19,7 @@ export const Navbar = () => {
         } else {
             setEnableFav(false);
         }
-    }, [store.accessToken]); // Update enableFav when store.accessToken changes
+    }, [store.accessToken]); 
 
     const handleLogoClick = () => {
         if (window.location.pathname === "/") {

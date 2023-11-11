@@ -7,25 +7,24 @@ const blogPostStyle = {
 const containerStyle = {
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center', // Center contents horizontally
-  textAlign: 'center', // Center text horizontally
-  border: '3px solid #ccc', // Add a border to create a box
-  padding: '10px', // Add padding for spacing
-  fontWeight: 'bold', // Make the box bold
-  //maxWidth: '40%', // Set the maximum width to 100% to fit the image width
-  margin: '0 auto', // Center the container horizontally
+  alignItems: 'center', 
+  textAlign: 'center', 
+  border: '3px solid #ccc', 
+  padding: '10px', 
+  fontWeight: 'bold', 
+  margin: '0 auto', 
 };
 
 const imageStyle = {
   display: 'block',
-  margin: '0 auto', // Center horizontally
-  maxWidth: '100%', // Set the maximum width to 100% to fit the container
+  margin: '0 auto', 
+  maxWidth: '100%', 
 };
 
 const contentStyle = {
-  textAlign: 'center', // Align text to the center
-  margin: '1em', // Add some margin for spacing
-  maxWidth: '100%', // Set the maximum width to 100% to fit the container
+  textAlign: 'center', 
+  margin: '1em', 
+  maxWidth: '100%', 
 };
 
 const BlogPost = ({ post }) => {
@@ -35,7 +34,6 @@ const BlogPost = ({ post }) => {
     if (imageRef.current) {
       const imageWidth = imageRef.current.width;
       const container = document.querySelector('.container');
-      //container.style.maxWidth = `${imageWidth}px`;
     }
   }, []);
 
