@@ -1,11 +1,22 @@
 /* userFavorites.css */
 
-.body {
-  background: rgb(219, 14, 154);
-  background: linear-gradient(
-    90deg,
-    rgba(219, 14, 154, 1) 2%,
-    rgba(9, 29, 121, 1) 49%,
-    rgba(0, 2, 3, 1) 100%
+.listItem {
+  border: 2px solid rgb(230, 0, 255); /* Add a white border */
+  background: rgb(50, 16, 121);
+  background: -moz-linear-gradient(
+    0deg,
+    rgba(50, 16, 121, 0) 35%,
+    rgba(219, 14, 154, 1) 50%
   );
+  background: -webkit-linear-gradient(
+    0deg,
+    rgba(50, 16, 121, 0) 35%,
+    rgba(219, 14, 154, 1) 50%
+  );
+  background: linear-gradient(
+    0deg,
+    rgba(50, 16, 121, 0) 35%,
+    rgba(219, 14, 154, 1) 50%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#321079",endColorstr="#db0e9a",GradientType=1);
 }

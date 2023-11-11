@@ -11,9 +11,20 @@ body {
   color: #e58be1; /* Set text color to #e58be1 */
 }
 .profile-pic {
-  max-width: 150px;
-  max-height: 150px;
-  flex: content;
+  max-width: 100px;
+  max-height: 100px;
+}
+@media screen and (max-width: 900px) {
+  .profile-pic {
+    max-width: 75px;
+    max-height: 75px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .profile-pic {
+    display: none;
+  }
 }
 .login-container {
   position: absolute;
@@ -34,6 +45,8 @@ body {
   border-bottom: 1px solid #cccccc;
 }
 .logged-in-btn {
+  white-space: normal;
+  font-size: 1em;
   width: 90px;
 }
 .tab-link {
@@ -68,18 +81,18 @@ body {
 }
 
 .dropdown-container {
-    position: relative;
-    z-index: 1; /* Ensure it's higher than the navbar */
-  }
-  
-  .dropdown-content {
-    display: block;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 250px; /* Adjust as needed */
-    background-color: #020202; /* Set the background color to #020202 */
-    border: 1px solid #96F3F8; /* Add a border for clarity */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
-    overflow: visible; /* Allows content to overflow the dropdown */
-  }
+  position: relative;
+  z-index: 1; /* Ensure it's higher than the navbar */
+}
+
+.dropdown-content {
+  display: block;
+  position: absolute;
+  top: 100%;
+  right: 20%;
+  width: 30vw; /* Adjust as needed */
+  background-color: #020202; /* Set the background color to #020202 */
+  border: 1px solid #96f3f8; /* Add a border for clarity */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+  overflow: visible; /* Allows content to overflow the dropdown */
+}

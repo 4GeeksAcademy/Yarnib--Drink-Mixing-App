@@ -3,12 +3,13 @@ import { Context } from '../store/appContext';
 import rigoImageUrl from '../../img/rigo-baby.jpg';
 import '../../styles/home.css';
 import Chatbot from './chatbot';
-import Blogsidebar from './Blogsidebar'; 
+import Blogsidebar from './Blogsidebar';
 import { fetchCocktails, fetchCocktailsByIngredient, fetchCocktailByName } from './api';
 import Homebarprotopsplashnotitle from "../../img/Headerimages/Homebarprotopsplashnotitle.jpg";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 export const Home = () => {
+  const { location } = useLocation()
   const { store, actions } = useContext(Context);
   const [cocktails, setCocktails] = useState([]);
   const [selectedDrink, setSelectedDrink] = useState(null);
@@ -22,7 +23,6 @@ export const Home = () => {
   let { drinkId } = useParams();
 
   useEffect(() => {
-    console.log(drinkId)
     if (drinkId != undefined) {
       handleDrinkClick({ strDrink: drinkId })
     } else {
@@ -35,11 +35,16 @@ export const Home = () => {
           console.error('Error fetching data:', error);
         });
     }
-  }, [showAgeVerificationModal]);
+  }, [showAgeVerificationModal, location]);
   const handleDrinkClick = (drink) => {
     fetchCocktailByName(drink.strDrink)
       .then((data) => {
-        setSelectedDrink(data);
+        const result = {
+          ...drink,
+          ...data,
+        };
+        console.log(result)
+        setSelectedDrink(result);
         setShowDrinkList(false);
       })
       .catch((error) => {
@@ -47,16 +52,16 @@ export const Home = () => {
       });
   };
   const toggleFavorite = (drink) => {
+    console.log(drink)
+    console.log(favorites)
     if (favorites.includes(drink.idDrink)) {
-      const updatedFavorites = favorites.filter((fav) => fav !== drink.idDrink);
-      actions.deleteFavorites(1, drink.idDrink).then((result) => {
-        console.log(result)
+      const updatedFavorites = favorites.filter((fav) => fav != drink.idDrink);
+      let id = store.user.id;
+      actions.deleteFavorites(id, drink.idDrink).then((result) => {
+        setFavorites(updatedFavorites);
       })
-      setFavorites(updatedFavorites);
     } else {
-      console.log(drink)
       if (store.user != undefined) {
-        console.log(store)
         let id = store.user.id
         actions.addToFavorites(id, drink.idDrink, drink.strDrink, drink.strDrinkThumb).then((result) => {
           setFavorites([...favorites, drink.idDrink]);
@@ -92,14 +97,15 @@ export const Home = () => {
     }
   };
   const handleStarClick = (event, drink) => {
-    event.stopPropagation(); 
+    event.stopPropagation();
     toggleFavorite(drink);
   };
   return (
     <div style={{ background: `url(${Homebarprotopsplashnotitle})`, backgroundSize: 'cover', height: '100vh' }}>
       <div className="text-center">
-        <div className="search-bar" style={{ margin: '40px 0', textAlign: 'center' }}>
+        <div className="search-bar" style={{ paddingTop: "30px", margin: 'auto', textAlign: 'center', width: "25vw" }}>
           <input
+            className="form-control"
             type="text"
             style={{
               textAlign: 'center', // Center the text inside the input field
@@ -114,8 +120,12 @@ export const Home = () => {
             }}
           />
           <button
+            className='btn'
             style={{
-              marginLeft: '10px',
+              paddingTop: "10px",
+              background: "rgb(244, 32, 219 )",
+              margin: "10px auto 0px"
+              ,
             }}
             onClick={handleIngredientSearch}
           >
@@ -135,7 +145,7 @@ export const Home = () => {
                       <br></br>
                       {store.user != undefined ? ((<button
                         className={favorites.includes(cocktail.idDrink) ? 'favorite active' : 'favorite'}
-                        onClick={(e) => handleStarClick(e, cocktail)} 
+                        onClick={(e) => handleStarClick(e, cocktail)}
                       >
                         ★
                       </button>)) :
@@ -146,9 +156,9 @@ export const Home = () => {
                       }
                     </p>
                     <p className="other-info">
-                      <a href="#" onClick={() => handleDrinkClick(cocktail)}>
+                      <button className="btn" style={{ color: "white" }} onClick={() => handleDrinkClick(cocktail)}>
                         Details
-                      </a>
+                      </button>
                     </p>
                   </div>
                 </li>
@@ -194,15 +204,15 @@ export const Home = () => {
               </p>
             </div>
             <p className="other-info">
-              <a href="#" onClick={() => setSelectedDrink(null)}>
+              <button className="btn" style={{ color: "blue" }} onClick={() => setSelectedDrink(null)}>
                 Back to search results
-              </a>
+              </button>
             </p>
           </div>
         )}
       </div>
       <div className="sidebar">
-        <Blogsidebar /> 
+        <Blogsidebar />
       </div>
 
     </div>

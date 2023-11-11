@@ -13,6 +13,11 @@ export const Navbar = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [enableFav, setEnableFav] = useState(false);
 
+    const toBlogPage = () => {
+        setDropdownOpen(false)
+        navigate("/BlogPage");
+    }
+
     useEffect(() => {
         if (store.accessToken !== undefined) {
             setEnableFav(true);
@@ -22,11 +27,7 @@ export const Navbar = () => {
     }, [store.accessToken]);
 
     const handleLogoClick = () => {
-        if (window.location.pathname === "/") {
-            window.location.reload();
-        } else {
-            navigate("/");
-        }
+        navigate("/", { state: Math.random() });
     };
 
     const toggleDropdown = () => {
@@ -46,21 +47,21 @@ export const Navbar = () => {
                 </Link>
 
                 <div className="tab-link-container">
-                    <Link to="/BlogPage" className="tab-link">
+                    <button className="tab-link" onClick={() => toBlogPage()}>
                         Blog
-                    </Link>
+                    </button>
 
-                  
+
                 </div>
 
                 <div className="dropdown-container">
-                    <button onClick={toggleDropdown} className="dropbtn">
+                    <button onClick={toggleDropdown} className="btn btn-primary dropbtn">
                         Menu
                     </button>
                     {dropdownOpen && (
                         <div className="dropdown-content">
                             {store.accessToken !== undefined ? (
-                                <LoggedIn style={{ width: '300px', height: '300px' }} />
+                                <LoggedIn toggleDropdown={toggleDropdown} style={{ width: '500px', height: '400px' }} />
                             ) : (
                                 <Login style={{ width: '300px', height: '300px' }} />
                             )}

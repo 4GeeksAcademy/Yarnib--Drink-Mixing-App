@@ -8,34 +8,46 @@ export const LoggedIn = (props) => {
     const onSubmit = async (event) => {
         await actions.logOut();
         localStorage.clear()
-        navigate('/');
+        props.toggleDropdown()
+        await navigate('/');
+        alert("Succesfully Logged Out")
     }
     const onProfile = (event) => {
+        props.toggleDropdown()
         navigate('/profile')
     }
     const onSocial = (event) => {
+        props.toggleDropdown()
         navigate('/social');
     }
     return (
-        <div className="text-center">
+        <div className="container text-center">
             <div className="row">
-                <div className="col-6">
+                <div className="col-4">
                     <img src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg" className="profile-pic" />
                 </div>
-                <div className="col-6">
-                    <h6>{"Welcome " + store?.user?.name + "!"}</h6>
-                    <button
-                        onClick={onProfile}
-                        className="btn btn-primary logged-in-btn"
-                    >My Profile!</button>
-                    <button
-                        className="btn btn-primary logged-in-btn"
-                        onClick={onSocial}
-                    >Social</button>
-                    <button
-                        className="btn btn-danger logged-in-btn"
-                        onClick={onSubmit}
-                    >Log Out</button>
+                <div className="col-7">
+                    <div className="row">
+                        <h6>{"Welcome " + store?.user?.name + "!"}</h6>
+                        <div>
+                            <button
+                                onClick={onProfile}
+                                className="btn btn-primary logged-in-btn"
+                            >My Profile!</button>
+                        </div>
+                        <div>
+                            <button
+                                className="btn btn-primary logged-in-btn"
+                                onClick={onSocial}
+                            >Social</button>
+                        </div>
+                        <div>
+                            <button
+                                className="btn btn-danger logged-in-btn"
+                                onClick={onSubmit}
+                            >Log Out</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

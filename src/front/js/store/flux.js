@@ -175,12 +175,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return response
 			},
 
-			deleteFavorites: async (favId,) => {
+			deleteFavorites: async (userId, drinkId) => {
 				console.log("api call: DeleteFromFavorite")
+				console.log(userId)
 				const response = await fetch(`${baseApiUrl}/api/favorites`, {
 					method: "DELETE",
 					body: JSON.stringify({
-						favId: favId
+						userId: userId,
+						drinkId: drinkId
 					},
 					),
 					headers: {
@@ -198,27 +200,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			getMessage: async () => {
 				try {
-					
+
 					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
 					const data = await resp.json()
 					setStore({ message: data.message })
-					
+
 					return data;
 				} catch (error) {
 					console.log("Error loading message from backend", error)
 				}
 			},
 			changeColor: (index, color) => {
-				
+
 				const store = getStore();
 
-				
+
 				const demo = store.demo.map((elm, i) => {
 					if (i === index) elm.background = color;
 					return elm;
 				});
 
-				
+
 				setStore({ demo: demo });
 			}
 		}

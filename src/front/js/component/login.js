@@ -12,7 +12,7 @@ export const Login = (props) => {
     const onSubmit = async (event) => {
         const success = await actions.logIn({ email: email, hashed_password: password });
         if (success) {
-            navigate("/profile");
+            navigate("/profile", { state: (Math.random()) });
         }
     };
 

@@ -23,9 +23,9 @@ def getAllFavorites(user):
     print("result ", favs)
     return favs
 
-def deleteFromFavorites(favId):
-    print("removing from favorites for user ", favId)
-    obj = Favorites.query.filter_by(id=favId).one()
+def deleteFromFavorites(userId, drinkId):
+    print("removing from favorites for user ", drinkId)
+    obj = Favorites.query.filter_by(cocktail_id=drinkId, user_id=userId).first()
     db.session.delete(obj)
     db.session.commit()    
     return True

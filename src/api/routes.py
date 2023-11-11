@@ -192,8 +192,9 @@ def getAllFav():
 @api.route('/favorites', methods=['DELETE'])
 def removeFromFavorites():
     data = request.get_json()
-    favId = data.get("favId")
-    deleteFromFavorites(favId)
+    userId = data.get("userId")
+    drinkId = data.get("drinkId")
+    deleteFromFavorites(userId, drinkId)
     return jsonify({"msg": "deleted"}), 200
 
 

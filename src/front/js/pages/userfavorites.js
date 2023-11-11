@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import '../../styles/userFavorites.css';
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 
 export const UserFavorites = () => {
@@ -9,6 +9,7 @@ export const UserFavorites = () => {
     const [favs, setFavs] = useState([])
     const [update, setUpdate] = useState(false)
     const { store, actions } = useContext(Context);
+    const { state } = useLocation();
 
     useEffect(() => {
         console.log(store)
@@ -19,12 +20,13 @@ export const UserFavorites = () => {
             console.log(store)
             let id = store.user.id
             actions.getAllFavorites(id).then(favDrinks => {
+                console.log(favDrinks.favs[0])
                 console.log(favDrinks.favs)
                 setFavs(favDrinks.favs)
             });
         }
 
-    }, [update]);
+    }, [update, state]);
 
 
     return (
@@ -51,17 +53,18 @@ export const UserFavorites = () => {
                         </p>
                     </div>
                 ) : (favs.map((fav) => (
-                    <div style={{ backgroundColor: "white" }} className="row" key={fav.id}>
-                        <div className="col-8 list-group-item list-group-item-action">
-                            <a href={"/" + fav.name} className="" aria-current="true" style={{ background: "inherit" }}>
+                    <div className="row" key={fav.id} style={{ margin: "auto", width: "500px" }}>
+                        <div className="col-8 list-group-item list-group-item-action listItem">
+                            <Link to={"/" + fav.name}>
                                 <div className="d-flex w-100 align-items-center justify-content-between">
                                     <strong className="mb-1">{fav.name}</strong>
                                 </div>
                                 <img className="float-start" style={{ width: 100, height: 100 }} src={fav.img}></img>
-                            </a>
+                            </Link>
                             <div className="float-end">
                                 <button onClick={() => {
-                                    actions.deleteFavorites(fav.id).then(e => {
+                                    console.log(store.user)
+                                    actions.deleteFavorites(store.user.id, fav.cocktail_id,).then(e => {
                                         setUpdate(!update)
                                     })
                                 }
