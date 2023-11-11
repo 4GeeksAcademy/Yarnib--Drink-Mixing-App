@@ -2,13 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../store/appContext';
 import rigoImageUrl from '../../img/rigo-baby.jpg';
 import '../../styles/home.css';
-<<<<<<< Updated upstream
-import chatbot from './chatbot';
-import Blogsidebar from './Blogsidebar'; // Import the Blogsidebar component
-=======
 import Chatbot from './chatbot';
 import Blogsidebar from './Blogsidebar'; 
->>>>>>> Stashed changes
 import { fetchCocktails, fetchCocktailsByIngredient, fetchCocktailByName } from './api';
 import Homebarprotopsplashnotitle from "../../img/Headerimages/Homebarprotopsplashnotitle.jpg";
 export const Home = () => {
