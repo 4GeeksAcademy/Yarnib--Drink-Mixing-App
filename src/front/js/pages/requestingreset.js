@@ -16,7 +16,7 @@ export const Sendtoken = ()=>{
             .then((response) => response.json())
 
             .then((data) => {console.log(data)})
-        
+            localStorage.getItem("token")
     }
  return(<div> <button onClick={send_email}></button>
    <input

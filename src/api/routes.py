@@ -108,6 +108,7 @@ def send_email():
             # do a conditional after line 107 before the return
             #use os.environment.get
             }
+         
         )
     
         return jsonify(response.json()),response.status_code
