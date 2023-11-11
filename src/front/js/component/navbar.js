@@ -14,12 +14,12 @@ export const Navbar = () => {
     const [enableFav, setEnableFav] = useState(false);
 
     useEffect(() => {
-        if (localStorage.getItem("user") !== null) {
+        if (store.accessToken !== undefined) {
             setEnableFav(true);
         } else {
             setEnableFav(false);
         }
-    }, [store.accessToken]); 
+    }, [store.accessToken]);
 
     const handleLogoClick = () => {
         if (window.location.pathname === "/") {
@@ -49,21 +49,14 @@ export const Navbar = () => {
                     <Link to="/BlogPage" className="tab-link">
                         Blog
                     </Link>
-                        
-                    
+
                     {enableFav ? (
                         <Link to="/userfavorites" className="tab-link">
                             Favorites
                         </Link>
                     ) : (
-                        <Link
-                            to="/"
-                            className="tab-link-disabled disabled"
-                            onClick={(event) => event.preventDefault()}
-                        >
-                            <span data-toggle="tooltip" data-placement="left" title="Log in to see Favorites!">
-                                Favorites
-                            </span>
+                        <Link to="/" className="tab-link-disabled disabled">
+                            Favorites
                         </Link>
                     )}
                 </div>
