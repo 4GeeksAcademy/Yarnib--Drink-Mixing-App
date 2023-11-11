@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import '../../styles/userFavorites.css';
 import { Context } from "../store/appContext";
 import { Link, useLocation } from "react-router-dom";
-
+import img from "../../img/Headerimages/Homebarprotopsplash1080.jpg"
 
 export const UserFavorites = () => {
 
@@ -10,6 +10,13 @@ export const UserFavorites = () => {
     const [update, setUpdate] = useState(false)
     const { store, actions } = useContext(Context);
     const { state } = useLocation();
+
+    const backgroundStyle = {
+        backgroundImage: `url(${img})`,
+        backgroundPosition: 'center',
+        height: '100vh'
+    };
+
 
     useEffect(() => {
         console.log(store)
@@ -30,7 +37,7 @@ export const UserFavorites = () => {
 
 
     return (
-        <div className="sidebar container" >
+        <div className="container" style={backgroundStyle}>
             <div className="row justify-content-center">
                 <h1 className="text-center">
                     <i style={{ color: "white" }} className="fas fa-glass-martini-alt me-2"></i>
@@ -44,9 +51,9 @@ export const UserFavorites = () => {
             </div>
             {
                 favs.length == 0 ? (
-                    <div>
+                    <div className="container-class">
                         <p className="text-center">
-                            <text style={{ color: "white" }}>No Favorites, yet! Click below to find your favorite drink</text><br />
+                            <h4 style={{ color: "white" }}>No Favorites, yet! Click below to find your favorite drink</h4><br />
                             <Link to="/">
                                 <span>Search For Drinks</span>
                             </Link>
@@ -54,7 +61,7 @@ export const UserFavorites = () => {
                     </div>
                 ) : (favs.map((fav) => (
                     <div className="row" key={fav.id} style={{ margin: "auto", width: "500px" }}>
-                        <div className="col-8 list-group-item list-group-item-action listItem">
+                        <div className="col-8 list-group-item listItem">
                             <Link to={"/" + fav.name}>
                                 <div className="d-flex w-100 align-items-center justify-content-between">
                                     <strong className="mb-1">{fav.name}</strong>
@@ -62,15 +69,14 @@ export const UserFavorites = () => {
                                 <img className="float-start" style={{ width: 100, height: 100 }} src={fav.img}></img>
                             </Link>
                             <div className="float-end">
-                                <button onClick={() => {
+
+                                <i className="btn fa-solid fa-trash-can" onClick={() => {
                                     console.log(store.user)
                                     actions.deleteFavorites(store.user.id, fav.cocktail_id,).then(e => {
                                         setUpdate(!update)
                                     })
-                                }
-                                }>
-                                    <i className="fa-solid fa-trash-can"></i>
-                                </button>
+                                }}>
+                                </i>
                             </div>
 
                         </div>
