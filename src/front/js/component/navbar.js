@@ -50,15 +50,7 @@ export const Navbar = () => {
                         Blog
                     </Link>
 
-                    {enableFav ? (
-                        <Link to="/userfavorites" className="tab-link">
-                            Favorites
-                        </Link>
-                    ) : (
-                        <Link to="/" className="tab-link-disabled disabled">
-                            Favorites
-                        </Link>
-                    )}
+                  
                 </div>
 
                 <div className="dropdown-container">
