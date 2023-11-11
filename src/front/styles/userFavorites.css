@@ -1,0 +1,11 @@
+/* userFavorites.css */
+
+.body {
+  background: rgb(219, 14, 154);
+  background: linear-gradient(
+    90deg,
+    rgba(219, 14, 154, 1) 2%,
+    rgba(9, 29, 121, 1) 49%,
+    rgba(0, 2, 3, 1) 100%
+  );
+}
