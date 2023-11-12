@@ -13,7 +13,7 @@ export const ResetPassword = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [token, setToken] = useState(searchParams.get("token") || "");
     const [errorMessage, setErrorMessage] = useState("");
-
+    const baseApiUrl = process.env.BACKEND_URL || "http://127.0.0.1:3001";
     const onSubmit = async (event) => {
         event.preventDefault();
 
@@ -26,20 +26,27 @@ export const ResetPassword = () => {
             setErrorMessage("Passwords do not match.");
             return;
         }
-
+        console.log(token)
         try {
-            const response = await fetch(`${baseApiUrl}/api/reset-password`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer + ${token}`  // Add JWT here
-                },
-                body: JSON.stringify({
-                    email: email,
-                    new_password: password,
-                }),
-            });
-
+            const token = localStorage.getItem('token'); 
+            // const response = await fetch(`${baseApiUrl}/api/reset-password`, {
+            //     method: "PUT",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //         "Authorization": `Bearer + ${token}`  // Add JWT here
+            //     },
+            //     body: JSON.stringify({
+            //         email: email,
+            //         new_password: password,
+            //     }),
+               
+            // });
+            const response = await actions.ResetPassword({
+                email:email,
+                token:token,
+                newpassword:password
+            })
+       
             // Check the success condition based on your API's response structure
             if (response && response.message === "Password has been reset successfully.") {
                 navigate("/login"); // Redirect to login page
@@ -48,6 +55,7 @@ export const ResetPassword = () => {
             }
         } catch (error) {
             setErrorMessage("An error occurred while resetting the password.");
+            console.log(response.message)
         }
     };
 
