@@ -40,3 +40,11 @@
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#470fbd",GradientType=1);
 }
+
+.titleBox {
+  width: 100%;
+  border: 15px solid black;
+  padding: 50px;
+  margin: 20px;
+  background-color: black;
+}

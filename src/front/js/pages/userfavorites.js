@@ -38,22 +38,22 @@ export const UserFavorites = () => {
 
     return (
         <div className="container" style={backgroundStyle}>
-            <div className="row justify-content-center">
+            <div className="titleBox row justify-content-center">
                 <h1 className="text-center">
-                    <i style={{ color: "white" }} className="fas fa-glass-martini-alt me-2"></i>
-                    <i style={{ color: "white" }} className="fas fa-wine-glass me-2"></i>
-                    <i style={{ color: "white" }} className="fas fa-beer me-2"></i>
-                    <text style={{ color: "white" }}>Favorites</text>
-                    <i style={{ color: "white" }} className="fas fa-beer ms-2"></i>
-                    <i style={{ color: "white" }} className="fas fa-wine-glass ms-2"></i>
-                    <i style={{ color: "white" }} className="fas fa-glass-martini-alt ms-2"></i>
+                    <i style={{ color: "#f212c9" }} className="fas fa-glass-martini-alt me-2"></i>
+                    <i style={{ color: "#f212c9" }} className="fas fa-wine-glass me-2"></i>
+                    <i style={{ color: "#f212c9" }} className="fas fa-beer me-2"></i>
+                    <text style={{ color: "#f212c9" }}>Favorites</text>
+                    <i style={{ color: "#f212c9" }} className="fas fa-beer ms-2"></i>
+                    <i style={{ color: "#f212c9" }} className="fas fa-wine-glass ms-2"></i>
+                    <i style={{ color: "#f212c9" }} className="fas fa-glass-martini-alt ms-2"></i>
                 </h1>
             </div>
             {
                 favs.length == 0 ? (
                     <div className="container-class">
                         <p className="text-center">
-                            <h4 style={{ color: "white" }}>No Favorites, yet! Click below to find your favorite drink</h4><br />
+                            <h4 style={{ color: "#f212c9" }}>No Favorites, yet! Click below to find your favorite drink</h4><br />
                             <Link to="/">
                                 <span>Search For Drinks</span>
                             </Link>
