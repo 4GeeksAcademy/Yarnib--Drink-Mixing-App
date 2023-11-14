@@ -4,9 +4,9 @@
 
 }
 button{
-  background: linear-gradient(
-    0deg,
-    rgba(50, 16, 121, 0) 7%,
-    rgba(219, 14, 154, 1) 85%
-  );
-  color:white}
+  background: #5100FF;
+  
+  color:white;
+
+}
+

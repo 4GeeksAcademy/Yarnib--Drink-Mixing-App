@@ -94,29 +94,25 @@ def send_email(email,subject,token):
     # token = create_access_token(identity=email)
   
     try:
-        response=requests.post(
-            
-            # need to get rid of every instance of mailgun
+        # Define the reset link
+        reset_link = f"https://didactic-enigma-gv6j7wgppgqcwq9x-3000.app.github.dev/request_reset?token={token}"
+
+        response = requests.post(
             f"{os.environ.get('HIDDEN_URL')}",
-             auth=("api", os.environ.get('MAILGUN_KEY')),
+            auth=("api", os.environ.get('MAILGUN_KEY')),
             data={
                 "from": f"Your Name <{os.environ.get('HIDDEN')}@{os.environ.get('DOMAIN')}>",
                 "to": [email],
                 "subject": subject,
-                "text": f"Your reset token is: {token}"  
-                #send current front end domain
-                # You should create a proper reset link using this token
-            # do a conditional after line 107 before the return
-            #use os.environment.get
-            #adding a way to get to the form
+                "text": f"Click here to reset your password: {reset_link}",  # Plain text version
+                # "html": f"<html><body><p><a href='{reset_link}'>Reset Password Link</a></p></body></html>"
             }
-         
         )
-    
+
         return response
     except Exception as error:
         print(f">>> 😣 {error}")
-        return jsonify(error),400
+        return jsonify(error), 400
 
 @api.route('/request_reset', methods=['POST'])
 def request_reset():
@@ -132,7 +128,7 @@ def request_reset():
  
         send_email(user.email, 'Password Reset Request', token)
 
-        return jsonify({'message': 'If your email is in our system, you will receive a password reset link.',"reset_url":token}) #need to get rid of "reesturl:token need to work send email function"
+        return jsonify({'message': 'If your email is in our system, you will receive a password reset link.'}) #need to get rid of "reesturl:token need to work send email function"
     return jsonify({"message":"If your email is in our system, you will receive a password reset link."}), 400
 @api.route('/reset-password', methods=['PUT']) 
 @jwt_required()
