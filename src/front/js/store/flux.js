@@ -28,7 +28,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			contact: async ({ name, email, datatype, text }) => {
 
-				const response = await fetch(`${baseApiUrl}/api/contact_requests`, {
+				const response = await fetch(`${baseApiUrl}/api/contact-requests`, {
 					method: "POST",
 					body: JSON.stringify({
 						name: name,
