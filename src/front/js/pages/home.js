@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../store/appContext';
 import rigoImageUrl from '../../img/rigo-baby.jpg';
-import '../../styles/home.css';
+
 import Chatbot from './chatbot';
 import Blogsidebar from './Blogsidebar';
 import { fetchCocktails, fetchCocktailsByIngredient, fetchCocktailByName } from './api';

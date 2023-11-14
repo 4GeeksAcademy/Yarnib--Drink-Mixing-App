@@ -1,78 +1,12 @@
-/*
-    home.css: This website contains selectors only used in home.css
+.flex{
+  display:flex;
+  justify-content: center;
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
-
-/* Home.css */
-.centered-grid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    
-  }
-  
-  /* Home.css */
-.cocktail-list {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    max-width: 600px;
-    max-height: 700px;
-    padding: 20px;
-    background-color: #000;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow-y: auto;
-    margin: auto;
-    position: relative;
-    top: 10px; /* Adjust the top value to move the box up */
-  }
-  
-  .cocktail-item {
-    text-align: center;
-  }
-  
-  .cocktail-image {
-    width: 80px;
-    height: 80px;
-  }
-  
-  .original-cocktail-image {
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 100%;
-  }
-  
-  .drink-info {
-    text-align: center;
-  }
-  
-  .drink-name {
-    font-weight: bold;
-  }
-  
-  .favorite {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    margin-left: 5px;
-    color: white;
-  }
-  
-  .favorite.active {
-    color: gold;
-  }
-.setter{
-  width:500px;
-  height:500px;
 }
-
-  .adjustable-margin {
-    margin: 2px; /* Set your default margin width here */
-  }
+button{
+  background: linear-gradient(
+    0deg,
+    rgba(50, 16, 121, 0) 7%,
+    rgba(219, 14, 154, 1) 85%
+  );
+  color:white}

@@ -1,5 +1,5 @@
 import React from 'react';
-import "../../styles/landing_page.css";
+
 import ChatBot from './ChatBot';
 import { Link } from "react-router-dom";
 const LandingPage = () => {

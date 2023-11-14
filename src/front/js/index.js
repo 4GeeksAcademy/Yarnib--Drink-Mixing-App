@@ -4,7 +4,12 @@ import ReactDOM from "react-dom";
 import App from './pages/chatbot';
 
 //include your index.scss file into the bundle
+import "../styles/home.css";
 import "../styles/index.css";
+import "../styles/landing_page.css";
+import "../styles/userFavorites.css";
+import "../styles/requestingreset.css";
+
 
 //import your own components
 import Layout from "./layout";

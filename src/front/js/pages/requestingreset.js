@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Navigate, useNavigate } from "react-router-dom";
-import "../../styles/requestingreset.css"
+
 export const Sendtoken = () => {
     const baseApiUrl = process.env.BACKEND_URL || "http://127.0.0.1:3001";
     const [email, setEmail] = useState("")
@@ -37,8 +37,9 @@ export const Sendtoken = () => {
             onChange={(event) => setEmail(event.target.value)}
             required
         />
-        <div className="flex"><button onClick={send_email}>send email</button>
-        <button onClick={onReset}>go to reset password</button>
+        <div className="flex">
+            <button onClick={send_email}>send email</button>
+            <button onClick={onReset}>go to reset password</button>
         </div>
     </div>
     )

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../../styles/index.css";
+
 import { Login } from "./login";
 import { LoggedIn } from "./loggedin";
 import { Context } from "../store/appContext";

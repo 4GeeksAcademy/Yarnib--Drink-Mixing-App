@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import '../../styles/userFavorites.css';
+
 import { Context } from "../store/appContext";
 import { Link, useLocation } from "react-router-dom";
 import img from "../../img/Headerimages/Homebarprotopsplash1080.jpg"
