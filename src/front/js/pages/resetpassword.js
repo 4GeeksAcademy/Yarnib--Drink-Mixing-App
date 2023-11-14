@@ -1,45 +1,61 @@
-import React, { useContext, useState } from "react";
-import { Context } from "../store/appContext";
+
+import React, { useContext,useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const ResetPassword = () => {
-    const { actions } = useContext(Context);
+    const { store,actions} = useContext(Context);
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [token, setToken] = useState(searchParams.get("token") || "");
     const [errorMessage, setErrorMessage] = useState("");
-    const navigate = useNavigate();
-    
-    
-    const token = searchParams.get("token");
-
+    const baseApiUrl = process.env.BACKEND_URL || "http://127.0.0.1:3001";
     const onSubmit = async (event) => {
         event.preventDefault();
-        
-        
+
+        if (!token) {
+            setErrorMessage("Token is required.");
+            return;
+        }
+
         if (password !== confirmPassword) {
             setErrorMessage("Passwords do not match.");
             return;
         }
-
+   
         try {
-            const response = await actions.resetPassword({
-                email,
-                password,
-                token, 
+            // const token = localStorage.getItem('token'); 
+            const response = await fetch(`${baseApiUrl}api/reset-password`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`  // Add JWT here
+                },
+                body: JSON.stringify({
+                    email: email,
+                    new_password: password,
+                }),
+               
             });
-
-           
-            if (response.message === "Password has been reset successfully.") {
-                navigate("/login");
+            // const response = await actions.ResetPassword({
+            //     email:email,
+            //     token:token,
+            //     newpassword:password
+            // })
+       
+            // Check the success condition based on your API's response structure
+            if (response.ok) {
+                navigate("/login"); // Redirect to login page
             } else {
-                setErrorMessage(response.message);
+                setErrorMessage(response.message || "An error occurred during password reset.");
             }
         } catch (error) {
-           
             setErrorMessage("An error occurred while resetting the password.");
+            console.log("testing")
         }
     };
 
@@ -48,9 +64,7 @@ export const ResetPassword = () => {
             <h1>Reset Password</h1>
             {errorMessage && <p className="text-danger">{errorMessage}</p>}
             <form onSubmit={onSubmit}>
-                {/* Email input */}
                 <label htmlFor="emailInput">Email</label>
-                {/* needs to confirm reset code */}
                 <input
                     id="emailInput"
                     className="form-control m-3"
@@ -61,7 +75,17 @@ export const ResetPassword = () => {
                     required
                 />
 
-                
+                <label htmlFor="tokenInput">Token</label>
+                <input
+                    id="tokenInput"
+                    className="form-control m-3"
+                    type="text"
+                    value={token}
+                    placeholder="Enter your token"
+                    onChange={(event) => setToken(event.target.value)}
+                    required
+                />
+
                 <label htmlFor="passwordInput">New Password</label>
                 <input
                     id="passwordInput"
@@ -73,7 +97,6 @@ export const ResetPassword = () => {
                     required
                 />
 
-                
                 <label htmlFor="confirmPasswordInput">Confirm New Password</label>
                 <input
                     id="confirmPasswordInput"
@@ -84,9 +107,7 @@ export const ResetPassword = () => {
                     onChange={(event) => setConfirmPassword(event.target.value)}
                     required
                 />
-               
 
-                
                 <button className="btn btn-success" type="submit">
                     Reset Password
                 </button>

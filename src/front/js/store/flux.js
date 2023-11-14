@@ -196,6 +196,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 			},
+			resetPassword: async ({ email, newPassword, token }) => {
+				try {
+					const response = await fetch(`${baseApiUrl}/api/reset_password`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify({
+							email: email,
+							new_password: newPassword,
+							token: token,
+						})
+					});
+			
+					if (response.ok) {
+						const data = await response.json();
+						console.log("Password reset successfully", data);
+						// Additional logic here, like redirecting the user
+						return data;
+					} else {
+						console.error("Failed to reset password: ", response.status, response.statusText);
+						throw new Error('Failed to reset password');
+					}
+				} catch (error) {
+					console.error("Error resetting password:", error);
+				}
+			},
 
 
 			getMessage: async () => {

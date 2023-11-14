@@ -4,7 +4,7 @@ export const Sendtoken = ()=>{
     const[email,setEmail]=useState("")
     function send_email(){
     //  check to see if no email is typed
-        fetch(`${baseApiUrl}/api/forgot-password` ,{
+        fetch(`${baseApiUrl}api/request_reset` ,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -16,7 +16,7 @@ export const Sendtoken = ()=>{
             .then((response) => response.json())
 
             .then((data) => {console.log(data)})
-        
+            localStorage.getItem("token")
     }
  return(<div> <button onClick={send_email}></button>
    <input

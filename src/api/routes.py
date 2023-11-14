@@ -9,7 +9,7 @@ from werkzeug.security import check_password_hash ,generate_password_hash
 from datetime import datetime,timedelta
 from api.favoriteService import addFavorite, getAllFavorites, deleteFromFavorites
 import os
-
+import requests
 api = Blueprint('api', __name__)
 
 
@@ -85,13 +85,13 @@ def protected():
     return jsonify(logged_in_as=user.serialize()), 200
 
 
-@api.route('/forgot-password', methods=["POST"])
-def send_email():
-    email = request.json.get('email')
-    user = User.query.filter_by(email=email).first()
-    if not user:
-        return jsonify("incorrect email")
-    token = create_access_token(identity=email)
+
+def send_email(email,subject,token):
+    # email = request.json.get('email')
+    # user = User.query.filter_by(email=email).first()
+    # if not user:
+    #     return jsonify("incorrect email")
+    # token = create_access_token(identity=email)
   
     try:
         response=requests.post(
@@ -102,14 +102,18 @@ def send_email():
             data={
                 "from": f"Your Name <{os.environ.get('HIDDEN')}@{os.environ.get('DOMAIN')}>",
                 "to": [email],
-                "subject": "passwordreset",
-                "text": f"Your reset token is: {token}"  # You should create a proper reset link using this token
+                "subject": subject,
+                "text": f"Your reset token is: {token}"  
+                #send current front end domain
+                # You should create a proper reset link using this token
             # do a conditional after line 107 before the return
             #use os.environment.get
+            #adding a way to get to the form
             }
+         
         )
     
-        return jsonify(response.json()),response.status_code
+        return response
     except Exception as error:
         print(f">>> 😣 {error}")
         return jsonify(error),400
@@ -121,27 +125,28 @@ def request_reset():
   
     if user:
         token = create_access_token(identity=email)
-        user.reset_token = token
-        user.token_expiration = datetime.utcnow() + timedelta(hours=1)
-        db.session.commit()
+        # user.reset_token = token
+        # user.token_expiration = datetime.utcnow() + timedelta(hours=1)
+        # db.session.commit()
         
  
         send_email(user.email, 'Password Reset Request', token)
 
         return jsonify({'message': 'If your email is in our system, you will receive a password reset link.',"reset_url":token}) #need to get rid of "reesturl:token need to work send email function"
     return jsonify({"message":"If your email is in our system, you will receive a password reset link."}), 400
-
-@api.route('/reset-password', methods=['POST']) 
+@api.route('/reset-password', methods=['PUT']) 
 @jwt_required()
 def reset_password():
     email=get_jwt_identity()
-
+    print(email)
+    print("test")
     user = User.query.filter_by(email=email).first_or_404()
-    new_password = request.json.get('password')
-    user.hashed_password = generate_password_hash(new_password)
+    new_password = request.json.get('new_password')
+    print(new_password)
+    user.hashed_password = generate_password_hash(new_password+user.salt)
    
-    user.reset_token = None
-    user.token_expiration = None
+    # user.reset_token = None
+    # user.token_expiration = None
     db.session.commit()
     
     return jsonify({'message': 'Password has been reset successfully.'})
