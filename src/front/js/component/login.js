@@ -19,6 +19,9 @@ export const Login = (props) => {
     const onSignup = () => {
         navigate("/sign-up");
     };
+    const onForgot = () => {
+        navigate("/sendtoken")
+    }
 
     return (
         <div className="text-center mt-5 top-right-nav">
@@ -43,7 +46,7 @@ export const Login = (props) => {
             <button className="btn btn-success m-2" onClick={onSignup}>
                 Sign Up!
             </button>
-            <a>Forgot Password?</a>
+            <button onClick={onForgot}>Forgot Password?</button>
         </div>
     );
 };
