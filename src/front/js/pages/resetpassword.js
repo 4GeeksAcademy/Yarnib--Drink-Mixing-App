@@ -26,36 +26,36 @@ export const ResetPassword = () => {
             setErrorMessage("Passwords do not match.");
             return;
         }
-        console.log(token)
+   
         try {
-            const token = localStorage.getItem('token'); 
-            // const response = await fetch(`${baseApiUrl}/api/reset-password`, {
-            //     method: "PUT",
-            //     headers: {
-            //         "Content-Type": "application/json",
-            //         "Authorization": `Bearer + ${token}`  // Add JWT here
-            //     },
-            //     body: JSON.stringify({
-            //         email: email,
-            //         new_password: password,
-            //     }),
+            // const token = localStorage.getItem('token'); 
+            const response = await fetch(`${baseApiUrl}api/reset-password`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`  // Add JWT here
+                },
+                body: JSON.stringify({
+                    email: email,
+                    new_password: password,
+                }),
                
-            // });
-            const response = await actions.ResetPassword({
-                email:email,
-                token:token,
-                newpassword:password
-            })
+            });
+            // const response = await actions.ResetPassword({
+            //     email:email,
+            //     token:token,
+            //     newpassword:password
+            // })
        
             // Check the success condition based on your API's response structure
-            if (response && response.message === "Password has been reset successfully.") {
+            if (response.ok) {
                 navigate("/login"); // Redirect to login page
             } else {
                 setErrorMessage(response.message || "An error occurred during password reset.");
             }
         } catch (error) {
             setErrorMessage("An error occurred while resetting the password.");
-            console.log(response.message)
+            console.log("testing")
         }
     };
 
