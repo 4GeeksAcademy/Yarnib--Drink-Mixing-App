@@ -1,13 +1,10 @@
-
 import React, { useContext,useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-
 export const ResetPassword = () => {
     const { store,actions} = useContext(Context);
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -16,20 +13,17 @@ export const ResetPassword = () => {
     const baseApiUrl = process.env.BACKEND_URL || "http://127.0.0.1:3001";
     const onSubmit = async (event) => {
         event.preventDefault();
-
         if (!token) {
             setErrorMessage("Token is required.");
             return;
         }
-
         if (password !== confirmPassword) {
             setErrorMessage("Passwords do not match.");
             return;
         }
-   
         try {
-            // const token = localStorage.getItem('token'); 
-            const response = await fetch(`${baseApiUrl}api/reset-password`, {
+            // const token = localStorage.getItem('token');
+            const response = await fetch(`${baseApiUrl}/api/reset-password`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -39,14 +33,12 @@ export const ResetPassword = () => {
                     email: email,
                     new_password: password,
                 }),
-               
             });
             // const response = await actions.ResetPassword({
             //     email:email,
             //     token:token,
             //     newpassword:password
             // })
-       
             // Check the success condition based on your API's response structure
             if (response.ok) {
                 navigate("/login"); // Redirect to login page
@@ -58,7 +50,6 @@ export const ResetPassword = () => {
             console.log("testing")
         }
     };
-
     return (
         <div className="container">
             <h1>Reset Password</h1>
@@ -74,7 +65,6 @@ export const ResetPassword = () => {
                     onChange={(event) => setEmail(event.target.value)}
                     required
                 />
-
                 <label htmlFor="tokenInput">Token</label>
                 <input
                     id="tokenInput"
@@ -85,7 +75,6 @@ export const ResetPassword = () => {
                     onChange={(event) => setToken(event.target.value)}
                     required
                 />
-
                 <label htmlFor="passwordInput">New Password</label>
                 <input
                     id="passwordInput"
@@ -96,7 +85,6 @@ export const ResetPassword = () => {
                     onChange={(event) => setPassword(event.target.value)}
                     required
                 />
-
                 <label htmlFor="confirmPasswordInput">Confirm New Password</label>
                 <input
                     id="confirmPasswordInput"
@@ -107,8 +95,7 @@ export const ResetPassword = () => {
                     onChange={(event) => setConfirmPassword(event.target.value)}
                     required
                 />
-
-                <button className="btn btn-button" type="submit">
+                <button className="btn btn-success" type="submit">
                     Reset Password
                 </button>
             </form>

@@ -92,11 +92,9 @@ def send_email(email,subject,token):
     # if not user:
     #     return jsonify("incorrect email")
     # token = create_access_token(identity=email)
-  
     try:
         # Define the reset link
-        reset_link = f"https://didactic-enigma-gv6j7wgppgqcwq9x-3000.app.github.dev/request_reset?token={token}"
-
+        reset_link = f"{os.environ.get('FRONT_END_URL')}/request_reset?token={token}"
         response = requests.post(
             f"{os.environ.get('HIDDEN_URL')}",
             auth=("api", os.environ.get('MAILGUN_KEY')),
@@ -105,32 +103,26 @@ def send_email(email,subject,token):
                 "to": [email],
                 "subject": subject,
                 "text": f"Click here to reset your password: {reset_link}",  # Plain text version
-                # "html": f"<html><body><p><a href='{reset_link}'>Reset Password Link</a></p></body></html>"
+                "html": f"<html><body><a href={reset_link}>Reset Password Link</a> {token}</body></html>"
             }
         )
-
         return response
     except Exception as error:
-        print(f">>> 😣 {error}")
+        print(f">>> :persevere: {error}")
         return jsonify(error), 400
-
 @api.route('/request_reset', methods=['POST'])
 def request_reset():
     email = request.json.get('email')
     user = User.query.filter_by(email=email).first()
-  
     if user:
         token = create_access_token(identity=email)
         # user.reset_token = token
         # user.token_expiration = datetime.utcnow() + timedelta(hours=1)
         # db.session.commit()
-        
- 
         send_email(user.email, 'Password Reset Request', token)
-
         return jsonify({'message': 'If your email is in our system, you will receive a password reset link.'}) #need to get rid of "reesturl:token need to work send email function"
     return jsonify({"message":"If your email is in our system, you will receive a password reset link."}), 400
-@api.route('/reset-password', methods=['PUT']) 
+@api.route('/reset-password', methods=['PUT'])
 @jwt_required()
 def reset_password():
     email=get_jwt_identity()
@@ -140,11 +132,9 @@ def reset_password():
     new_password = request.json.get('new_password')
     print(new_password)
     user.hashed_password = generate_password_hash(new_password+user.salt)
-   
     # user.reset_token = None
     # user.token_expiration = None
     db.session.commit()
-    
     return jsonify({'message': 'Password has been reset successfully.'})
 
 @api.route('/contact-requests', methods=['POST'])

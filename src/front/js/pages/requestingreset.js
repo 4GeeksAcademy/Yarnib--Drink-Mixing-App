@@ -8,9 +8,22 @@ export const Sendtoken = () => {
     const onReset = () => {
         navigate("/request_reset")
     }
+    function send_email() {
+        //  check to see if no email is typed
+        fetch(`${baseApiUrl}/api/request_reset`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: email
+            })
+        })
+            .then((response) => response.json())
+            .then((data) => { console.log(data) })
+        localStorage.getItem("token")
+    }
     return (<div>
-
-
         <input
             id="confirmemail"
             className="form-control m-3"
@@ -21,8 +34,8 @@ export const Sendtoken = () => {
             required
         />
         <div className="flex">
-            <button onClick={onReset}>send email</button>
-            {/* <button onClick={onReset}>go to reset password</button> */}
+            <button onClick={send_email}>send email</button>
+            <button onClick={onReset}>go to reset password</button>
         </div>
     </div>
     )
