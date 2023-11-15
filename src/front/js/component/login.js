@@ -23,7 +23,7 @@ export const Login = (props) => {
     }
 
     return (
-        <div className="text-center mt-5 top-right-nav">
+        <div className="text-center mt-2">
             <h1>Log in</h1>
             <input
                 className="form-control m-3"
@@ -39,12 +39,13 @@ export const Login = (props) => {
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
             ></input>
-            <button className="btn btn-primary m-2" onClick={onSubmit}>
+            <button className="btn btn-button m-2" onClick={onSubmit}>
                 Log in
             </button>
-            <button className="btn btn-success m-2" onClick={onSignup}>
+            <button className="btn btn-button m-2" onClick={onSignup}>
                 Sign Up!
             </button>
+            <br></br>
             <button onClick={onForgot}>Forgot Password?</button>
         </div>
     );

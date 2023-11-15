@@ -88,7 +88,7 @@ export const ContactForm = () => {
                     />
                 </div>
                 <div className="row">
-                    <button className="btn btn-primary" type="submit">
+                    <button className="btn btn-button" type="submit">
                         Submit
                     </button>
                 </div>

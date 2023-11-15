@@ -4,15 +4,23 @@ body {
   color: white;
 }
 .top-right-nav {
-  height: 270px;
-  width: 220px;
+  right: 5%;
+  height: 300px;
+  width: 270px;
   justify-content: center;
   align-items: center;
   color: #e58be1; /* Set text color to #e58be1 */
+  position: absolute;
+  background-color: #020202; /* Set the background color to #020202 */
+  border: 1px solid #96f3f8; /* Add a border for clarity */
+  
+}
+.top-right-nav input {
+  max-width: 240px;
 }
 .profile-pic {
-  max-width: 100px;
-  max-height: 100px;
+  max-width: 120px;
+  max-height: 120px;
 }
 @media screen and (max-width: 900px) {
   .profile-pic {
@@ -29,11 +37,14 @@ body {
 .login-container {
   position: absolute;
   top: 0;
+  width: 270px;
+  height: 300px;
   right: 0;
   padding: 10px; /* Adjust the padding as needed */
   background-color: #fff; /* Set the background color as needed */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a shadow for better visibility */
   z-index: 1000; /* Make sure it's above other elements on the page */
+  overflow: visible;
 }
 .custom-navbar-bg {
   background-color: black; /* Background color remains black */
@@ -95,4 +106,12 @@ body {
   border: 1px solid #96f3f8; /* Add a border for clarity */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
   overflow: visible; /* Allows content to overflow the dropdown */
+}
+.btn-button {
+  background-color: #5100FF;
+  color: white;
+}
+.btn-button:hover {
+  border: 2px solid rgb(240, 116, 234);
+  color: #fff;
 }

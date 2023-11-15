@@ -13,7 +13,7 @@ export const Footer = () => {
 	}
 	return(
 		<footer className="footer mt-auto py-3 text-center">
-		<button className="btn btn-primary" onClick={onSubmit}>Contact us!</button>
+		<button className="btn btn-button" onClick={onSubmit}>Contact us!</button>
 		{store.accessToken !== undefined ? (
                                 <Chatbot />
                             ) : (

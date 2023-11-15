@@ -2,49 +2,33 @@
 
 .listItem {
   border: 2px solid rgb(230, 0, 255); /* Add a white border */
-  background: rgb(50, 16, 121);
-  background: -moz-linear-gradient(
-    0deg,
-    rgba(50, 16, 121, 0) 7%,
-    rgba(219, 14, 154, 1) 85%
-  );
-  background: -webkit-linear-gradient(
-    0deg,
-    rgba(50, 16, 121, 0) 7%,
-    rgba(219, 14, 154, 1) 85%
-  );
-  background: linear-gradient(
-    0deg,
-    rgba(50, 16, 121, 0) 7%,
-    rgba(219, 14, 154, 1) 85%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#321079",endColorstr="#db0e9a",GradientType=1);
-}
-
+  background-color: rgb(50, 16, 121);
+  color: white;
+  font-weight: 300;
+  }
+  .listItem a{
+    color: white;
+    font-weight: 700;
+  }
 .container-class {
-  background: rgb(0, 0, 0);
-  background: -moz-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(71, 15, 189, 0.7077424719887955) 86%
-  );
-  background: -webkit-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(71, 15, 189, 0.7077424719887955) 86%
-  );
-  background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(71, 15, 189, 0.7077424719887955) 86%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#470fbd",GradientType=1);
+  background-color: rgb(0, 0, 0);
+  border: 2px solid rgb(230, 0, 255);
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  color: white;
 }
-
+.container-class a {
+  color: #96f3f8;
+}
 .titleBox {
   width: 100%;
-  border: 15px solid black;
-  padding: 50px;
-  margin: 20px;
+  padding: 30px;
+  margin: 10px;
   background-color: black;
+  color: white;
+}
+
+.trash-btn {
+  color: white;
+  font-weight: 700;
 }

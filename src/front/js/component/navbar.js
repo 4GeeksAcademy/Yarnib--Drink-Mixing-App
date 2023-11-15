@@ -47,7 +47,7 @@ export const Navbar = () => {
                 </Link>
 
                 <div className="tab-link-container">
-                    <button className="tab-link" onClick={() => toBlogPage()}>
+                    <button className="btn btn-button" onClick={() => toBlogPage()}>
                         Blog
                     </button>
 
@@ -55,11 +55,11 @@ export const Navbar = () => {
                 </div>
 
                 <div className="dropdown-container">
-                    <button onClick={toggleDropdown} className="btn btn-primary dropbtn">
+                    <button onClick={toggleDropdown} className="btn btn-button">
                         Menu
                     </button>
                     {dropdownOpen && (
-                        <div className="dropdown-content">
+                        <div className="top-right-nav">
                             {store.accessToken !== undefined ? (
                                 <LoggedIn toggleDropdown={toggleDropdown} style={{ width: '500px', height: '400px' }} />
                             ) : (

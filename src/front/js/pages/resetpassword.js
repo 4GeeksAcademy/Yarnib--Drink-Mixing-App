@@ -108,7 +108,7 @@ export const ResetPassword = () => {
                     required
                 />
 
-                <button className="btn btn-success" type="submit">
+                <button className="btn btn-button" type="submit">
                     Reset Password
                 </button>
             </form>

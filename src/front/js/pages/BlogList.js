@@ -22,7 +22,7 @@ const BlogList = () => {
       ))}
       <div style={buttonContainerStyle}>
         {visiblePosts < blogData.length && (
-          <button onClick={loadMorePosts}>See More</button>
+          <button onClick={loadMorePosts} className='btn-button btn'>See More</button>
         )}
       </div>
     </div>

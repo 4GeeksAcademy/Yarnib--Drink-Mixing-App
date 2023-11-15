@@ -49,7 +49,7 @@ export const AgeVerification = () => {
               <option value="Yes">Yes</option>
               <option value="No">No</option>
             </select>
-            <button style={{ padding: '10px 20px', backgroundColor: '#007BFF', color: '#fff', border: 'none', cursor: 'pointer', marginTop: '20px' }} onClick={handleRedirect}>Continue</button>
+            <button className='btn btn-button' onClick={handleRedirect}>Continue</button>
           </div>
         </div>
       )}

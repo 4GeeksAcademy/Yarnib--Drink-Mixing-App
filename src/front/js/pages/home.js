@@ -120,13 +120,8 @@ export const Home = () => {
             }}
           />
           <button
-            className='btn'
-            style={{
-              paddingTop: "10px",
-              background: "rgb(244, 32, 219 )",
-              margin: "10px auto 0px"
-              ,
-            }}
+            className='btn btn-button'
+            
             onClick={handleIngredientSearch}
           >
             Search

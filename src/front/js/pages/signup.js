@@ -69,7 +69,7 @@ export const SignUp = () => {
                     placeholder="Password"
                     onChange={(event) => setPassword(event.target.value)}
                 ></input>
-                <button className="btn btn-success" type="submit">Submit</button>
+                <button className="btn btn-button" type="submit">Submit</button>
             </form>
         </div>
     );

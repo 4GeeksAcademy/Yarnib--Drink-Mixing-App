@@ -32,18 +32,18 @@ export const LoggedIn = (props) => {
                         <div>
                             <button
                                 onClick={onProfile}
-                                className="btn btn-primary logged-in-btn"
+                                className="btn btn-button"
                             >My Profile!</button>
                         </div>
                         <div>
                             <button
-                                className="btn btn-primary logged-in-btn"
+                                className="btn btn-button"
                                 onClick={onSocial}
                             >Social</button>
                         </div>
                         <div>
                             <button
-                                className="btn btn-danger logged-in-btn"
+                                className="btn btn-button"
                                 onClick={onSubmit}
                             >Log Out</button>
                         </div>
