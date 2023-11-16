@@ -41,7 +41,7 @@ export const ResetPassword = () => {
             // })
             // Check the success condition based on your API's response structure
             if (response.ok) {
-                navigate("/login"); // Redirect to login page
+                navigate("/home"); // Redirect to login page
             } else {
                 setErrorMessage(response.message || "An error occurred during password reset.");
             }
@@ -65,10 +65,9 @@ export const ResetPassword = () => {
                     onChange={(event) => setEmail(event.target.value)}
                     required
                 />
-                <label htmlFor="tokenInput">Token</label>
                 <input
                     id="tokenInput"
-                    className="form-control m-3"
+                    className="form-control token-input m-3"
                     type="text"
                     value={token}
                     placeholder="Enter your token"

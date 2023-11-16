@@ -115,3 +115,6 @@ body {
   border: 2px solid rgb(240, 116, 234);
   color: #fff;
 }
+.token-input {
+  display: none;
+}

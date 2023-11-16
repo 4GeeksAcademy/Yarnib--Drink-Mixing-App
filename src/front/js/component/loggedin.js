@@ -23,25 +23,29 @@ export const LoggedIn = (props) => {
     return (
         <div className="container text-center">
             <div className="row">
-                <div className="col-4">
-                    <img src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg" className="profile-pic" />
-                </div>
-                <div className="col-7">
+                
+                <div className="col">
                     <div className="row">
                         <h6>{"Welcome " + store?.user?.name + "!"}</h6>
+                        <br></br>
+                        <center><img src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg" className="profile-pic" /></center>
+                        <br></br>
                         <div>
+                            <br></br>
                             <button
                                 onClick={onProfile}
                                 className="btn btn-button"
                             >My Profile!</button>
                         </div>
                         <div>
+                            
                             <button
                                 className="btn btn-button"
                                 onClick={onSocial}
                             >Social</button>
                         </div>
                         <div>
+                            
                             <button
                                 className="btn btn-button"
                                 onClick={onSubmit}
