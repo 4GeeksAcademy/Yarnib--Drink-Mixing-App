@@ -46,13 +46,7 @@ export const Navbar = () => {
                     />
                 </Link>
 
-                <div className="tab-link-container">
-                    <button className="btn btn-button" onClick={() => toBlogPage()}>
-                        Blog
-                    </button>
-
-
-                </div>
+               
 
                 <div className="dropdown-container">
                     <button onClick={toggleDropdown} className="btn btn-button">

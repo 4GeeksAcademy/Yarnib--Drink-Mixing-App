@@ -21,8 +21,9 @@ export const ContactForm = () => {
         });
 
         if (success) {
-            navigate('/');
+            navigate('/home');
         }
+        navigate("/home")
     };
 
     return (
