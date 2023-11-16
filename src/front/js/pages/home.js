@@ -176,6 +176,7 @@ export const Home = () => {
             <img src={selectedDrink.Image} alt={selectedDrink.strDrink} className="cocktail-image" />
             <p className="drink-name">
               {selectedDrink.strDrink}
+              <br></br>
               <button
                 className={favorites.includes(selectedDrink.idDrink) ? 'favorite active' : 'favorite'}
                 onClick={() => toggleFavorite(selectedDrink)}

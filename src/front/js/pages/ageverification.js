@@ -10,7 +10,7 @@ export const AgeVerification = () => {
   };
   const handleRedirect = () => {
     if (selectedOption === 'Yes') {
-      setShowModal(false); 
+      navigate("/home") 
     } else if (selectedOption === 'No') {
       window.location.href = 'https://www.disney.com'; 
     }

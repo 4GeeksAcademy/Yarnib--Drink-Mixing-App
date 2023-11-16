@@ -27,7 +27,7 @@ export const Navbar = () => {
     }, [store.accessToken]);
 
     const handleLogoClick = () => {
-        navigate("/", { state: Math.random() });
+        navigate("/home", { state: Math.random() });
     };
 
     const toggleDropdown = () => {
@@ -37,7 +37,7 @@ export const Navbar = () => {
     return (
         <nav className="navbar custom-navbar-bg">
             <div className="container d-flex justify-content-align-items-center">
-                <Link to="/" onClick={handleLogoClick}>
+                <Link to="/home" onClick={handleLogoClick}>
                     <img
                         src={CheerslogoCorner}
                         alt="Home Bar Pro"
