@@ -95,7 +95,7 @@ export const ResetPassword = () => {
                     onChange={(event) => setConfirmPassword(event.target.value)}
                     required
                 />
-                <button className="btn btn-success" type="submit">
+                <button className="btn btn-button" type="submit">
                     Reset Password
                 </button>
             </form>

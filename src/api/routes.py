@@ -94,7 +94,7 @@ def send_email(email,subject,token):
     # token = create_access_token(identity=email)
     try:
         # Define the reset link
-        reset_link = f"{os.environ.get('FRONT_END_URL')}/request_reset?token={token}"
+        reset_link = f"{os.environ.get('FRONT_END_URL')}request_reset?token={token}"
         response = requests.post(
             f"{os.environ.get('HIDDEN_URL')}",
             auth=("api", os.environ.get('MAILGUN_KEY')),
@@ -103,7 +103,7 @@ def send_email(email,subject,token):
                 "to": [email],
                 "subject": subject,
                 "text": f"Click here to reset your password: {reset_link}",  # Plain text version
-                "html": f"<html><body><a href={reset_link}>Reset Password Link</a> {token}</body></html>"
+                "html": f"<html><body><a href={reset_link}>Reset Password Link</a></body></html>"
             }
         )
         return response
